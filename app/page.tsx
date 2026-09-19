@@ -1,0 +1,612 @@
+"use client";
+
+import {
+  Music,
+  VolumeX,
+  ScrollText,
+  MapPin,
+  Images,
+  MessageCircle,
+} from "lucide-react";
+
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
+
+import { db } from "./firebase";
+
+import { useEffect, useRef, useState } from "react";
+
+export default function Home() {
+  const [opened, setOpened] = useState(false);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+  const [guestName, setGuestName] = useState("");
+
+  const [wishName, setWishName] = useState("");
+  const [wishMessage, setWishMessage] = useState("");
+  const [wishes, setWishes] = useState<any[]>([]);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const weddingDate = new Date("2026-11-16T17:00:00");
+
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  function scrollToSection(id: string) {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const guest = params.get("guest");
+
+    if (guest) {
+      setGuestName(decodeURIComponent(guest));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!opened) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [opened]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = weddingDate.getTime() - now;
+
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        ),
+        minutes: Math.floor(
+          (distance % (1000 * 60 * 60)) / (1000 * 60)
+        ),
+        seconds: Math.floor(
+          (distance % (1000 * 60)) / 1000
+        ),
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "wishes"),
+      orderBy("createdAt", "desc")
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setWishes(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+      );
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  function handleOpen() {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 2;
+
+      const playPromise = audioRef.current.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setMusicPlaying(true);
+            setOpened(true);
+          })
+          .catch((err) => {
+            console.log("Audio play blocked:", err);
+            setOpened(true);
+          });
+      } else {
+        setOpened(true);
+      }
+    } else {
+      setOpened(true);
+    }
+  }
+
+  function toggleMusic() {
+    if (!audioRef.current) return;
+
+    if (musicPlaying) {
+      audioRef.current.pause();
+      setMusicPlaying(false);
+    } else {
+      audioRef.current.play();
+      setMusicPlaying(true);
+    }
+  }
+
+  async function submitWish(e: React.FormEvent) {
+    e.preventDefault();
+
+    if (!wishName.trim() || !wishMessage.trim()) {
+      alert("Please enter your name and message.");
+      return;
+    }
+
+    await addDoc(collection(db, "wishes"), {
+      name: wishName,
+      message: wishMessage,
+      createdAt: serverTimestamp(),
+    });
+
+    setWishName("");
+    setWishMessage("");
+  }
+
+  return (
+    <main className={opened ? "site-bg-inner" : "site-bg"}>
+      <div className={opened ? "fixed-bg-inner" : "fixed-bg"} />
+
+      <audio ref={audioRef} loop preload="auto">
+        <source src="/Weddingsong.mp3" type="audio/mpeg" />
+      </audio>
+
+      <div className={opened ? "soft-overlay-inner" : "soft-overlay"} />
+
+      <div className="petal petal1"></div>
+      <div className="petal petal2"></div>
+      <div className="petal petal3"></div>
+      <div className="petal petal4"></div>
+      <div className="petal petal5"></div>
+      <div className="petal petal6"></div>
+      <div className="petal petal7"></div>
+      <div className="petal petal8"></div>
+      <div className="petal petal9"></div>
+      <div className="petal petal10"></div>
+      <div className="petal petal11"></div>
+      <div className="petal petal12"></div>
+      <div className="petal petal13"></div>
+      <div className="petal petal14"></div>
+      <div className="petal petal15"></div>
+
+      {!opened ? (
+        <section className="intro-wrap">
+          <div className="intro-card fade-up">
+            <img
+              src="/DD.png"
+              alt="Wedding Logo"
+              className="monogram-logo"
+            />
+
+            <p className="small-title">Wedding Invitation</p>
+
+            <div className="intro-khmer-wrap">
+              <h1 className="intro-khmer-title kh-main-font">
+                សិរីមង្គលអាពាហ៍ពិពាហ៍
+              </h1>
+
+              <p className="intro-khmer-sub kh-main-font">
+                សូមគោរពអញ្ជើញ
+              </p>
+            </div>
+
+            {guestName && (
+              <div className="guest-name-wrap fade-up">
+                <h2 className="guest-name kh-main-font">
+                  {guestName}
+                </h2>
+
+                <img
+                  src="/Gold Line Under Text.webp"
+                  alt=""
+                  className="guest-divider"
+                />
+              </div>
+            )}
+
+            <button className="open-frame-btn" onClick={handleOpen}>
+              <img
+                src="/Open Text Frame (1).png"
+                alt="Open Invitation"
+                className="open-frame-img"
+              />
+            </button>
+          </div>
+        </section>
+      ) : (
+        <section className="formal-invitation fade-up">
+          <div className="formal-card">
+
+            {/* QUICK NAVIGATION */}
+            <div className="quick-nav">
+              <button onClick={() => scrollToSection("khmer")}>
+                <ScrollText size={26} />
+              </button>
+
+              <button onClick={() => scrollToSection("location")}>
+                <MapPin size={26} />
+              </button>
+
+              <button onClick={() => scrollToSection("gallery")}>
+                <Images size={26} />
+              </button>
+
+              <button onClick={() => scrollToSection("wishes")}>
+                <MessageCircle size={26} />
+              </button>
+
+              <button className="music-btn" onClick={toggleMusic}>
+                {musicPlaying ? (
+                  <Music size={26} />
+                ) : (
+                  <VolumeX size={26} />
+                )}
+              </button>
+            </div>
+
+            {/* KHMER INVITATION */}
+            <div id="khmer" className="khmer-section">
+              <h1 className="khmer-title kh-main-font">
+                សិរីមង្គលអាពាហ៍ពិពាហ៍
+              </h1>
+
+              <div className="parents-grid">
+                <div>
+                  <p className="parent-label">លោក</p>
+
+                  <h3 className="parent-name kh-main-font">
+                    សឿន សុវណ្ណា
+                  </h3>
+
+                  <p className="parent-label">លោកស្រី</p>
+
+                  <h3 className="parent-name kh-main-font">
+                    ឡាំ សុខចេង
+                  </h3>
+                </div>
+
+                <div>
+                  <p className="parent-label">លោក</p>
+
+                  <h3 className="parent-name kh-main-font">
+                    ជា វីរៈ
+                  </h3>
+
+                  <p className="parent-label">លោកស្រី</p>
+
+                  <h3 className="parent-name kh-main-font">
+                    ណុប នីលីន
+                  </h3>
+                </div>
+              </div>
+
+              <p className="invite-paragraph kh-main-font">
+                មានកិត្តិយសសូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី
+                អ្នកនាងកញ្ញា អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស
+                ក្នុងពិធីមង្គលការកូនប្រុស កូនស្រី របស់យើងខ្ញុំ។
+              </p>
+
+              <div className="couple-section">
+                <div>
+                  <p className="role">កូនប្រុសនាម</p>
+
+                  <h2 className="person-name kh-main-font">
+                    សឿន សុវណ្ណាឌី
+                  </h2>
+                </div>
+
+                <img
+                  src="/DD.png"
+                  alt="Wedding Logo"
+                  className="center-logo"
+                />
+
+                <div>
+                  <p className="role">កូនស្រីនាម</p>
+
+                  <h2 className="person-name kh-main-font">
+                    ជា ពេជ្រសុខធីតា
+                  </h2>
+                </div>
+              </div>
+
+              <p className="date-text kh-title-font">
+                និងពិសារភោជនាហារដែលនឹងប្រព្រឹត្តទៅនៅ
+                ថ្ងៃចន្ទ ៧កើត ខែកត្តិក ឆ្នាំមមី អដ្ឋស័ក
+                ពុទ្ធសករាជ ២៥៧០
+                ត្រូវនឹងថ្ងៃទី១៦ ខែវិច្ឆិកា ឆ្នាំ២០២៦
+                វេលាម៉ោង ៥:០០ នាទីល្ងាច
+                <br />
+                នៅ ភោជនីយដ្ឋានឡាក់ឡីប្រាយ (អគារទាំងមូល)
+              </p>
+            </div>
+
+            {/* ENGLISH INVITATION */}
+            <div className="english-section">
+              <h2 className="english-title">
+                THE
+                <br />
+                WEDDING INVITATION
+              </h2>
+
+              <div className="english-parents-grid">
+                <p>
+                  Mr. SEOUN SOVANNA
+                  <br />
+                  Mrs. LAM SOKCHENG
+                </p>
+
+                <p>
+                  <span>Mr. CHEA VIREAK</span>
+                  <br />
+                  <span className="nob-nilin">
+                    Mrs. NOB NILIN
+                  </span>
+                </p>
+              </div>
+
+              <p className="english-invite-text">
+                Request the Pleasure of your presence on this
+                Auspicious Occasion
+                <br />
+                of the Wedding Reception of our Children.
+              </p>
+
+              <h2 className="english-couple-name">
+                <span>Seoun Sovannady</span>
+                <span className="ampersand">&</span>
+                <span>Chea Pichsokthida</span>
+              </h2>
+
+              <p className="english-date">
+                on Monday 16<sup>th</sup> November 2026
+                &nbsp; At 5:00 PM
+                <br />
+                at Lucky Bright Restaurant (Whole Building)
+              </p>
+            </div>
+
+            {/* COUNTDOWN */}
+            <div id="countdown" className="countdown-section">
+              <div className="countdown-title-wrap">
+                <h2 className="section-title kh-main-font">
+                  រាប់ថយក្រោយ
+                </h2>
+
+                <p className="section-subtitle-en">
+                  COUNTDOWN
+                </p>
+              </div>
+
+              {[
+                {
+                  label: "ថ្ងៃ",
+                  en: "Days",
+                  value: timeLeft.days,
+                },
+                {
+                  label: "ម៉ោង",
+                  en: "Hours",
+                  value: timeLeft.hours,
+                },
+                {
+                  label: "នាទី",
+                  en: "Minutes",
+                  value: timeLeft.minutes,
+                },
+                {
+                  label: "វិនាទី",
+                  en: "Seconds",
+                  value: timeLeft.seconds,
+                },
+              ].map((item) => (
+                <div key={item.label} className="countdown-box">
+                  <h2>{item.value}</h2>
+
+                  <p className="kh-main-font">
+                    {item.label}
+                  </p>
+
+                  <span>{item.en}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* EVENT AGENDA */}
+            <div id="agenda" className="agenda-section">
+              <h2 className="section-title kh-main-font">
+                របៀបវារៈកម្មវិធី
+              </h2>
+
+              <p className="section-subtitle-en">
+                EVENT AGENDA
+              </p>
+
+              <div className="agenda-card">
+                <img
+                  src="/Agenda.png"
+                  alt="Wedding Event Agenda"
+                  className="agenda-image"
+                />
+              </div>
+            </div>
+
+            {/* DRESS CODE */}
+            <div id="dress-code" className="dress-code-section">
+              <img
+                src="/Dress-Code.png"
+                alt="Wedding Guest Dress Code"
+                className="dress-code-image"
+              />
+            </div>
+
+            {/* LOCATION */}
+            <div id="location" className="location-section">
+              <h2 className="section-title kh-main-font">
+                ទីតាំងកម្មវិធី
+              </h2>
+
+              <p className="section-subtitle-en">
+                LOCATION
+              </p>
+
+              <div className="location-card">
+                <img
+                  src="/Map.png"
+                  alt="Wedding Location"
+                  className="location-image"
+                />
+              </div>
+
+              <a
+                className="save-btn kh-main-font"
+                href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                បើកទីតាំងកម្មវិធី
+                <span>Open Google Map</span>
+              </a>
+            </div>
+
+            {/* PHOTO GALLERY */}
+            <div id="gallery" className="gallery-section">
+              <h2 className="section-title kh-main-font">
+                កម្រងរូបភាពអនុស្សាវរីយ៍
+              </h2>
+
+              <p className="section-subtitle-en">
+                PHOTO GALLERY
+              </p>
+
+              <div className="gallery-grid">
+                <div className="photo-card large-photo">
+                  <img src="/photo1.jpg" alt="Wedding" />
+                </div>
+
+                <div className="photo-card">
+                  <img src="/photo2.jpg" alt="Wedding" />
+                </div>
+
+                <div className="photo-card">
+                  <img src="/photo3.jpg" alt="Wedding" />
+                </div>
+
+                <div className="photo-card">
+                  <img src="/photo4.jpg" alt="Wedding" />
+                </div>
+
+                <div className="photo-card large-photo">
+                  <img src="/photo5.jpg" alt="Wedding" />
+                </div>
+              </div>
+            </div>
+
+            {/* GRATITUDE */}
+            <div className="gratitude-section">
+              <h2 className="gratitude-title kh-main-font">
+                សេចក្តីថ្លែងអំណរគុណ
+              </h2>
+
+              <p className="gratitude-kh kh-title-font">
+                យើងខ្ញុំ សូមថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅ
+                ចំពោះ ឯកឧត្តម លោកជំទាវ លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា
+                លោក លោកស្រី អ្នកនាងកញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
+                ដែលបានចូលរួមជាកិត្តិយសក្នុងពិធីមង្គលការរបស់យើងខ្ញុំ។
+              </p>
+
+              <div className="gratitude-divider">
+                ✦
+              </div>
+
+              <h3 className="gratitude-en-title">
+                OUR GRATITUDE
+              </h3>
+
+              <p className="gratitude-en">
+                We are deeply grateful to H.E., Lok Neak Oknha,
+                Neak Oknha, Oknha, Lct., ladies and gentlemen,
+                for honoring us with your presence at our upcoming
+                wedding ceremony.
+              </p>
+            </div>
+
+            {/* WISHES */}
+            <div id="wishes" className="wishes-section">
+              <h2 className="section-title kh-title-font">
+                សារជូនពរ
+              </h2>
+
+              <p className="section-subtitle-en">
+                Leave Your Wishes
+              </p>
+
+              <form className="wish-form" onSubmit={submitWish}>
+                <input
+                  value={wishName}
+                  onChange={(e) => setWishName(e.target.value)}
+                  placeholder="Your name"
+                  className="wish-input"
+                />
+
+                <textarea
+                  value={wishMessage}
+                  onChange={(e) =>
+                    setWishMessage(e.target.value)
+                  }
+                  placeholder="Write your wishes..."
+                  className="wish-textarea"
+                  rows={4}
+                />
+
+                <button
+                  className="main-btn"
+                  type="submit"
+                >
+                  Send Wishes
+                </button>
+              </form>
+
+              <div className="wish-list">
+                {wishes.map((wish) => (
+                  <div
+                    className="wish-card"
+                    key={wish.id}
+                  >
+                    <h3>{wish.name}</h3>
+                    <p>{wish.message}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </section>
+      )}
+    </main>
+  );
+}
