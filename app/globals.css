@@ -110,7 +110,7 @@ body {
 
 .small-title {
   font-size: 19px;
-  letter-spacing: 2.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: #8f6a32;
   font-weight: 600;
@@ -163,7 +163,7 @@ body {
   font-family: 'Cinzel', serif;
   font-weight: 500;
   font-size: 14px;
-  letter-spacing: 1.8px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
