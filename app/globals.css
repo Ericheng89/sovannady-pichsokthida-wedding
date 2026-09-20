@@ -244,7 +244,7 @@ body {
 .parent-name {
   margin: 0 0 7px;
   color: #b8924f;
-  font-size: clamp(13px, 3.3vw, 26px);
+  font-size: clamp(15px, 3.7vw, 28px);
   line-height: 1.2;
   white-space: nowrap;
   font-weight: 400;
