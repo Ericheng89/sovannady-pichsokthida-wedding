@@ -38,6 +38,7 @@ body {
 .khmer-mool-title {
   font-family: "Khmer Mool 1", serif;
   font-weight: 400;
+  font-size: clamp(26px, 6vw, 42px);
 }
 
 .site-bg {
