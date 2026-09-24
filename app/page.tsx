@@ -222,9 +222,9 @@ export default function Home() {
   {/* GUEST NAME */}
   {guestName && (
     <div className="guest-name-wrap fade-up">
-      <h2 className="guest-name kh-main-font">
-        {guestName}
-      </h2>
+      <h2 className="guest-name">
+  {guestName}
+</h2>
 
       <img
         src="/Gold Line Under Text.webp"
