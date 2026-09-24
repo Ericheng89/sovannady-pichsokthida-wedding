@@ -948,7 +948,7 @@ body {
   width: min(420px, 80vw);
   height: auto;
   display: block;
-  margin: -2px auto 0;
+  margin: -14px auto 0;
   opacity: 0.95;
   pointer-events: none;
 }
