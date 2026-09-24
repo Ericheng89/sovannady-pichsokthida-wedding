@@ -19,7 +19,6 @@ import {
 } from "firebase/firestore";
 
 import { db } from "./firebase";
-
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -63,6 +62,37 @@ export default function Home() {
   }, []);
 
   /* ========================================
+     SCROLL REVEAL
+  ======================================== */
+
+  useEffect(() => {
+    if (!opened) return;
+
+    const elements = document.querySelectorAll(
+      ".scroll-reveal, .gallery-reveal"
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px",
+      }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, [opened]);
+
+  /* ========================================
      PAGE SCROLL LOCK
   ======================================== */
 
@@ -102,9 +132,7 @@ export default function Home() {
       }
 
       setTimeLeft({
-        days: Math.floor(
-          distance / (1000 * 60 * 60 * 24)
-        ),
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
 
         hours: Math.floor(
           (distance % (1000 * 60 * 60 * 24)) /
@@ -224,6 +252,7 @@ export default function Home() {
       />
 
       {/* MUSIC */}
+
       <audio ref={audioRef} loop preload="auto">
         <source
           src="/Weddingsong.mp3"
@@ -260,39 +289,60 @@ export default function Home() {
       <div className="petal petal15"></div>
 
       {/* ========================================
-    AMBIENT WEDDING EFFECTS
-======================================== */}
+          AMBIENT WEDDING EFFECTS
+      ======================================== */}
 
-<div className="ambient-effects" aria-hidden="true">
+      <div
+        className="ambient-effects"
+        aria-hidden="true"
+      >
+        {/* SOFT BACKGROUND LIGHTS */}
 
-  {/* SOFT BACKGROUND LIGHTS */}
-  <div className="light-orb light-orb-1"></div>
-  <div className="light-orb light-orb-2"></div>
-  <div className="light-orb light-orb-3"></div>
+        <div className="light-orb light-orb-1"></div>
+        <div className="light-orb light-orb-2"></div>
+        <div className="light-orb light-orb-3"></div>
 
-  {/* GOLD DUST */}
-  <div className="gold-dust dust-1"></div>
-  <div className="gold-dust dust-2"></div>
-  <div className="gold-dust dust-3"></div>
-  <div className="gold-dust dust-4"></div>
-  <div className="gold-dust dust-5"></div>
-  <div className="gold-dust dust-6"></div>
-  <div className="gold-dust dust-7"></div>
-  <div className="gold-dust dust-8"></div>
-  <div className="gold-dust dust-9"></div>
-  <div className="gold-dust dust-10"></div>
-  <div className="gold-dust dust-11"></div>
-  <div className="gold-dust dust-12"></div>
+        {/* GOLD DUST */}
 
-  {/* TWINKLING STARS */}
-  <div className="gold-sparkle sparkle-1">✦</div>
-  <div className="gold-sparkle sparkle-2">✦</div>
-  <div className="gold-sparkle sparkle-3">✦</div>
-  <div className="gold-sparkle sparkle-4">✦</div>
-  <div className="gold-sparkle sparkle-5">✦</div>
-  <div className="gold-sparkle sparkle-6">✦</div>
+        <div className="gold-dust dust-1"></div>
+        <div className="gold-dust dust-2"></div>
+        <div className="gold-dust dust-3"></div>
+        <div className="gold-dust dust-4"></div>
+        <div className="gold-dust dust-5"></div>
+        <div className="gold-dust dust-6"></div>
+        <div className="gold-dust dust-7"></div>
+        <div className="gold-dust dust-8"></div>
+        <div className="gold-dust dust-9"></div>
+        <div className="gold-dust dust-10"></div>
+        <div className="gold-dust dust-11"></div>
+        <div className="gold-dust dust-12"></div>
 
-</div>
+        {/* TWINKLING STARS */}
+
+        <div className="gold-sparkle sparkle-1">
+          ✦
+        </div>
+
+        <div className="gold-sparkle sparkle-2">
+          ✦
+        </div>
+
+        <div className="gold-sparkle sparkle-3">
+          ✦
+        </div>
+
+        <div className="gold-sparkle sparkle-4">
+          ✦
+        </div>
+
+        <div className="gold-sparkle sparkle-5">
+          ✦
+        </div>
+
+        <div className="gold-sparkle sparkle-6">
+          ✦
+        </div>
+      </div>
 
       {!opened ? (
         /* ========================================
@@ -303,16 +353,19 @@ export default function Home() {
           <div className="intro-card fade-up">
 
             {/* KHMER WEDDING TITLE */}
+
             <h1 className="intro-khmer-title khmer-mool-title">
               សិរីមង្គលអាពាហ៍ពិពាហ៍
             </h1>
 
             {/* ENGLISH TITLE */}
+
             <p className="small-title">
               Wedding Ceremony
             </p>
 
             {/* WEDDING LOGO */}
+
             <img
               src="/DD.png"
               alt="Wedding Logo"
@@ -320,11 +373,13 @@ export default function Home() {
             />
 
             {/* INVITATION TEXT */}
+
             <p className="intro-khmer-sub kh-main-font">
               សូមគោរពអញ្ជើញ
             </p>
 
             {/* GUEST NAME */}
+
             {guestName && (
               <div className="guest-name-wrap fade-up">
                 <h2
@@ -346,6 +401,7 @@ export default function Home() {
             )}
 
             {/* OPEN INVITATION */}
+
             <button
               className="open-frame-btn"
               onClick={handleOpen}
@@ -430,7 +486,7 @@ export default function Home() {
 
             <div
               id="khmer"
-              className="khmer-section"
+              className="khmer-section scroll-reveal"
             >
               <h1 className="khmer-title kh-main-font">
                 សិរីមង្គលអាពាហ៍ពិពាហ៍
@@ -439,6 +495,7 @@ export default function Home() {
               <div className="parents-grid">
 
                 {/* GROOM PARENTS */}
+
                 <div>
                   <p className="parent-label">
                     លោក
@@ -458,6 +515,7 @@ export default function Home() {
                 </div>
 
                 {/* BRIDE PARENTS */}
+
                 <div>
                   <p className="parent-label">
                     លោក
@@ -488,6 +546,7 @@ export default function Home() {
               <div className="couple-section">
 
                 {/* GROOM */}
+
                 <div>
                   <p className="role kh-main-font">
                     កូនប្រុសនាម
@@ -499,6 +558,7 @@ export default function Home() {
                 </div>
 
                 {/* LOGO */}
+
                 <img
                   src="/DD.png"
                   alt="Wedding Logo"
@@ -506,6 +566,7 @@ export default function Home() {
                 />
 
                 {/* BRIDE */}
+
                 <div>
                   <p className="role kh-main-font">
                     កូនស្រីនាម
@@ -533,7 +594,7 @@ export default function Home() {
                 ENGLISH INVITATION
             ======================================== */}
 
-            <div className="english-section">
+            <div className="english-section scroll-reveal">
               <h2 className="english-title">
                 THE
                 <br />
@@ -597,7 +658,7 @@ export default function Home() {
 
             <div
               id="agenda"
-              className="agenda-section"
+              className="agenda-section scroll-reveal"
             >
               <h2 className="section-title kh-main-font">
                 របៀបវារៈកម្មវិធី
@@ -622,7 +683,7 @@ export default function Home() {
 
             <div
               id="dress-code"
-              className="dress-code-section"
+              className="dress-code-section scroll-reveal"
             >
               <img
                 src="/Dress-Code.png"
@@ -637,7 +698,7 @@ export default function Home() {
 
             <div
               id="location"
-              className="location-section"
+              className="location-section scroll-reveal"
             >
               <h2 className="section-title kh-main-font">
                 ទីតាំងកម្មវិធី
@@ -656,19 +717,19 @@ export default function Home() {
               </div>
 
               <a
-  className="save-btn"
-  href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <span className="map-khmer">
-    បើកទីតាំងកម្មវិធី
-  </span>
+                className="save-btn"
+                href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="map-khmer">
+                  បើកទីតាំងកម្មវិធី
+                </span>
 
-  <span className="map-english">
-    Open Google Map
-  </span>
-</a>
+                <span className="map-english">
+                  Open Google Map
+                </span>
+              </a>
             </div>
 
             {/* ========================================
@@ -677,7 +738,7 @@ export default function Home() {
 
             <div
               id="countdown"
-              className="countdown-section"
+              className="countdown-section scroll-reveal"
             >
               <div className="countdown-title-wrap">
                 <h2 className="section-title kh-main-font">
@@ -736,7 +797,7 @@ export default function Home() {
 
             <div
               id="gallery"
-              className="gallery-section"
+              className="gallery-section scroll-reveal"
             >
               <h2 className="section-title kh-main-font">
                 កម្រងរូបភាពអនុស្សាវរីយ៍
@@ -748,35 +809,35 @@ export default function Home() {
 
               <div className="gallery-grid">
 
-                <div className="photo-card large-photo">
+                <div className="photo-card large-photo gallery-reveal">
                   <img
                     src="/photo1.jpg"
                     alt="Wedding"
                   />
                 </div>
 
-                <div className="photo-card">
+                <div className="photo-card gallery-reveal">
                   <img
                     src="/photo2.jpg"
                     alt="Wedding"
                   />
                 </div>
 
-                <div className="photo-card">
+                <div className="photo-card gallery-reveal">
                   <img
                     src="/photo3.jpg"
                     alt="Wedding"
                   />
                 </div>
 
-                <div className="photo-card">
+                <div className="photo-card gallery-reveal">
                   <img
                     src="/photo4.jpg"
                     alt="Wedding"
                   />
                 </div>
 
-                <div className="photo-card large-photo">
+                <div className="photo-card large-photo gallery-reveal">
                   <img
                     src="/photo5.jpg"
                     alt="Wedding"
@@ -786,77 +847,77 @@ export default function Home() {
             </div>
 
             {/* ========================================
-    APOLOGY
-======================================== */}
+                APOLOGY
+            ======================================== */}
 
-<div className="apology-section">
-  <h2 className="apology-title kh-main-font">
-    សេចក្តីសូមអភ័យទោស
-  </h2>
+            <div className="apology-section scroll-reveal">
+              <h2 className="apology-title kh-main-font">
+                សេចក្តីសូមអភ័យទោស
+              </h2>
 
-  <p className="apology-kh kh-title-font">
-    យើងខ្ញុំសូមមេត្តាអធ្យាស្រ័យ និងអភ័យទោសពីសំណាក់
-    ឯកឧត្តម អ្នកឧកញ៉ា ឧកញ៉ា លោកជំទាវ លោក លោកស្រី
-    អ្នកនាង កញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
-    ដោយយើងខ្ញុំពុំបានគោរពជូនលិខិតអញ្ជើញដោយផ្ទាល់។
-    យើងខ្ញុំសង្ឃឹមថាភ្ញៀវកិត្តិយសទាំងអស់
-    នឹងអញ្ជើញចូលរួមក្នុងកម្មវិធីរបស់យើងខ្ញុំជាក់ជាមិនខាន។
-  </p>
+              <p className="apology-kh kh-title-font">
+                យើងខ្ញុំសូមមេត្តាអធ្យាស្រ័យ និងអភ័យទោសពីសំណាក់
+                ឯកឧត្តម អ្នកឧកញ៉ា ឧកញ៉ា លោកជំទាវ លោក លោកស្រី
+                អ្នកនាង កញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
+                ដោយយើងខ្ញុំពុំបានគោរពជូនលិខិតអញ្ជើញដោយផ្ទាល់។
+                យើងខ្ញុំសង្ឃឹមថាភ្ញៀវកិត្តិយសទាំងអស់
+                នឹងអញ្ជើញចូលរួមក្នុងកម្មវិធីរបស់យើងខ្ញុំជាក់ជាមិនខាន។
+              </p>
 
-  <div className="apology-divider">
-    ✦
-  </div>
+              <div className="apology-divider">
+                ✦
+              </div>
 
-  <h3 className="apology-en-title">
-    OUR APOLOGY
-  </h3>
+              <h3 className="apology-en-title">
+                OUR APOLOGY
+              </h3>
 
-  <p className="apology-en">
-    We sincerely apologize and ask for the kind understanding
-    of all our honored guests, as we were unable to personally
-    deliver this invitation to you. We sincerely hope that you
-    will honor us with your presence and join us in celebrating
-    our wedding.
-  </p>
-</div>
+              <p className="apology-en">
+                We sincerely apologize and ask for the kind understanding
+                of all our honored guests, as we were unable to personally
+                deliver this invitation to you. We sincerely hope that you
+                will honor us with your presence and join us in celebrating
+                our wedding.
+              </p>
+            </div>
 
-{/* ========================================
-    DIVIDER — APOLOGY / GRATITUDE
-======================================== */}
+            {/* ========================================
+                DIVIDER — APOLOGY / GRATITUDE
+            ======================================== */}
 
-<div className="apology-gratitude-divider"></div>
+            <div className="apology-gratitude-divider"></div>
 
-{/* ========================================
-    GRATITUDE
-======================================== */}
+            {/* ========================================
+                GRATITUDE
+            ======================================== */}
 
-<div className="gratitude-section">
-  <h2 className="gratitude-title kh-main-font">
-    សេចក្តីថ្លែងអំណរគុណ
-  </h2>
+            <div className="gratitude-section scroll-reveal">
+              <h2 className="gratitude-title kh-main-font">
+                សេចក្តីថ្លែងអំណរគុណ
+              </h2>
 
-  <p className="gratitude-kh kh-title-font">
-    យើងខ្ញុំ សូមថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅ
-    ចំពោះ ឯកឧត្តម លោកជំទាវ លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា
-    លោក លោកស្រី អ្នកនាងកញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
-    ដែលបានចូលរួមជាកិត្តិយសក្នុងពិធីមង្គលការរបស់យើងខ្ញុំ។
-  </p>
+              <p className="gratitude-kh kh-title-font">
+                យើងខ្ញុំ សូមថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅ
+                ចំពោះ ឯកឧត្តម លោកជំទាវ លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា
+                លោក លោកស្រី អ្នកនាងកញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
+                ដែលបានចូលរួមជាកិត្តិយសក្នុងពិធីមង្គលការរបស់យើងខ្ញុំ។
+              </p>
 
-  <div className="gratitude-divider">
-    ✦
-  </div>
+              <div className="gratitude-divider">
+                ✦
+              </div>
 
-  <h3 className="gratitude-en-title">
-    OUR GRATITUDE
-  </h3>
+              <h3 className="gratitude-en-title">
+                OUR GRATITUDE
+              </h3>
 
-  <p className="gratitude-en">
-    We are deeply grateful to H.E., Lok Neak Oknha,
-    Neak Oknha, Oknha, Lct., ladies and gentlemen,
-    for honoring us with your presence at our upcoming
-    wedding ceremony.
-  </p>
-</div>
+              <p className="gratitude-en">
+                We are deeply grateful to H.E., Lok Neak Oknha,
+                Neak Oknha, Oknha, Lct., ladies and gentlemen,
+                for honoring us with your presence at our upcoming
+                wedding ceremony.
+              </p>
+            </div>
 
             {/* ========================================
                 WISHES
@@ -864,7 +925,7 @@ export default function Home() {
 
             <div
               id="wishes"
-              className="wishes-section"
+              className="wishes-section scroll-reveal"
             >
               <h2 className="section-title kh-title-font">
                 សារជូនពរ
