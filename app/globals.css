@@ -826,23 +826,12 @@ body {
 /* COUNTDOWN NUMBER */
 
 .countdown-box h2 {
-  margin:
-    0
-    0
-    15px;
-
-  font-family:
-    'Cormorant Garamond',
-    serif;
-
-  font-size:
-    clamp(36px, 9vw, 56px);
-
+  margin: 0 0 15px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 9vw, 56px);
   font-weight: 500;
-
   line-height: 0.9;
-
-  color: #55704d;
+  color: #b8924f;
 }
 
 
