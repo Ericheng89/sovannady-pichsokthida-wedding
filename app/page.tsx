@@ -222,7 +222,13 @@ export default function Home() {
   {/* GUEST NAME */}
   {guestName && (
     <div className="guest-name-wrap fade-up">
-      <h2 className="guest-name">
+      <h2
+  className={`guest-name ${
+    /[\u1780-\u17FF]/.test(guestName)
+      ? "guest-name-khmer"
+      : "guest-name-english"
+  }`}
+>
   {guestName}
 </h2>
 

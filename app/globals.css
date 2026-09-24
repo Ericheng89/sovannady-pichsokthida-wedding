@@ -295,7 +295,7 @@ body {
   color: #b47225;
   margin-bottom: 6px;
   font-size: 12px;
-  font-family: "Khmer Mool 1", serif;
+  font-family: "Kh Ang Bokor New", serif;
   font-weight: 400;
   line-height: 1.1;
   text-align: center;
@@ -550,14 +550,27 @@ body {
 
 .guest-name {
   margin: 0;
-  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(22px, 5.2vw, 38px);
-  line-height: 1.15;
+  line-height: 1.25;
   color: #b8924f;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 400;
   text-shadow:
     0 1px 2px rgba(255, 255, 255, 0.45);
+}
+
+/* English guest names */
+.guest-name-english {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Khmer guest names */
+.guest-name-khmer {
+  font-family: "Khmer Mool 1", serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
 }
 
 .guest-label-en {
