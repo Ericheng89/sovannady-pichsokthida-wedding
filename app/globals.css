@@ -35,6 +35,11 @@ body {
   font-family: "Khmer Mool 1", serif;
 }
 
+.khmer-mool-title {
+  font-family: "Khmer Mool 1", serif;
+  font-weight: 400;
+}
+
 .site-bg {
   min-height: 100vh;
   position: relative;
