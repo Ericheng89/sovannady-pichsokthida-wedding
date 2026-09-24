@@ -245,35 +245,82 @@ body {
 
 /* ========================================
    OPEN INVITATION BUTTON
+   iOS SAFARI FIX
 ======================================== */
 
 .open-frame-btn {
-  border: none;
-  background: transparent;
+  display: block;
+  position: relative;
+
+  width: min(620px, 92%);
+  margin: 10px auto 0;
   padding: 0;
+
+  background: transparent !important;
+  background-color: transparent !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  box-shadow: none !important;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  -webkit-tap-highlight-color: transparent;
+
   cursor: pointer;
-  margin-top: 6px;
-  animation: gentleFloat 2.8s ease-in-out infinite;
 }
+
+
+/* BUTTON IMAGE */
 
 .open-frame-img {
-  width: clamp(250px, 72vw, 430px);
   display: block;
-  filter:
-    drop-shadow(0 8px 18px rgba(90, 60, 25, 0.18));
+
+  width: 100%;
+  height: auto;
+
+  margin: 0;
+  padding: 0;
+
+  background: transparent !important;
+
+  border: 0;
+  outline: 0;
+
+  box-shadow: none !important;
+
+  /* Helps Safari render PNG transparency correctly */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-@keyframes gentleFloat {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
 
-  50% {
-    transform: translateY(-5px) scale(1.02);
-  }
+/* REMOVE SAFARI ACTIVE / FOCUS EFFECTS */
+
+.open-frame-btn:hover,
+.open-frame-btn:active,
+.open-frame-btn:focus,
+.open-frame-btn:focus-visible {
+  background: transparent !important;
+  background-color: transparent !important;
+
+  border: 0 !important;
+  outline: none !important;
+
+  box-shadow: none !important;
 }
 
+
+/* PREVENT IOS TOUCH HIGHLIGHT */
+
+.open-frame-btn * {
+  -webkit-tap-highlight-color: transparent;
+}
 
 /* ========================================
    GENERAL BUTTONS
