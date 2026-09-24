@@ -49,6 +49,10 @@ export default function Home() {
     });
   }
 
+  /* ========================================
+     GUEST NAME
+  ======================================== */
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const guest = params.get("guest");
@@ -57,6 +61,10 @@ export default function Home() {
       setGuestName(decodeURIComponent(guest));
     }
   }, []);
+
+  /* ========================================
+     PAGE SCROLL LOCK
+  ======================================== */
 
   useEffect(() => {
     if (!opened) {
@@ -73,27 +81,57 @@ export default function Home() {
     };
   }, [opened]);
 
+  /* ========================================
+     COUNTDOWN
+  ======================================== */
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    const updateCountdown = () => {
       const now = new Date().getTime();
       const distance = weddingDate.getTime() - now;
 
+      if (distance <= 0) {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        });
+
+        return;
+      }
+
       setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        days: Math.floor(
+          distance / (1000 * 60 * 60 * 24)
+        ),
+
         hours: Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
         ),
+
         minutes: Math.floor(
-          (distance % (1000 * 60 * 60)) / (1000 * 60)
+          (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
         ),
+
         seconds: Math.floor(
           (distance % (1000 * 60)) / 1000
         ),
       });
-    }, 1000);
+    };
+
+    updateCountdown();
+
+    const interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
   }, []);
+
+  /* ========================================
+     FIREBASE WISHES
+  ======================================== */
 
   useEffect(() => {
     const q = query(
@@ -112,6 +150,10 @@ export default function Home() {
 
     return () => unsubscribe();
   }, []);
+
+  /* ========================================
+     OPEN INVITATION
+  ======================================== */
 
   function handleOpen() {
     if (audioRef.current) {
@@ -137,6 +179,10 @@ export default function Home() {
     }
   }
 
+  /* ========================================
+     MUSIC
+  ======================================== */
+
   function toggleMusic() {
     if (!audioRef.current) return;
 
@@ -148,6 +194,10 @@ export default function Home() {
       setMusicPlaying(true);
     }
   }
+
+  /* ========================================
+     SUBMIT WISH
+  ======================================== */
 
   async function submitWish(e: React.FormEvent) {
     e.preventDefault();
@@ -169,13 +219,29 @@ export default function Home() {
 
   return (
     <main className={opened ? "site-bg-inner" : "site-bg"}>
-      <div className={opened ? "fixed-bg-inner" : "fixed-bg"} />
+      <div
+        className={opened ? "fixed-bg-inner" : "fixed-bg"}
+      />
 
+      {/* MUSIC */}
       <audio ref={audioRef} loop preload="auto">
-        <source src="/Weddingsong.mp3" type="audio/mpeg" />
+        <source
+          src="/Weddingsong.mp3"
+          type="audio/mpeg"
+        />
       </audio>
 
-      <div className={opened ? "soft-overlay-inner" : "soft-overlay"} />
+      <div
+        className={
+          opened
+            ? "soft-overlay-inner"
+            : "soft-overlay"
+        }
+      />
+
+      {/* ========================================
+          FALLING PETALS
+      ======================================== */}
 
       <div className="petal petal1"></div>
       <div className="petal petal2"></div>
@@ -194,86 +260,127 @@ export default function Home() {
       <div className="petal petal15"></div>
 
       {!opened ? (
+        /* ========================================
+           FRONT COVER
+        ======================================== */
+
         <section className="intro-wrap">
           <div className="intro-card fade-up">
 
-  {/* KHMER WEDDING TITLE */}
-  <h1 className="intro-khmer-title khmer-mool-title">
-    សិរីមង្គលអាពាហ៍ពិពាហ៍
-  </h1>
+            {/* KHMER WEDDING TITLE */}
+            <h1 className="intro-khmer-title khmer-mool-title">
+              សិរីមង្គលអាពាហ៍ពិពាហ៍
+            </h1>
 
-  {/* ENGLISH TITLE */}
-  <p className="small-title">
-    Wedding Ceremony
-  </p>
+            {/* ENGLISH TITLE */}
+            <p className="small-title">
+              Wedding Ceremony
+            </p>
 
-  {/* WEDDING LOGO */}
-  <img
-    src="/DD.png"
-    alt="Wedding Logo"
-    className="monogram-logo"
-  />
+            {/* WEDDING LOGO */}
+            <img
+              src="/DD.png"
+              alt="Wedding Logo"
+              className="monogram-logo"
+            />
 
-  {/* INVITATION TEXT */}
-  <p className="intro-khmer-sub kh-main-font">
-    សូមគោរពអញ្ជើញ
-  </p>
+            {/* INVITATION TEXT */}
+            <p className="intro-khmer-sub kh-main-font">
+              សូមគោរពអញ្ជើញ
+            </p>
 
-  {/* GUEST NAME */}
-  {guestName && (
-    <div className="guest-name-wrap fade-up">
-      <h2
-  className={`guest-name ${
-    /[\u1780-\u17FF]/.test(guestName)
-      ? "guest-name-khmer"
-      : "guest-name-english"
-  }`}
->
-  {guestName}
-</h2>
+            {/* GUEST NAME */}
+            {guestName && (
+              <div className="guest-name-wrap fade-up">
+                <h2
+                  className={`guest-name ${
+                    /[\u1780-\u17FF]/.test(guestName)
+                      ? "guest-name-khmer"
+                      : "guest-name-english"
+                  }`}
+                >
+                  {guestName}
+                </h2>
 
-      <img
-        src="/Gold Line Under Text.webp"
-        alt=""
-        className="guest-divider"
-      />
-    </div>
-  )}
+                <img
+                  src="/Gold Line Under Text.webp"
+                  alt=""
+                  className="guest-divider"
+                />
+              </div>
+            )}
 
-  {/* OPEN INVITATION BUTTON */}
-  <button className="open-frame-btn" onClick={handleOpen}>
-    <img
-      src="/Open Text Frame (1).png"
-      alt="Open Invitation"
-      className="open-frame-img"
-    />
-  </button>
-
-</div>
+            {/* OPEN INVITATION */}
+            <button
+              className="open-frame-btn"
+              onClick={handleOpen}
+            >
+              <img
+                src="/Open Text Frame (1).png"
+                alt="Open Invitation"
+                className="open-frame-img"
+              />
+            </button>
+          </div>
         </section>
       ) : (
+        /* ========================================
+           MAIN INVITATION
+        ======================================== */
+
         <section className="formal-invitation fade-up">
           <div className="formal-card">
 
-            {/* QUICK NAVIGATION */}
+            {/* ========================================
+                QUICK NAVIGATION
+            ======================================== */}
+
             <div className="quick-nav">
-              <button onClick={() => scrollToSection("khmer")}>
+              <button
+                onClick={() =>
+                  scrollToSection("khmer")
+                }
+                aria-label="Invitation"
+              >
                 <ScrollText size={26} />
               </button>
 
-              <button onClick={() => scrollToSection("location")}>
+              <button
+                onClick={() =>
+                  scrollToSection("location")
+                }
+                aria-label="Location"
+              >
                 <MapPin size={26} />
               </button>
 
-              <button onClick={() => scrollToSection("gallery")}>
+              <button
+                onClick={() =>
+                  scrollToSection("gallery")
+                }
+                aria-label="Gallery"
+              >
                 <Images size={26} />
               </button>
 
-              <button onClick={() => scrollToSection("wishes")}>
+              <button
+                onClick={() =>
+                  scrollToSection("wishes")
+                }
+                aria-label="Wishes"
+              >
                 <MessageCircle size={26} />
               </button>
 
-              <button className="music-btn" onClick={toggleMusic}>
+              <button
+                className="music-btn"
+                onClick={toggleMusic}
+                aria-label={
+                  musicPlaying
+                    ? "Pause music"
+                    : "Play music"
+                }
+              >
                 {musicPlaying ? (
                   <Music size={26} />
                 ) : (
@@ -282,35 +389,52 @@ export default function Home() {
               </button>
             </div>
 
-            {/* KHMER INVITATION */}
-            <div id="khmer" className="khmer-section">
+            {/* ========================================
+                KHMER INVITATION
+            ======================================== */}
+
+            <div
+              id="khmer"
+              className="khmer-section"
+            >
               <h1 className="khmer-title kh-main-font">
                 សិរីមង្គលអាពាហ៍ពិពាហ៍
               </h1>
 
               <div className="parents-grid">
+
+                {/* GROOM PARENTS */}
                 <div>
-                  <p className="parent-label">លោក</p>
+                  <p className="parent-label">
+                    លោក
+                  </p>
 
                   <h3 className="parent-name kh-main-font">
                     សឿន សុវណ្ណា
                   </h3>
 
-                  <p className="parent-label">លោកស្រី</p>
+                  <p className="parent-label">
+                    លោកស្រី
+                  </p>
 
                   <h3 className="parent-name kh-main-font">
                     ឡាំ សុខចេង
                   </h3>
                 </div>
 
+                {/* BRIDE PARENTS */}
                 <div>
-                  <p className="parent-label">លោក</p>
+                  <p className="parent-label">
+                    លោក
+                  </p>
 
                   <h3 className="parent-name kh-main-font">
                     ជា វីរៈ
                   </h3>
 
-                  <p className="parent-label">លោកស្រី</p>
+                  <p className="parent-label">
+                    លោកស្រី
+                  </p>
 
                   <h3 className="parent-name kh-main-font">
                     ណុប នីលីន
@@ -319,28 +443,38 @@ export default function Home() {
               </div>
 
               <p className="invite-paragraph kh-main-font">
-                មានកិត្តិយសសូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី
-                អ្នកនាងកញ្ញា អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស
-                ក្នុងពិធីមង្គលការកូនប្រុស កូនស្រី របស់យើងខ្ញុំ។
+                មានកិត្តិយសសូមគោរពអញ្ជើញ ឯកឧត្តម
+                លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា
+                អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស
+                ក្នុងពិធីមង្គលការកូនប្រុស កូនស្រី
+                របស់យើងខ្ញុំ។
               </p>
 
               <div className="couple-section">
+
+                {/* GROOM */}
                 <div>
-                  <p className="role kh-main-font">កូនប្រុសនាម</p>
+                  <p className="role kh-main-font">
+                    កូនប្រុសនាម
+                  </p>
 
                   <h2 className="person-name kh-main-font">
                     សឿន សុវណ្ណាឌី
                   </h2>
                 </div>
 
+                {/* LOGO */}
                 <img
                   src="/DD.png"
                   alt="Wedding Logo"
                   className="center-logo"
                 />
 
+                {/* BRIDE */}
                 <div>
-                  <p className="role kh-main-font">កូនស្រីនាម</p>
+                  <p className="role kh-main-font">
+                    កូនស្រីនាម
+                  </p>
 
                   <h2 className="person-name kh-main-font">
                     ជា ពេជ្រសុខធីតា
@@ -355,11 +489,15 @@ export default function Home() {
                 ត្រូវនឹងថ្ងៃទី១៦ ខែវិច្ឆិកា ឆ្នាំ២០២៦
                 វេលាម៉ោង ៥:០០ នាទីល្ងាច
                 <br />
-                នៅ ភោជនីយដ្ឋានឡាក់គីប្រាយ (អគារទាំងមូល)
+                នៅ ភោជនីយដ្ឋានឡាក់គីប្រាយ
+                (អគារទាំងមូល)
               </p>
             </div>
 
-            {/* ENGLISH INVITATION */}
+            {/* ========================================
+                ENGLISH INVITATION
+            ======================================== */}
+
             <div className="english-section">
               <h2 className="english-title">
                 THE
@@ -375,8 +513,12 @@ export default function Home() {
                 </p>
 
                 <p>
-                  <span>Mr. CHEA VIREAK</span>
+                  <span>
+                    Mr. CHEA VIREAK
+                  </span>
+
                   <br />
+
                   <span className="nob-nilin">
                     Mrs. NOB NILIN
                   </span>
@@ -384,28 +526,122 @@ export default function Home() {
               </div>
 
               <p className="english-invite-text">
-                Request the Pleasure of your presence on this
-                Auspicious Occasion
+                Request the Pleasure of your presence
+                on this Auspicious Occasion
                 <br />
-                of the Wedding Reception of our Children.
+                of the Wedding Reception of our
+                Children.
               </p>
 
               <h2 className="english-couple-name">
-                <span>Seoun Sovannady</span>
-                <span className="ampersand">&</span>
-                <span>Chea Pichsokthida</span>
+                <span>
+                  Seoun Sovannady
+                </span>
+
+                <span className="ampersand">
+                  &
+                </span>
+
+                <span>
+                  Chea Pichsokthida
+                </span>
               </h2>
 
               <p className="english-date">
-                on Monday 16<sup>th</sup> November 2026
-                &nbsp; At 5:00 PM
+                on Monday 16<sup>th</sup> November
+                2026 &nbsp; At 5:00 PM
                 <br />
-                at Lucky Bright Restaurant (Whole Building)
+                at Lucky Bright Restaurant
+                (Whole Building)
               </p>
             </div>
 
-            {/* COUNTDOWN */}
-            <div id="countdown" className="countdown-section">
+            {/* ========================================
+                EVENT AGENDA
+            ======================================== */}
+
+            <div
+              id="agenda"
+              className="agenda-section"
+            >
+              <h2 className="section-title kh-main-font">
+                របៀបវារៈកម្មវិធី
+              </h2>
+
+              <p className="section-subtitle-en">
+                EVENT AGENDA
+              </p>
+
+              <div className="agenda-card">
+                <img
+                  src="/Agenda.png"
+                  alt="Wedding Event Agenda"
+                  className="agenda-image"
+                />
+              </div>
+            </div>
+
+            {/* ========================================
+                DRESS CODE
+            ======================================== */}
+
+            <div
+              id="dress-code"
+              className="dress-code-section"
+            >
+              <img
+                src="/Dress-Code.png"
+                alt="Wedding Guest Dress Code"
+                className="dress-code-image"
+              />
+            </div>
+
+            {/* ========================================
+                LOCATION
+            ======================================== */}
+
+            <div
+              id="location"
+              className="location-section"
+            >
+              <h2 className="section-title kh-main-font">
+                ទីតាំងកម្មវិធី
+              </h2>
+
+              <p className="section-subtitle-en">
+                LOCATION
+              </p>
+
+              <div className="location-card">
+                <img
+                  src="/Map.png"
+                  alt="Wedding Location"
+                  className="location-image"
+                />
+              </div>
+
+              <a
+                className="save-btn kh-main-font"
+                href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                បើកទីតាំងកម្មវិធី
+
+                <span>
+                  Open Google Map
+                </span>
+              </a>
+            </div>
+
+            {/* ========================================
+                COUNTDOWN
+            ======================================== */}
+
+            <div
+              id="countdown"
+              className="countdown-section"
+            >
               <div className="countdown-title-wrap">
                 <h2 className="section-title kh-main-font">
                   រាប់ថយក្រោយ
@@ -438,77 +674,33 @@ export default function Home() {
                   value: timeLeft.seconds,
                 },
               ].map((item) => (
-                <div key={item.label} className="countdown-box">
-                  <h2>{item.value}</h2>
+                <div
+                  key={item.label}
+                  className="countdown-box"
+                >
+                  <h2>
+                    {item.value}
+                  </h2>
 
                   <p className="kh-main-font">
                     {item.label}
                   </p>
 
-                  <span>{item.en}</span>
+                  <span>
+                    {item.en}
+                  </span>
                 </div>
               ))}
             </div>
 
-            {/* EVENT AGENDA */}
-            <div id="agenda" className="agenda-section">
-              <h2 className="section-title kh-main-font">
-                របៀបវារៈកម្មវិធី
-              </h2>
+            {/* ========================================
+                PHOTO GALLERY
+            ======================================== */}
 
-              <p className="section-subtitle-en">
-                EVENT AGENDA
-              </p>
-
-              <div className="agenda-card">
-                <img
-                  src="/Agenda.png"
-                  alt="Wedding Event Agenda"
-                  className="agenda-image"
-                />
-              </div>
-            </div>
-
-            {/* DRESS CODE */}
-            <div id="dress-code" className="dress-code-section">
-              <img
-                src="/Dress-Code.png"
-                alt="Wedding Guest Dress Code"
-                className="dress-code-image"
-              />
-            </div>
-
-            {/* LOCATION */}
-            <div id="location" className="location-section">
-              <h2 className="section-title kh-main-font">
-                ទីតាំងកម្មវិធី
-              </h2>
-
-              <p className="section-subtitle-en">
-                LOCATION
-              </p>
-
-              <div className="location-card">
-                <img
-                  src="/Map.png"
-                  alt="Wedding Location"
-                  className="location-image"
-                />
-              </div>
-
-              <a
-                className="save-btn kh-main-font"
-                href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                បើកទីតាំងកម្មវិធី
-                <span>Open Google Map</span>
-              </a>
-            </div>
-
-            {/* PHOTO GALLERY */}
-            <div id="gallery" className="gallery-section">
+            <div
+              id="gallery"
+              className="gallery-section"
+            >
               <h2 className="section-title kh-main-font">
                 កម្រងរូបភាពអនុស្សាវរីយ៍
               </h2>
@@ -518,29 +710,48 @@ export default function Home() {
               </p>
 
               <div className="gallery-grid">
-                <div className="photo-card large-photo">
-                  <img src="/photo1.jpg" alt="Wedding" />
-                </div>
-
-                <div className="photo-card">
-                  <img src="/photo2.jpg" alt="Wedding" />
-                </div>
-
-                <div className="photo-card">
-                  <img src="/photo3.jpg" alt="Wedding" />
-                </div>
-
-                <div className="photo-card">
-                  <img src="/photo4.jpg" alt="Wedding" />
-                </div>
 
                 <div className="photo-card large-photo">
-                  <img src="/photo5.jpg" alt="Wedding" />
+                  <img
+                    src="/photo1.jpg"
+                    alt="Wedding"
+                  />
+                </div>
+
+                <div className="photo-card">
+                  <img
+                    src="/photo2.jpg"
+                    alt="Wedding"
+                  />
+                </div>
+
+                <div className="photo-card">
+                  <img
+                    src="/photo3.jpg"
+                    alt="Wedding"
+                  />
+                </div>
+
+                <div className="photo-card">
+                  <img
+                    src="/photo4.jpg"
+                    alt="Wedding"
+                  />
+                </div>
+
+                <div className="photo-card large-photo">
+                  <img
+                    src="/photo5.jpg"
+                    alt="Wedding"
+                  />
                 </div>
               </div>
             </div>
 
-            {/* GRATITUDE */}
+            {/* ========================================
+                GRATITUDE
+            ======================================== */}
+
             <div className="gratitude-section">
               <h2 className="gratitude-title kh-main-font">
                 សេចក្តីថ្លែងអំណរគុណ
@@ -548,8 +759,9 @@ export default function Home() {
 
               <p className="gratitude-kh kh-title-font">
                 យើងខ្ញុំ សូមថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅ
-                ចំពោះ ឯកឧត្តម លោកជំទាវ លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា
-                លោក លោកស្រី អ្នកនាងកញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
+                ចំពោះ ឯកឧត្តម លោកជំទាវ
+                លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា លោក លោកស្រី
+                អ្នកនាងកញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
                 ដែលបានចូលរួមជាកិត្តិយសក្នុងពិធីមង្គលការរបស់យើងខ្ញុំ។
               </p>
 
@@ -562,15 +774,22 @@ export default function Home() {
               </h3>
 
               <p className="gratitude-en">
-                We are deeply grateful to H.E., Lok Neak Oknha,
-                Neak Oknha, Oknha, Lct., ladies and gentlemen,
-                for honoring us with your presence at our upcoming
-                wedding ceremony.
+                We are deeply grateful to H.E.,
+                Lok Neak Oknha, Neak Oknha, Oknha,
+                Lct., ladies and gentlemen, for
+                honoring us with your presence at
+                our upcoming wedding ceremony.
               </p>
             </div>
 
-            {/* WISHES */}
-            <div id="wishes" className="wishes-section">
+            {/* ========================================
+                WISHES
+            ======================================== */}
+
+            <div
+              id="wishes"
+              className="wishes-section"
+            >
               <h2 className="section-title kh-title-font">
                 សារជូនពរ
               </h2>
@@ -579,10 +798,15 @@ export default function Home() {
                 Leave Your Wishes
               </p>
 
-              <form className="wish-form" onSubmit={submitWish}>
+              <form
+                className="wish-form"
+                onSubmit={submitWish}
+              >
                 <input
                   value={wishName}
-                  onChange={(e) => setWishName(e.target.value)}
+                  onChange={(e) =>
+                    setWishName(e.target.value)
+                  }
                   placeholder="Your name"
                   className="wish-input"
                 />
@@ -611,8 +835,13 @@ export default function Home() {
                     className="wish-card"
                     key={wish.id}
                   >
-                    <h3>{wish.name}</h3>
-                    <p>{wish.message}</p>
+                    <h3>
+                      {wish.name}
+                    </h3>
+
+                    <p>
+                      {wish.message}
+                    </p>
                   </div>
                 ))}
               </div>
