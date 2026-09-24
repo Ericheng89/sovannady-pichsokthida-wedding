@@ -1337,66 +1337,183 @@ body {
 
 
 /* ========================================
-   QUICK NAVIGATION
+   LIQUID GLASS QUICK NAV
 ======================================== */
 
 .quick-nav {
   position: fixed;
-
   left: 50%;
-
   bottom: 18px;
-
-  transform:
-    translateX(-50%);
+  transform: translateX(-50%);
 
   display: flex;
+  align-items: center;
+  gap: 9px;
 
-  gap: 8px;
+  padding: 7px;
 
   z-index: 10000;
-}
 
-.quick-nav button {
-  width: 52px;
-
-  height: 52px;
-
-  border: none;
-
-  border-radius: 16px;
-
+  /* Glass container */
   background:
-    rgba(255, 255, 255, 0.88);
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.28),
+      rgba(255, 248, 235, 0.12)
+    );
 
-  backdrop-filter:
-    blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 24px;
 
-  color: #9b7335;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
 
   box-shadow:
-    0 4px 14px rgba(0, 0, 0, 0.08);
+    0 10px 35px rgba(80, 55, 25, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(184, 146, 79, 0.08);
+}
+
+
+/* ========================================
+   LIQUID GLASS BUTTONS
+======================================== */
+
+.quick-nav button {
+  position: relative;
+  overflow: hidden;
+
+  width: 52px;
+  height: 52px;
+
+  padding: 0;
+
+  border-radius: 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.42),
+      rgba(255, 248, 235, 0.15)
+    );
+
+  color: #a67c3d;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   cursor: pointer;
 
+  backdrop-filter: blur(14px) saturate(170%);
+  -webkit-backdrop-filter: blur(14px) saturate(170%);
+
+  box-shadow:
+    0 5px 16px rgba(75, 55, 30, 0.09),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75),
+    inset 0 -1px 1px rgba(184, 146, 79, 0.08);
+
   transition:
-    all 0.25s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 }
+
+
+/* GLASS LIGHT REFLECTION */
+
+.quick-nav button::before {
+  content: "";
+
+  position: absolute;
+
+  top: 2px;
+  left: 8px;
+
+  width: 65%;
+  height: 40%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.75) 0%,
+      rgba(255, 255, 255, 0.20) 55%,
+      transparent 75%
+    );
+
+  opacity: 0.65;
+
+  pointer-events: none;
+
+  filter: blur(2px);
+}
+
+
+/* SUBTLE GLASS GLOW */
+
+.quick-nav button::after {
+  content: "";
+
+  position: absolute;
+  inset: 1px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.18);
+
+  pointer-events: none;
+}
+
+
+/* ICON */
+
+.quick-nav button svg {
+  position: relative;
+
+  z-index: 2;
+
+  width: 22px;
+  height: 22px;
+
+  stroke-width: 1.8;
+}
+
+
+/* HOVER */
 
 .quick-nav button:hover {
   transform:
-    translateY(-2px);
+    translateY(-3px)
+    scale(1.04);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.55),
+      rgba(255, 248, 235, 0.22)
+    );
+
+  box-shadow:
+    0 9px 22px rgba(75, 55, 30, 0.13),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85);
 }
 
-.quick-nav button svg {
-  width: 22px;
-  height: 22px;
+
+/* CLICK */
+
+.quick-nav button:active {
+  transform:
+    translateY(0)
+    scale(0.94);
+
+  box-shadow:
+    0 3px 10px rgba(75, 55, 30, 0.10),
+    inset 0 2px 5px rgba(130, 100, 55, 0.08);
 }
 
 
@@ -1404,39 +1521,48 @@ body {
    MUSIC BUTTON
 ======================================== */
 
-.music-btn {
-  width: 58px;
-  height: 58px;
+.quick-nav .music-btn {
+  width: 52px;
+  height: 52px;
 
-  border: none;
+  border-radius: 17px;
 
-  border-radius: 18px;
-
-  background:
-    rgba(255, 255, 255, 0.88);
-
-  backdrop-filter:
-    blur(12px);
-
-  color: #9b7335;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  box-shadow:
-    0 4px 14px rgba(0, 0, 0, 0.08);
-
-  cursor: pointer;
-
-  transition:
-    all 0.25s ease;
-
-  font-size: 24px;
+  color: #b8924f;
 }
 
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+  .quick-nav {
+    bottom: 14px;
+
+    gap: 6px;
+
+    padding: 6px;
+
+    border-radius: 22px;
+  }
+
+  .quick-nav button,
+  .quick-nav .music-btn {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 15px;
+  }
+
+  .quick-nav button::after {
+    border-radius: 14px;
+  }
+
+  .quick-nav button svg {
+    width: 21px;
+    height: 21px;
+  }
+}
 
 /* ========================================
    FADE ANIMATION
