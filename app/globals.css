@@ -7,7 +7,9 @@
 
 @font-face {
   font-family: "Khmer Mool 1";
-  src: url("/fonts/KhmerMool1.ttf") format("truetype");
+  src: url("/fonts/Khmer Mool1 Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
 }
 
 html,
@@ -206,6 +208,7 @@ body {
 }
 
 .khmer-title {
+  font-family: "Khmer Mool 1", serif;
   font-size: clamp(20px, 4.5vw, 38px);
   color: #b8924f;
   margin-top: 25px;
