@@ -932,7 +932,7 @@ body {
 .guest-divider {
   width: min(420px, 80vw);
   display: block;
-  margin: -15px auto 0;
+  margin: -9px auto 0;
   opacity: 0.95;
   pointer-events: none;
 }
@@ -1066,9 +1066,11 @@ html {
 
 .intro-khmer-title.khmer-mool-title {
   font-family: "Khmer Mool 1", serif;
-  font-size: clamp(24px, 6vw, 40px);
+  font-size: clamp(25px, 6vw, 42px);
   font-weight: 400;
   line-height: 1.35;
+  margin-top: 12px;
+  margin-bottom: 2px;
 }
 
 /* Mobile */

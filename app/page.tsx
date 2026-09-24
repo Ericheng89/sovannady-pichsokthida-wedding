@@ -320,7 +320,7 @@ export default function Home() {
 
               <div className="couple-section">
                 <div>
-                  <p className="role">កូនប្រុសនាម</p>
+                  <p className="role kh-main-font">កូនប្រុសនាម</p>
 
                   <h2 className="person-name kh-main-font">
                     សឿន សុវណ្ណាឌី
@@ -334,7 +334,7 @@ export default function Home() {
                 />
 
                 <div>
-                  <p className="role">កូនស្រីនាម</p>
+                  <p className="role kh-main-font">កូនស្រីនាម</p>
 
                   <h2 className="person-name kh-main-font">
                     ជា ពេជ្រសុខធីតា
