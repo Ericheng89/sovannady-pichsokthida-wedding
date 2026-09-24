@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap');
 
 @font-face {
-  font-family: "Kh Ang NiTean";
-  src: url("/fonts/Kh Ang NiTean.ttf") format("truetype");
+  font-family: "Kh Ang Bokor New";
+  src: url("/fonts/Kh Ang Bokor New.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
 }
+
 
 @font-face {
   font-family: "Khmer Mool 1";
@@ -25,7 +28,7 @@ body {
 }
 
 .kh-title-font {
-  font-family: "Kh Ang NiTean", serif;
+  font-family: "Kh Ang Bokor New", serif;
 }
 
 .kh-main-font {
@@ -240,7 +243,7 @@ body {
   margin: 0 0 2px;
   font-size: 11px;
   color: #7c6440;
-  font-family: "Kh Ang NiTean", serif;
+  font-family: "Kh Ang Bokor New", serif;
   line-height: 1.1;
 }
 
@@ -259,7 +262,7 @@ body {
   line-height: 1.65;
   color: #6b5633;
   font-size: clamp(11px, 3vw, 18px);
-  font-family: "Kh Ang NiTean", serif;
+  font-family: "Kh Ang Bokor New", serif;
 }
 
 .couple-section {
