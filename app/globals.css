@@ -3431,3 +3431,379 @@ body {
     transition: none !important;
   }
 }
+
+/* ========================================
+   PERSONALIZED GUEST WELCOME
+======================================== */
+
+.guest-welcome-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 99990;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 252, 244, 0.94) 0%,
+      rgba(255, 249, 236, 0.86) 45%,
+      rgba(250, 241, 221, 0.68) 72%,
+      rgba(250, 241, 221, 0) 100%
+    );
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  animation:
+    guestWelcomeOverlay
+    3.2s
+    ease
+    forwards;
+}
+
+
+/* ========================================
+   WELCOME CONTENT
+======================================== */
+
+.guest-welcome-content {
+  width: min(520px, 90vw);
+
+  text-align: center;
+
+  animation:
+    guestWelcomeContent
+    3.2s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+.guest-welcome-small {
+  margin: 0 0 13px;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  letter-spacing: 5px;
+
+  color: #a98549;
+}
+
+
+/* ========================================
+   GUEST NAME
+======================================== */
+
+.guest-welcome-name {
+  margin: 0;
+
+  color: #b8924f;
+
+  font-weight: 400;
+
+  text-shadow:
+    0 2px 12px
+    rgba(184, 146, 79, 0.12);
+}
+
+
+.guest-welcome-english {
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size:
+    clamp(34px, 8vw, 58px);
+
+  font-weight: 500;
+
+  line-height: 1.05;
+}
+
+
+.guest-welcome-khmer {
+  font-family:
+    "Khmer Mool 1",
+    serif;
+
+  font-size:
+    clamp(25px, 6vw, 42px);
+
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   GOLD LINE
+======================================== */
+
+.guest-welcome-line {
+  position: relative;
+
+  width: min(270px, 70vw);
+
+  height: 24px;
+
+  margin: 17px auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.guest-welcome-line::before,
+.guest-welcome-line::after {
+  content: "";
+
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(184, 146, 79, 0.75)
+    );
+
+  transform: scaleX(0);
+
+  animation:
+    guestWelcomeLine
+    0.9s
+    0.55s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+.guest-welcome-line::after {
+  background:
+    linear-gradient(
+      to left,
+      transparent,
+      rgba(184, 146, 79, 0.75)
+    );
+
+  transform-origin: left;
+}
+
+
+.guest-welcome-line::before {
+  transform-origin: right;
+}
+
+
+.guest-welcome-line span {
+  margin: 0 10px;
+
+  color: #c49a50;
+
+  font-size: 12px;
+
+  opacity: 0;
+
+  animation:
+    guestWelcomeStar
+    0.7s
+    0.8s
+    ease
+    forwards;
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+.guest-welcome-message {
+  max-width: 360px;
+
+  margin: 8px auto 0;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size:
+    clamp(15px, 3.8vw, 18px);
+
+  font-style: italic;
+
+  line-height: 1.5;
+
+  color: #786443;
+
+  opacity: 0;
+
+  animation:
+    guestWelcomeMessage
+    0.8s
+    0.9s
+    ease
+    forwards;
+}
+
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes guestWelcomeOverlay {
+
+  0% {
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  78% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+@keyframes guestWelcomeContent {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(18px)
+      scale(0.97);
+
+    filter: blur(5px);
+  }
+
+  20% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  78% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translateY(-12px)
+      scale(1.015);
+
+    filter: blur(3px);
+  }
+}
+
+
+@keyframes guestWelcomeLine {
+
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
+@keyframes guestWelcomeStar {
+
+  from {
+    opacity: 0;
+
+    transform:
+      scale(0.4)
+      rotate(0deg);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      rotate(45deg);
+  }
+}
+
+
+@keyframes guestWelcomeMessage {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .guest-welcome-overlay,
+  .guest-welcome-content,
+  .guest-welcome-line::before,
+  .guest-welcome-line::after,
+  .guest-welcome-line span,
+  .guest-welcome-message {
+    animation: none !important;
+  }
+
+  .guest-welcome-overlay,
+  .guest-welcome-content,
+  .guest-welcome-line span,
+  .guest-welcome-message {
+    opacity: 1;
+  }
+
+  .guest-welcome-line::before,
+  .guest-welcome-line::after {
+    transform: scaleX(1);
+  }
+}

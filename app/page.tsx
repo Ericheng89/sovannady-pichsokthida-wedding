@@ -26,6 +26,7 @@ export default function Home() {
   const [opening, setOpening] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [guestName, setGuestName] = useState("");
+  const [showGuestWelcome, setShowGuestWelcome] = useState(false);
 
   const [wishName, setWishName] = useState("");
   const [wishMessage, setWishMessage] = useState("");
@@ -327,14 +328,22 @@ useEffect(() => {
 
   // Let the cinematic cover animation play first
   setTimeout(() => {
-    setOpened(true);
-    setOpening(false);
+  setOpened(true);
+  setOpening(false);
 
-    window.scrollTo({
-      top: 0,
-      behavior: "instant",
-    });
-  }, 1200);
+  window.scrollTo({
+    top: 0,
+    behavior: "instant",
+  });
+
+  if (guestName) {
+    setShowGuestWelcome(true);
+
+    setTimeout(() => {
+      setShowGuestWelcome(false);
+    }, 3200);
+  }
+}, 1200);
 }
 
   /* ========================================
@@ -1136,6 +1145,44 @@ useEffect(() => {
                     </div>
         </section>
       )}
+
+      {/* ========================================
+    PERSONALIZED GUEST WELCOME
+======================================== */}
+
+{showGuestWelcome && guestName && (
+  <div
+    className="guest-welcome-overlay"
+    aria-hidden="true"
+  >
+    <div className="guest-welcome-content">
+
+      <p className="guest-welcome-small">
+        WELCOME
+      </p>
+
+      <h2
+        className={`guest-welcome-name ${
+          /[\u1780-\u17FF]/.test(guestName)
+            ? "guest-welcome-khmer"
+            : "guest-welcome-english"
+        }`}
+      >
+        {guestName}
+      </h2>
+
+      <div className="guest-welcome-line">
+        <span>✦</span>
+      </div>
+
+      <p className="guest-welcome-message">
+        We are delighted to celebrate
+        this special day with you.
+      </p>
+
+    </div>
+  </div>
+)}
 
       {/* ========================================
           FULLSCREEN PHOTO GALLERY
