@@ -2963,3 +2963,471 @@ body {
     transform: none !important;
   }
 }
+
+/* ========================================
+   INTERACTIVE PHOTO GALLERY
+======================================== */
+
+.photo-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.photo-card img {
+  transition:
+    transform 0.7s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+}
+
+.gallery-photo-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(45, 31, 15, 0.35),
+      transparent 55%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 0.4s ease;
+
+  pointer-events: none;
+}
+
+.gallery-photo-overlay span {
+  position: absolute;
+
+  bottom: 18px;
+
+  color: rgba(255, 255, 255, 0.95);
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 14px;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  transform:
+    translateY(8px);
+
+  transition:
+    transform 0.4s ease;
+}
+
+.photo-card:hover img {
+  transform:
+    scale(1.035);
+}
+
+.photo-card:hover
+.gallery-photo-overlay {
+  opacity: 1;
+}
+
+.photo-card:hover
+.gallery-photo-overlay span {
+  transform:
+    translateY(0);
+}
+
+
+/* ========================================
+   FULLSCREEN LIGHTBOX
+======================================== */
+
+.gallery-lightbox {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999999;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    60px 70px;
+
+  box-sizing: border-box;
+
+  background:
+    rgba(22, 17, 11, 0.82);
+
+  backdrop-filter:
+    blur(18px)
+    saturate(120%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(120%);
+
+  animation:
+    lightboxFadeIn
+    0.35s ease
+    forwards;
+
+  touch-action: pan-y;
+}
+
+
+@keyframes lightboxFadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* ========================================
+   LIGHTBOX IMAGE
+======================================== */
+
+.lightbox-image-wrap {
+  max-width: 1100px;
+  max-height: 85vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.lightbox-image {
+  display: block;
+
+  max-width: 100%;
+  max-height: 85vh;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 25px 80px
+    rgba(0, 0, 0, 0.35);
+
+  animation:
+    lightboxImageEnter
+    0.5s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+@keyframes lightboxImageEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      scale(0.94)
+      translateY(10px);
+
+    filter:
+      blur(4px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+
+    filter:
+      blur(0);
+  }
+}
+
+
+/* ========================================
+   CLOSE BUTTON
+======================================== */
+
+.lightbox-close {
+  position: absolute;
+
+  top: 22px;
+  right: 25px;
+
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.25);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.12);
+
+  color: white;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 32px;
+  font-weight: 200;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.lightbox-close:hover {
+  transform:
+    rotate(90deg);
+
+  background:
+    rgba(255, 255, 255, 0.2);
+}
+
+
+/* ========================================
+   PHOTO COUNTER
+======================================== */
+
+.lightbox-counter {
+  position: absolute;
+
+  top: 32px;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    rgba(255, 255, 255, 0.9);
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 17px;
+
+  letter-spacing: 2px;
+}
+
+
+/* ========================================
+   GALLERY ARROWS
+======================================== */
+
+.lightbox-arrow {
+  position: absolute;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  width: 52px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-radius: 18px;
+
+  background:
+    rgba(255, 255, 255, 0.10);
+
+  color: white;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 42px;
+  font-weight: 300;
+
+  cursor: pointer;
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.lightbox-arrow:hover {
+  background:
+    rgba(255, 255, 255, 0.18);
+}
+
+
+.lightbox-prev {
+  left: 20px;
+}
+
+
+.lightbox-next {
+  right: 20px;
+}
+
+
+/* ========================================
+   SWIPE HINT
+======================================== */
+
+.lightbox-swipe-hint {
+  display: none;
+
+  position: absolute;
+
+  bottom: 24px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    rgba(255, 255, 255, 0.65);
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 13px;
+
+  letter-spacing: 1.2px;
+
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   MOBILE GALLERY
+======================================== */
+
+@media (max-width: 600px) {
+
+  .gallery-lightbox {
+    padding:
+      70px 14px
+      70px;
+  }
+
+  .lightbox-image-wrap {
+    width: 100%;
+
+    max-height: 78vh;
+  }
+
+  .lightbox-image {
+    max-height: 78vh;
+
+    border-radius: 8px;
+  }
+
+  .lightbox-close {
+    top: 18px;
+    right: 16px;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 29px;
+  }
+
+  .lightbox-counter {
+    top: 29px;
+
+    font-size: 15px;
+  }
+
+  /*
+    Swipe is easier on phones,
+    so hide the large arrows.
+  */
+
+  .lightbox-arrow {
+    display: none;
+  }
+
+  .lightbox-swipe-hint {
+    display: block;
+  }
+
+  /*
+    No permanent overlay on touch.
+  */
+
+  .gallery-photo-overlay {
+    display: none;
+  }
+
+  .photo-card:active img {
+    transform:
+      scale(0.98);
+  }
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .gallery-lightbox,
+  .lightbox-image {
+    animation: none !important;
+  }
+
+  .photo-card img {
+    transition: none !important;
+  }
+}

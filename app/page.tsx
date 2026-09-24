@@ -30,8 +30,60 @@ export default function Home() {
   const [wishName, setWishName] = useState("");
   const [wishMessage, setWishMessage] = useState("");
   const [wishes, setWishes] = useState<any[]>([]);
+  const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
+
+const galleryPhotos = [
+  "/photo1.jpg",
+  "/photo2.jpg",
+  "/photo3.jpg",
+  "/photo4.jpg",
+  "/photo5.jpg",
+];
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  function handleTouchStart(
+  event: React.TouchEvent<HTMLDivElement>
+) {
+  touchStartX.current =
+    event.targetTouches[0].clientX;
+
+  touchEndX.current = null;
+}
+
+function handleTouchMove(
+  event: React.TouchEvent<HTMLDivElement>
+) {
+  touchEndX.current =
+    event.targetTouches[0].clientX;
+}
+
+function handleTouchEnd() {
+  if (
+    touchStartX.current === null ||
+    touchEndX.current === null
+  ) {
+    return;
+  }
+
+  const distance =
+    touchStartX.current - touchEndX.current;
+
+  const minimumSwipeDistance = 50;
+
+  if (distance > minimumSwipeDistance) {
+    nextPhoto();
+  }
+
+  if (distance < -minimumSwipeDistance) {
+    previousPhoto();
+  }
+
+  touchStartX.current = null;
+  touchEndX.current = null;
+}
 
   const weddingDate = new Date("2026-11-16T17:00:00");
 
@@ -48,6 +100,74 @@ export default function Home() {
       block: "start",
     });
   }
+
+  function openPhoto(index: number) {
+  setSelectedPhoto(index);
+}
+
+function closePhoto() {
+  setSelectedPhoto(null);
+}
+
+function nextPhoto() {
+  setSelectedPhoto((current) => {
+    if (current === null) return null;
+
+    return (current + 1) % galleryPhotos.length;
+  });
+}
+
+function previousPhoto() {
+  setSelectedPhoto((current) => {
+    if (current === null) return null;
+
+    return (
+      current - 1 + galleryPhotos.length
+    ) % galleryPhotos.length;
+  });
+}
+
+/* ========================================
+   GALLERY KEYBOARD CONTROLS
+======================================== */
+
+useEffect(() => {
+  if (selectedPhoto === null) return;
+
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      closePhoto();
+    }
+
+    if (event.key === "ArrowRight") {
+      nextPhoto();
+    }
+
+    if (event.key === "ArrowLeft") {
+      previousPhoto();
+    }
+  }
+
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, [selectedPhoto]);
+
+useEffect(() => {
+  if (selectedPhoto !== null) {
+    document.body.style.overflow = "hidden";
+  } else if (opened) {
+    document.body.style.overflow = "";
+  }
+
+  return () => {
+    if (opened) {
+      document.body.style.overflow = "";
+    }
+  };
+}, [selectedPhoto, opened]);
 
   /* ========================================
      GUEST NAME
@@ -821,59 +941,59 @@ export default function Home() {
             </div>
 
             {/* ========================================
-                PHOTO GALLERY
-            ======================================== */}
+    PHOTO GALLERY
+======================================== */}
 
-            <div
-              id="gallery"
-              className="gallery-section scroll-reveal"
-            >
-              <h2 className="section-title kh-main-font">
-                កម្រងរូបភាពអនុស្សាវរីយ៍
-              </h2>
+<div
+  id="gallery"
+  className="gallery-section scroll-reveal"
+>
+  <h2 className="section-title kh-main-font">
+    កម្រងរូបភាពអនុស្សាវរីយ៍
+  </h2>
 
-              <p className="section-subtitle-en">
-                PHOTO GALLERY
-              </p>
+  <p className="section-subtitle-en">
+    PHOTO GALLERY
+  </p>
 
-              <div className="gallery-grid">
+  <div className="gallery-grid">
 
-                <div className="photo-card large-photo gallery-reveal">
-                  <img
-                    src="/photo1.jpg"
-                    alt="Wedding"
-                  />
-                </div>
+    {galleryPhotos.map((photo, index) => (
+      <div
+        key={photo}
+        className={`photo-card gallery-reveal ${
+          index === 0 || index === 4
+            ? "large-photo"
+            : ""
+        }`}
+        onClick={() => openPhoto(index)}
+        role="button"
+        tabIndex={0}
+        aria-label={`Open wedding photo ${
+          index + 1
+        }`}
+        onKeyDown={(event) => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            openPhoto(index);
+          }
+        }}
+      >
+        <img
+          src={photo}
+          alt={`Wedding photo ${index + 1}`}
+        />
 
-                <div className="photo-card gallery-reveal">
-                  <img
-                    src="/photo2.jpg"
-                    alt="Wedding"
-                  />
-                </div>
+        <div className="gallery-photo-overlay">
+          <span>View Photo</span>
+        </div>
+      </div>
+    ))}
 
-                <div className="photo-card gallery-reveal">
-                  <img
-                    src="/photo3.jpg"
-                    alt="Wedding"
-                  />
-                </div>
-
-                <div className="photo-card gallery-reveal">
-                  <img
-                    src="/photo4.jpg"
-                    alt="Wedding"
-                  />
-                </div>
-
-                <div className="photo-card large-photo gallery-reveal">
-                  <img
-                    src="/photo5.jpg"
-                    alt="Wedding"
-                  />
-                </div>
-              </div>
-            </div>
+  </div>
+</div>
 
             {/* ========================================
                 APOLOGY
@@ -1013,9 +1133,92 @@ export default function Home() {
               </div>
             </div>
 
-          </div>
+                    </div>
         </section>
       )}
+
+      {/* ========================================
+          FULLSCREEN PHOTO GALLERY
+      ======================================== */}
+
+      {selectedPhoto !== null && (
+        <div
+          className="gallery-lightbox"
+          onClick={closePhoto}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+
+          {/* CLOSE */}
+
+          <button
+            className="lightbox-close"
+            onClick={closePhoto}
+            aria-label="Close gallery"
+          >
+            ×
+          </button>
+
+          {/* PHOTO COUNTER */}
+
+          <div className="lightbox-counter">
+            {selectedPhoto + 1} / {galleryPhotos.length}
+          </div>
+
+          {/* PREVIOUS */}
+
+          <button
+            className="lightbox-arrow lightbox-prev"
+            onClick={(event) => {
+              event.stopPropagation();
+              previousPhoto();
+            }}
+            aria-label="Previous photo"
+          >
+            ‹
+          </button>
+
+          {/* IMAGE */}
+
+          <div
+            className="lightbox-image-wrap"
+            onClick={(event) =>
+              event.stopPropagation()
+            }
+          >
+            <img
+              key={galleryPhotos[selectedPhoto]}
+              src={galleryPhotos[selectedPhoto]}
+              alt={`Wedding photo ${
+                selectedPhoto + 1
+              }`}
+              className="lightbox-image"
+            />
+          </div>
+
+          {/* NEXT */}
+
+          <button
+            className="lightbox-arrow lightbox-next"
+            onClick={(event) => {
+              event.stopPropagation();
+              nextPhoto();
+            }}
+            aria-label="Next photo"
+          >
+            ›
+          </button>
+
+          {/* MOBILE SWIPE HINT */}
+
+          <div className="lightbox-swipe-hint">
+            Swipe to browse
+          </div>
+
+        </div>
+      )}
+
     </main>
   );
 }
