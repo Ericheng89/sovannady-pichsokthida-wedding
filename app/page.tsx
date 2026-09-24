@@ -259,6 +259,41 @@ export default function Home() {
       <div className="petal petal14"></div>
       <div className="petal petal15"></div>
 
+      {/* ========================================
+    AMBIENT WEDDING EFFECTS
+======================================== */}
+
+<div className="ambient-effects" aria-hidden="true">
+
+  {/* SOFT BACKGROUND LIGHTS */}
+  <div className="light-orb light-orb-1"></div>
+  <div className="light-orb light-orb-2"></div>
+  <div className="light-orb light-orb-3"></div>
+
+  {/* GOLD DUST */}
+  <div className="gold-dust dust-1"></div>
+  <div className="gold-dust dust-2"></div>
+  <div className="gold-dust dust-3"></div>
+  <div className="gold-dust dust-4"></div>
+  <div className="gold-dust dust-5"></div>
+  <div className="gold-dust dust-6"></div>
+  <div className="gold-dust dust-7"></div>
+  <div className="gold-dust dust-8"></div>
+  <div className="gold-dust dust-9"></div>
+  <div className="gold-dust dust-10"></div>
+  <div className="gold-dust dust-11"></div>
+  <div className="gold-dust dust-12"></div>
+
+  {/* TWINKLING STARS */}
+  <div className="gold-sparkle sparkle-1">✦</div>
+  <div className="gold-sparkle sparkle-2">✦</div>
+  <div className="gold-sparkle sparkle-3">✦</div>
+  <div className="gold-sparkle sparkle-4">✦</div>
+  <div className="gold-sparkle sparkle-5">✦</div>
+  <div className="gold-sparkle sparkle-6">✦</div>
+
+</div>
+
       {!opened ? (
         /* ========================================
            FRONT COVER

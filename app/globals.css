@@ -1980,3 +1980,400 @@ body {
 .gratitude-section {
   margin-top: 0;
 }
+
+/* ========================================
+   AMBIENT WEDDING EFFECTS
+======================================== */
+
+.ambient-effects {
+  position: fixed;
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+
+/* ========================================
+   SOFT CHAMPAGNE LIGHT ORBS
+======================================== */
+
+.light-orb {
+  position: absolute;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(238, 201, 130, 0.22) 0%,
+      rgba(232, 193, 118, 0.10) 35%,
+      transparent 72%
+    );
+
+  filter: blur(22px);
+
+  opacity: 0.55;
+
+  animation:
+    orbFloat 16s
+    ease-in-out
+    infinite alternate;
+}
+
+.light-orb-1 {
+  width: 280px;
+  height: 280px;
+
+  top: 8%;
+  left: -100px;
+
+  animation-duration: 17s;
+}
+
+.light-orb-2 {
+  width: 340px;
+  height: 340px;
+
+  top: 42%;
+  right: -150px;
+
+  animation-duration: 21s;
+  animation-delay: -5s;
+}
+
+.light-orb-3 {
+  width: 260px;
+  height: 260px;
+
+  bottom: 5%;
+  left: 10%;
+
+  animation-duration: 19s;
+  animation-delay: -8s;
+}
+
+@keyframes orbFloat {
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(35px, -25px, 0)
+      scale(1.08);
+  }
+
+  100% {
+    transform:
+      translate3d(-15px, 25px, 0)
+      scale(0.96);
+  }
+}
+
+
+/* ========================================
+   FLOATING GOLD DUST
+======================================== */
+
+.gold-dust {
+  position: absolute;
+
+  bottom: -15px;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #d9ad5b;
+
+  box-shadow:
+    0 0 5px rgba(217, 173, 91, 0.8),
+    0 0 10px rgba(217, 173, 91, 0.35);
+
+  opacity: 0;
+
+  animation:
+    goldDustFloat
+    linear
+    infinite;
+}
+
+@keyframes goldDustFloat {
+  0% {
+    transform:
+      translate3d(0, 20px, 0)
+      scale(0.5);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.55;
+  }
+
+  50% {
+    transform:
+      translate3d(25px, -50vh, 0)
+      scale(1);
+
+    opacity: 0.7;
+  }
+
+  85% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform:
+      translate3d(-20px, -110vh, 0)
+      scale(0.4);
+
+    opacity: 0;
+  }
+}
+
+
+/* INDIVIDUAL DUST POSITIONS */
+
+.dust-1 {
+  left: 5%;
+  animation-duration: 15s;
+  animation-delay: -3s;
+}
+
+.dust-2 {
+  left: 13%;
+  animation-duration: 18s;
+  animation-delay: -9s;
+}
+
+.dust-3 {
+  left: 22%;
+  animation-duration: 14s;
+  animation-delay: -5s;
+}
+
+.dust-4 {
+  left: 31%;
+  animation-duration: 20s;
+  animation-delay: -12s;
+}
+
+.dust-5 {
+  left: 40%;
+  animation-duration: 16s;
+  animation-delay: -7s;
+}
+
+.dust-6 {
+  left: 49%;
+  animation-duration: 19s;
+  animation-delay: -15s;
+}
+
+.dust-7 {
+  left: 58%;
+  animation-duration: 14.5s;
+  animation-delay: -2s;
+}
+
+.dust-8 {
+  left: 66%;
+  animation-duration: 21s;
+  animation-delay: -11s;
+}
+
+.dust-9 {
+  left: 74%;
+  animation-duration: 17s;
+  animation-delay: -6s;
+}
+
+.dust-10 {
+  left: 82%;
+  animation-duration: 15.5s;
+  animation-delay: -13s;
+}
+
+.dust-11 {
+  left: 90%;
+  animation-duration: 19.5s;
+  animation-delay: -4s;
+}
+
+.dust-12 {
+  left: 96%;
+  animation-duration: 17.5s;
+  animation-delay: -10s;
+}
+
+
+/* DUST SIZE VARIATION */
+
+.dust-2,
+.dust-5,
+.dust-8,
+.dust-11 {
+  width: 2px;
+  height: 2px;
+}
+
+.dust-3,
+.dust-7,
+.dust-10 {
+  width: 3px;
+  height: 3px;
+}
+
+
+/* ========================================
+   GOLD SPARKLES
+======================================== */
+
+.gold-sparkle {
+  position: absolute;
+
+  color: #d8ad5d;
+
+  font-family: serif;
+
+  font-size: 14px;
+
+  opacity: 0;
+
+  text-shadow:
+    0 0 5px rgba(224, 184, 105, 0.65),
+    0 0 12px rgba(224, 184, 105, 0.35);
+
+  animation:
+    sparkleTwinkle
+    6s
+    ease-in-out
+    infinite;
+}
+
+@keyframes sparkleTwinkle {
+  0%,
+  72%,
+  100% {
+    opacity: 0;
+
+    transform:
+      scale(0.4)
+      rotate(0deg);
+  }
+
+  80% {
+    opacity: 0.35;
+
+    transform:
+      scale(0.8)
+      rotate(20deg);
+  }
+
+  88% {
+    opacity: 0.95;
+
+    transform:
+      scale(1.25)
+      rotate(40deg);
+  }
+
+  94% {
+    opacity: 0.25;
+
+    transform:
+      scale(0.7)
+      rotate(55deg);
+  }
+}
+
+
+/* SPARKLE POSITIONS */
+
+.sparkle-1 {
+  top: 13%;
+  left: 9%;
+
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  top: 27%;
+  right: 12%;
+
+  font-size: 10px;
+
+  animation-delay: 2.7s;
+}
+
+.sparkle-3 {
+  top: 48%;
+  left: 14%;
+
+  font-size: 17px;
+
+  animation-delay: 4.1s;
+}
+
+.sparkle-4 {
+  top: 62%;
+  right: 8%;
+
+  font-size: 12px;
+
+  animation-delay: 1.3s;
+}
+
+.sparkle-5 {
+  top: 78%;
+  left: 8%;
+
+  font-size: 10px;
+
+  animation-delay: 5s;
+}
+
+.sparkle-6 {
+  top: 88%;
+  right: 17%;
+
+  font-size: 15px;
+
+  animation-delay: 3.3s;
+}
+
+
+/* ========================================
+   MAKE PETALS MORE SUBTLE
+======================================== */
+
+.petal {
+  opacity: 0.48;
+}
+
+
+/* ========================================
+   REDUCED MOTION ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .gold-dust,
+  .gold-sparkle,
+  .light-orb {
+    animation: none !important;
+  }
+
+  .gold-dust,
+  .gold-sparkle {
+    display: none;
+  }
+}
