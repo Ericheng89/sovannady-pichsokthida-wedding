@@ -107,10 +107,9 @@ body {
 
 .monogram-logo {
   width: clamp(145px, 40vw, 220px);
-  margin-bottom: 8px;
-  filter: drop-shadow(
-    0 0 12px rgba(220, 160, 60, 0.38)
-  );
+  margin-top: 15px;
+  margin-bottom: 25px;
+  filter: drop-shadow(0 0 12px rgba(220, 160, 60, 0.38));
 }
 
 .small-title {

@@ -196,46 +196,54 @@ export default function Home() {
       {!opened ? (
         <section className="intro-wrap">
           <div className="intro-card fade-up">
-            <img
-              src="/DD.png"
-              alt="Wedding Logo"
-              className="monogram-logo"
-            />
 
-            <p className="small-title">Wedding Invitation</p>
+  {/* KHMER WEDDING TITLE */}
+  <h1 className="intro-khmer-title khmer-mool-title">
+    សិរីមង្គលអាពាហ៍ពិពាហ៍
+  </h1>
 
-            <div className="intro-khmer-wrap">
-              <h1 className="intro-khmer-title kh-main-font">
-                សិរីមង្គលអាពាហ៍ពិពាហ៍
-              </h1>
+  {/* ENGLISH TITLE */}
+  <p className="small-title">
+    Wedding Ceremony
+  </p>
 
-              <p className="intro-khmer-sub kh-main-font">
-                សូមគោរពអញ្ជើញ
-              </p>
-            </div>
+  {/* WEDDING LOGO */}
+  <img
+    src="/DD.png"
+    alt="Wedding Logo"
+    className="monogram-logo"
+  />
 
-            {guestName && (
-              <div className="guest-name-wrap fade-up">
-                <h2 className="guest-name kh-main-font">
-                  {guestName}
-                </h2>
+  {/* INVITATION TEXT */}
+  <p className="intro-khmer-sub kh-main-font">
+    សូមគោរពអញ្ជើញ
+  </p>
 
-                <img
-                  src="/Gold Line Under Text.webp"
-                  alt=""
-                  className="guest-divider"
-                />
-              </div>
-            )}
+  {/* GUEST NAME */}
+  {guestName && (
+    <div className="guest-name-wrap fade-up">
+      <h2 className="guest-name kh-main-font">
+        {guestName}
+      </h2>
 
-            <button className="open-frame-btn" onClick={handleOpen}>
-              <img
-                src="/Open Text Frame (1).png"
-                alt="Open Invitation"
-                className="open-frame-img"
-              />
-            </button>
-          </div>
+      <img
+        src="/Gold Line Under Text.webp"
+        alt=""
+        className="guest-divider"
+      />
+    </div>
+  )}
+
+  {/* OPEN INVITATION BUTTON */}
+  <button className="open-frame-btn" onClick={handleOpen}>
+    <img
+      src="/Open Text Frame (1).png"
+      alt="Open Invitation"
+      className="open-frame-img"
+    />
+  </button>
+
+</div>
         </section>
       ) : (
         <section className="formal-invitation fade-up">
