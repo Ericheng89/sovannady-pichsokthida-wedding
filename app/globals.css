@@ -1065,7 +1065,7 @@ html {
 
 .intro-khmer-title.khmer-mool-title {
   font-family: "Khmer Mool 1", serif;
-  font-size: clamp(30px, 7.5vw, 52px);
+  font-size: clamp(24px, 6vw, 40px);
   font-weight: 400;
   line-height: 1.35;
 }
