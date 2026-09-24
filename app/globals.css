@@ -4074,3 +4074,469 @@ body {
     transform: scale(1.2);
   }
 }
+
+/* ========================================
+   VIEW ALL PHOTOS BUTTON
+======================================== */
+
+.view-all-photos-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 190px;
+  margin: 30px auto 0;
+  padding: 13px 30px 11px;
+
+  border: 1px solid rgba(180, 142, 76, 0.5);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.78),
+      rgba(248, 238, 216, 0.6)
+    );
+
+  color: #8d6b36;
+
+  box-shadow:
+    0 7px 22px rgba(98, 72, 35, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.view-all-photos-btn span {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+.view-all-photos-btn small {
+  margin-top: 2px;
+
+  font-family: "Cinzel", serif;
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  color: rgba(126, 94, 46, 0.72);
+}
+
+.view-all-photos-btn:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(180, 142, 76, 0.75);
+
+  box-shadow:
+    0 10px 28px rgba(98, 72, 35, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.view-all-photos-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* ========================================
+   ALL PHOTOS OVERLAY
+======================================== */
+
+.all-photos-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 99990;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  box-sizing: border-box;
+
+  background: rgba(30, 23, 14, 0.72);
+
+  backdrop-filter: blur(16px) saturate(110%);
+  -webkit-backdrop-filter: blur(16px) saturate(110%);
+
+  animation: allPhotosFadeIn 0.4s ease both;
+}
+
+@keyframes allPhotosFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* ========================================
+   ALL PHOTOS PANEL
+======================================== */
+
+.all-photos-panel {
+  position: relative;
+
+  width: min(1000px, 100%);
+  max-height: 90vh;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  padding: 28px 28px 35px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(207, 174, 112, 0.28);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 253, 247, 0.97),
+      rgba(248, 240, 224, 0.96)
+    );
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  animation: allPhotosPanelEnter
+    0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(174, 137, 74, 0.45)
+    transparent;
+}
+
+@keyframes allPhotosPanelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+
+/* ========================================
+   ALL PHOTOS HEADER
+======================================== */
+
+.all-photos-header {
+  position: sticky;
+  top: -28px;
+
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: -28px -28px 25px;
+  padding: 24px 28px 18px;
+
+  border-bottom: 1px solid
+    rgba(184, 148, 84, 0.18);
+
+  background: rgba(255, 252, 245, 0.91);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.all-photos-header h2 {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 29px;
+  font-weight: 500;
+
+  color: #9b773d;
+}
+
+.all-photos-header p {
+  margin: 3px 0 0;
+
+  font-family: "Cinzel", serif;
+  font-size: 9px;
+
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+
+  color: #9a835d;
+}
+
+
+/* ========================================
+   CLOSE BUTTON
+======================================== */
+
+.all-photos-close {
+  flex-shrink: 0;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid rgba(174, 137, 74, 0.35);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  color: #94703a;
+
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 200;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.all-photos-close:hover {
+  transform: rotate(90deg);
+
+  background: rgba(245, 232, 205, 0.8);
+}
+
+
+/* ========================================
+   26 PHOTO GRID
+======================================== */
+
+.all-photos-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+
+/* ========================================
+   PHOTO ITEM
+======================================== */
+
+.all-photo-item {
+  position: relative;
+
+  aspect-ratio: 1 / 1;
+
+  display: block;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: #eee7da;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+
+  box-shadow:
+    0 4px 13px rgba(82, 59, 27, 0.08);
+}
+
+.all-photo-item img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease;
+}
+
+.all-photo-item::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(53, 36, 16, 0.2),
+      transparent 50%
+    );
+
+  opacity: 0;
+
+  transition: opacity 0.35s ease;
+}
+
+.all-photo-item:hover img {
+  transform: scale(1.055);
+}
+
+.all-photo-item:hover::after {
+  opacity: 1;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 800px) {
+  .all-photos-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+  .view-all-photos-btn {
+    margin-top: 24px;
+    padding: 12px 27px 10px;
+  }
+
+  .all-photos-overlay {
+    padding: 0;
+  }
+
+  .all-photos-panel {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+
+    padding: 20px 12px 30px;
+
+    border: 0;
+    border-radius: 0;
+
+    background:
+      linear-gradient(
+        145deg,
+        #fffdf8,
+        #f8f0e1
+      );
+  }
+
+  .all-photos-header {
+    top: -20px;
+
+    margin:
+      -20px
+      -12px
+      18px;
+
+    padding:
+      18px
+      17px
+      14px;
+  }
+
+  .all-photos-header h2 {
+    font-size: 25px;
+  }
+
+  .all-photos-close {
+    width: 39px;
+    height: 39px;
+
+    font-size: 26px;
+  }
+
+  .all-photos-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 5px;
+  }
+
+  .all-photo-item {
+    border-radius: 5px;
+  }
+
+  .all-photo-item:hover img {
+    transform: none;
+  }
+
+  .all-photo-item:active img {
+    transform: scale(0.97);
+  }
+}
+
+
+/* ========================================
+   SMALL PHONES
+======================================== */
+
+@media (max-width: 360px) {
+  .all-photos-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 5px;
+  }
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .all-photos-overlay,
+  .all-photos-panel {
+    animation: none !important;
+  }
+
+  .all-photo-item img,
+  .all-photos-close,
+  .view-all-photos-btn {
+    transition: none !important;
+  }
+}

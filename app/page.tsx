@@ -34,14 +34,33 @@ export default function Home() {
   const [wishSent, setWishSent] = useState(false);
   const [wishes, setWishes] = useState<any[]>([]);
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
+const [showAllPhotos, setShowAllPhotos] =
+  useState(false);
 
-const galleryPhotos = [
-  "/photo1.jpg",
-  "/photo2.jpg",
-  "/photo3.jpg",
-  "/photo4.jpg",
-  "/photo5.jpg",
+const galleryPhotos = Array.from(
+  { length: 26 },
+  (_, i) =>
+    `/gallery/wedding-${String(i + 1).padStart(2, "0")}.webp`
+);
+
+// Choose which 8 photos appear on the front
+const featuredPhotoNumbers = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
 ];
+
+const featuredPhotos = featuredPhotoNumbers.map(
+  (number) => ({
+    src: galleryPhotos[number - 1],
+    galleryIndex: number - 1,
+  })
+);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const touchStartX = useRef<number | null>(null);
@@ -159,7 +178,7 @@ useEffect(() => {
 }, [selectedPhoto]);
 
 useEffect(() => {
-  if (selectedPhoto !== null) {
+  if (selectedPhoto !== null || showAllPhotos) {
     document.body.style.overflow = "hidden";
   } else if (opened) {
     document.body.style.overflow = "";
@@ -170,7 +189,7 @@ useEffect(() => {
       document.body.style.overflow = "";
     }
   };
-}, [selectedPhoto, opened]);
+}, [selectedPhoto, showAllPhotos, opened]);
 
   /* ========================================
      GUEST NAME
@@ -1030,33 +1049,38 @@ useEffect(() => {
   </p>
 
   <div className="gallery-grid">
-
-    {galleryPhotos.map((photo, index) => (
+    {featuredPhotos.map((photo, index) => (
       <div
-        key={photo}
+        key={photo.src}
         className={`photo-card gallery-reveal ${
           index === 0 || index === 4
             ? "large-photo"
             : ""
         }`}
-        onClick={() => openPhoto(index)}
+        onClick={() =>
+          openPhoto(photo.galleryIndex)
+        }
         role="button"
         tabIndex={0}
         aria-label={`Open wedding photo ${
-          index + 1
+          photo.galleryIndex + 1
         }`}
         onKeyDown={(event) => {
           if (
             event.key === "Enter" ||
             event.key === " "
           ) {
-            openPhoto(index);
+            openPhoto(photo.galleryIndex);
           }
         }}
       >
         <img
-          src={photo}
-          alt={`Wedding photo ${index + 1}`}
+          src={photo.src}
+          alt={`Wedding photo ${
+            photo.galleryIndex + 1
+          }`}
+          loading="lazy"
+          decoding="async"
         />
 
         <div className="gallery-photo-overlay">
@@ -1064,8 +1088,18 @@ useEffect(() => {
         </div>
       </div>
     ))}
-
   </div>
+
+  <button
+    type="button"
+    className="view-all-photos-btn"
+    onClick={() => setShowAllPhotos(true)}
+  >
+    <span>View All Photos</span>
+    <small>
+      {galleryPhotos.length} Photos
+    </small>
+  </button>
 </div>
 
             {/* ========================================
@@ -1234,12 +1268,6 @@ useEffect(() => {
     ✦
   </div>
 
-  <img
-    src="/DD.png"
-    alt="Sovannady and Pichsokthida"
-    className="finale-logo"
-  />
-
   <h2 className="finale-names">
     Sovannady
     <span>&</span>
@@ -1304,6 +1332,60 @@ useEffect(() => {
     </div>
   </div>
 )}
+
+      {/* ========================================
+          VIEW ALL PHOTOS
+      ======================================== */}
+
+      {showAllPhotos && (
+        <div
+          className="all-photos-overlay"
+          onClick={() => setShowAllPhotos(false)}
+        >
+          <div
+            className="all-photos-panel"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="all-photos-header">
+              <div>
+                <h2>Our Memories</h2>
+                <p>{galleryPhotos.length} Photos</p>
+              </div>
+
+              <button
+                type="button"
+                className="all-photos-close"
+                onClick={() => setShowAllPhotos(false)}
+                aria-label="Close all photos"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="all-photos-grid">
+              {galleryPhotos.map((photo, index) => (
+                <button
+                  type="button"
+                  className="all-photo-item"
+                  key={photo}
+                  onClick={() => {
+                    setShowAllPhotos(false);
+                    openPhoto(index);
+                  }}
+                  aria-label={`Open wedding photo ${index + 1}`}
+                >
+                  <img
+                    src={photo}
+                    alt={`Wedding photo ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ========================================
           FULLSCREEN PHOTO GALLERY
