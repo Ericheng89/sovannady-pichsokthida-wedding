@@ -3807,3 +3807,270 @@ body {
     transform: scaleX(1);
   }
 }
+
+/* ========================================
+   COUPLE NAME ENTRANCE
+======================================== */
+
+.couple-entrance {
+  overflow: visible;
+}
+
+.groom-name-entrance,
+.bride-name-entrance,
+.couple-ampersand-entrance {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+.groom-name-entrance {
+  transform: translateX(-28px);
+  filter: blur(3px);
+}
+
+.bride-name-entrance {
+  transform: translateX(28px);
+  filter: blur(3px);
+}
+
+.couple-ampersand-entrance {
+  transform: scale(0.65);
+  filter: blur(2px);
+}
+
+.couple-entrance.is-visible .groom-name-entrance {
+  animation:
+    groomNameEntrance
+    1.1s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.couple-entrance.is-visible .couple-ampersand-entrance {
+  animation:
+    ampersandEntrance
+    0.9s
+    0.35s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.couple-entrance.is-visible .bride-name-entrance {
+  animation:
+    brideNameEntrance
+    1.1s
+    0.18s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes groomNameEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes brideNameEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes ampersandEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.65) rotate(-8deg);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(1.08) rotate(2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .groom-name-entrance,
+  .bride-name-entrance,
+  .couple-ampersand-entrance {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+}
+
+/* ========================================
+   LOCATION BUTTON PULSE
+======================================== */
+
+.location-pulse-btn {
+  position: relative;
+  isolation: isolate;
+}
+
+.location-pulse-btn::before {
+  content: "";
+  position: absolute;
+
+  inset: -5px;
+
+  z-index: -1;
+
+  border: 1px solid rgba(190, 150, 77, 0.42);
+  border-radius: inherit;
+
+  opacity: 0;
+
+  animation:
+    locationPulse
+    2.8s
+    ease-out
+    infinite;
+}
+
+@keyframes locationPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  20% {
+    opacity: 0.55;
+  }
+
+  75% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .location-pulse-btn::before {
+    animation: none !important;
+  }
+}
+
+/* ========================================
+   WISH SUBMISSION
+======================================== */
+
+.wish-submit-btn {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.wish-submit-btn:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.wish-submit-success {
+  animation:
+    wishSuccessButton
+    0.7s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes wishSuccessButton {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.045);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.wish-success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  margin-top: 15px;
+
+  color: #a98549;
+
+  font-family:
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 16px;
+  font-style: italic;
+
+  text-align: center;
+
+  animation:
+    wishSuccessAppear
+    0.65s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.wish-success-message span {
+  font-size: 9px;
+
+  animation:
+    wishSuccessSparkle
+    1.4s
+    ease-in-out
+    infinite;
+}
+
+@keyframes wishSuccessAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wishSuccessSparkle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.75);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}

@@ -30,6 +30,8 @@ export default function Home() {
 
   const [wishName, setWishName] = useState("");
   const [wishMessage, setWishMessage] = useState("");
+  const [wishSending, setWishSending] = useState(false);
+  const [wishSent, setWishSent] = useState(false);
   const [wishes, setWishes] = useState<any[]>([]);
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
 
@@ -191,7 +193,7 @@ useEffect(() => {
     if (!opened) return;
 
     const elements = document.querySelectorAll(
-  ".scroll-reveal, .gallery-reveal, .divider-reveal"
+  ".scroll-reveal, .gallery-reveal, .divider-reveal, .couple-entrance"
 );
 
     const observer = new IntersectionObserver(
@@ -302,49 +304,83 @@ useEffect(() => {
   }, []);
 
   /* ========================================
+     MUSIC FADE
+  ======================================== */
+
+  function fadeMusicIn() {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    audio.volume = 0;
+
+    const targetVolume = 0.65;
+    const fadeDuration = 2200;
+    const steps = 30;
+    const volumeStep = targetVolume / steps;
+    const intervalTime = fadeDuration / steps;
+
+    const fadeInterval = window.setInterval(() => {
+      if (!audioRef.current) {
+        window.clearInterval(fadeInterval);
+        return;
+      }
+
+      const nextVolume = audioRef.current.volume + volumeStep;
+
+      if (nextVolume >= targetVolume) {
+        audioRef.current.volume = targetVolume;
+        window.clearInterval(fadeInterval);
+        return;
+      }
+
+      audioRef.current.volume = nextVolume;
+    }, intervalTime);
+  }
+
+  /* ========================================
      OPEN INVITATION
   ======================================== */
 
   function handleOpen() {
-  if (opening) return;
+    if (opening) return;
 
-  setOpening(true);
+    setOpening(true);
 
-  if (audioRef.current) {
-    audioRef.current.currentTime = 2;
+    if (audioRef.current) {
+      audioRef.current.currentTime = 2;
+      audioRef.current.volume = 0;
 
-    const playPromise = audioRef.current.play();
+      const playPromise = audioRef.current.play();
 
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setMusicPlaying(true);
-        })
-        .catch((err) => {
-          console.log("Audio play blocked:", err);
-        });
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setMusicPlaying(true);
+            fadeMusicIn();
+          })
+          .catch((err) => {
+            console.log("Audio play blocked:", err);
+          });
+      }
     }
-  }
 
-  // Let the cinematic cover animation play first
-  setTimeout(() => {
-  setOpened(true);
-  setOpening(false);
-
-  window.scrollTo({
-    top: 0,
-    behavior: "instant",
-  });
-
-  if (guestName) {
-    setShowGuestWelcome(true);
-
+    // Let the cinematic cover animation play first
     setTimeout(() => {
-      setShowGuestWelcome(false);
-    }, 3200);
+      setOpened(true);
+      setOpening(false);
+
+      window.scrollTo(0, 0);
+
+      if (guestName) {
+        setShowGuestWelcome(true);
+
+        setTimeout(() => {
+          setShowGuestWelcome(false);
+        }, 3200);
+      }
+    }, 1200);
   }
-}, 1200);
-}
 
   /* ========================================
      MUSIC
@@ -357,8 +393,16 @@ useEffect(() => {
       audioRef.current.pause();
       setMusicPlaying(false);
     } else {
-      audioRef.current.play();
-      setMusicPlaying(true);
+      audioRef.current.volume = 0.65;
+
+      audioRef.current
+        .play()
+        .then(() => {
+          setMusicPlaying(true);
+        })
+        .catch((err) => {
+          console.log("Audio play blocked:", err);
+        });
     }
   }
 
@@ -367,23 +411,43 @@ useEffect(() => {
   ======================================== */
 
   async function submitWish(e: React.FormEvent) {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!wishName.trim() || !wishMessage.trim()) {
-      alert("Please enter your name and message.");
-      return;
-    }
+  if (!wishName.trim() || !wishMessage.trim()) {
+    alert("Please enter your name and message.");
+    return;
+  }
+
+  if (wishSending) return;
+
+  try {
+    setWishSending(true);
+    setWishSent(false);
 
     await addDoc(collection(db, "wishes"), {
-      name: wishName,
-      message: wishMessage,
+      name: wishName.trim(),
+      message: wishMessage.trim(),
       createdAt: serverTimestamp(),
     });
 
     setWishName("");
     setWishMessage("");
-  }
 
+    setWishSent(true);
+
+    setTimeout(() => {
+      setWishSent(false);
+    }, 3500);
+  } catch (error) {
+    console.error("Error sending wish:", error);
+
+    alert(
+      "Your wish could not be sent. Please try again."
+    );
+  } finally {
+    setWishSending(false);
+  }
+}
   return (
     <main className={opened ? "site-bg-inner" : "site-bg"}>
       <div
@@ -787,19 +851,19 @@ useEffect(() => {
                 Children.
               </p>
 
-              <h2 className="english-couple-name">
-                <span>
-                  Soeun Sovannady
-                </span>
+              <h2 className="english-couple-name couple-entrance">
+  <span className="groom-name-entrance">
+    Soeun Sovannady
+  </span>
 
-                <span className="ampersand">
-                  &
-                </span>
+  <span className="ampersand couple-ampersand-entrance">
+    &
+  </span>
 
-                <span>
-                  Chea Pichsokthida
-                </span>
-              </h2>
+  <span className="bride-name-entrance">
+    Chea Pichsokthida
+  </span>
+</h2>
 
               <p className="english-date">
                 on Monday 16<sup>th</sup> November
@@ -875,7 +939,7 @@ useEffect(() => {
               </div>
 
               <a
-                className="save-btn"
+                className="save-btn location-pulse-btn"
                 href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1117,11 +1181,29 @@ useEffect(() => {
                 />
 
                 <button
-                  className="main-btn"
-                  type="submit"
-                >
-                  Send Wishes
-                </button>
+  className={`main-btn wish-submit-btn ${
+    wishSent ? "wish-submit-success" : ""
+  }`}
+  type="submit"
+  disabled={wishSending}
+>
+  {wishSending
+    ? "Sending..."
+    : wishSent
+      ? "✓ Wish Sent"
+      : "Send Wishes"}
+</button>
+
+{wishSent && (
+  <div
+    className="wish-success-message"
+    role="status"
+  >
+    <span>✦</span>
+    Thank you for your beautiful wishes
+    <span>✦</span>
+  </div>
+)}
               </form>
 
               <div className="wish-list">
@@ -1141,6 +1223,45 @@ useEffect(() => {
                 ))}
               </div>
             </div>
+
+            {/* ========================================
+    WEDDING FINALE
+======================================== */}
+
+<div className="wedding-finale scroll-reveal">
+
+  <div className="finale-sparkle">
+    ✦
+  </div>
+
+  <img
+    src="/DD.png"
+    alt="Sovannady and Pichsokthida"
+    className="finale-logo"
+  />
+
+  <h2 className="finale-names">
+    Sovannady
+    <span>&</span>
+    Pichsokthida
+  </h2>
+
+  <div className="finale-line"></div>
+
+  <p className="finale-date">
+    16 • 11 • 2026
+  </p>
+
+  <p className="finale-message">
+    Thank you for celebrating
+    our special day with us.
+  </p>
+
+  <div className="finale-sparkle finale-sparkle-bottom">
+    ✦
+  </div>
+
+</div>
 
                     </div>
         </section>
