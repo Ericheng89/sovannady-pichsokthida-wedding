@@ -295,7 +295,8 @@ body {
   color: #b47225;
   margin-bottom: 6px;
   font-size: 12px;
-  font-family: "Kh Ang NiTean", serif;
+  font-family: "Khmer Mool 1", serif;
+  font-weight: 400;
   line-height: 1.1;
   text-align: center;
   width: 100%;
@@ -549,11 +550,12 @@ body {
 
 .guest-name {
   margin: 0;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(20px, 5.2vw, 38px);
-  line-height: 1.1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 5.2vw, 38px);
+  line-height: 1.15;
   color: #b8924f;
-  font-weight: 400;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   text-shadow:
     0 1px 2px rgba(255, 255, 255, 0.45);
 }
@@ -931,8 +933,9 @@ body {
 
 .guest-divider {
   width: min(420px, 80vw);
+  height: auto;
   display: block;
-  margin: -9px auto 0;
+  margin: -2px auto 0;
   opacity: 0.95;
   pointer-events: none;
 }
