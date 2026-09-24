@@ -6,8 +6,8 @@
 }
 
 @font-face {
-  font-family: "Khmer MEF2";
-  src: url("/fonts/KHMERMEF2.ttf") format("truetype");
+  font-family: "Khmer Mool 1";
+  src: url("/fonts/KhmerMool1.ttf") format("truetype");
 }
 
 html,
@@ -27,7 +27,7 @@ body {
 }
 
 .kh-main-font {
-  font-family: "Khmer MEF2", serif;
+  font-family: "Khmer Mool 1", serif;
 }
 
 .site-bg {
