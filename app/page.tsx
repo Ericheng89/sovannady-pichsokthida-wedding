@@ -507,14 +507,14 @@ export default function Home() {
 
               <div className="english-parents-grid">
                 <p>
-                  Mr. SEOUN SOVANNA
+                  Mr. SOEUN SOVANNA
                   <br />
                   Mrs. LAM SOKCHENG
                 </p>
 
                 <p>
                   <span>
-                    Mr. CHEA VIREAK
+                    Mr. CHEA VIRAK
                   </span>
 
                   <br />
@@ -535,7 +535,7 @@ export default function Home() {
 
               <h2 className="english-couple-name">
                 <span>
-                  Seoun Sovannady
+                  Soeun Sovannady
                 </span>
 
                 <span className="ampersand">
@@ -621,7 +621,7 @@ export default function Home() {
               </div>
 
               <a
-                className="save-btn kh-main-font"
+                className="save-btn kh-title-font"
                 href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
                 target="_blank"
                 rel="noopener noreferrer"
