@@ -1821,3 +1821,36 @@ body {
   opacity: 0.8;
   margin-top: 2px;
 }
+
+/* ========================================
+   APOLOGY + GRATITUDE SPACING
+======================================== */
+
+.apology-section {
+  margin-bottom: 24px;
+}
+
+/* SIMPLE GOLD DIVIDER LINE */
+
+.apology-gratitude-divider {
+  width: min(420px, 75%);
+  height: 1px;
+
+  margin:
+    0
+    auto
+    30px;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(184, 146, 79, 0.75),
+    transparent
+  );
+}
+
+/* BRING GRATITUDE CLOSER TO DIVIDER */
+
+.gratitude-section {
+  margin-top: 0;
+}

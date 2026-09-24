@@ -784,40 +784,44 @@ export default function Home() {
     our wedding.
   </p>
 </div>
-            
-            {/* ========================================
-                GRATITUDE
-            ======================================== */}
 
-            <div className="gratitude-section">
-              <h2 className="gratitude-title kh-main-font">
-                សេចក្តីថ្លែងអំណរគុណ
-              </h2>
+{/* ========================================
+    DIVIDER — APOLOGY / GRATITUDE
+======================================== */}
 
-              <p className="gratitude-kh kh-title-font">
-                យើងខ្ញុំ សូមថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅ
-                ចំពោះ ឯកឧត្តម លោកជំទាវ
-                លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា លោក លោកស្រី
-                អ្នកនាងកញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
-                ដែលបានចូលរួមជាកិត្តិយសក្នុងពិធីមង្គលការរបស់យើងខ្ញុំ។
-              </p>
+<div className="apology-gratitude-divider"></div>
 
-              <div className="gratitude-divider">
-                ✦
-              </div>
+{/* ========================================
+    GRATITUDE
+======================================== */}
 
-              <h3 className="gratitude-en-title">
-                OUR GRATITUDE
-              </h3>
+<div className="gratitude-section">
+  <h2 className="gratitude-title kh-main-font">
+    សេចក្តីថ្លែងអំណរគុណ
+  </h2>
 
-              <p className="gratitude-en">
-                We are deeply grateful to H.E.,
-                Lok Neak Oknha, Neak Oknha, Oknha,
-                Lct., ladies and gentlemen, for
-                honoring us with your presence at
-                our upcoming wedding ceremony.
-              </p>
-            </div>
+  <p className="gratitude-kh kh-title-font">
+    យើងខ្ញុំ សូមថ្លែងអំណរគុណយ៉ាងជ្រាលជ្រៅ
+    ចំពោះ ឯកឧត្តម លោកជំទាវ លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា
+    លោក លោកស្រី អ្នកនាងកញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
+    ដែលបានចូលរួមជាកិត្តិយសក្នុងពិធីមង្គលការរបស់យើងខ្ញុំ។
+  </p>
+
+  <div className="gratitude-divider">
+    ✦
+  </div>
+
+  <h3 className="gratitude-en-title">
+    OUR GRATITUDE
+  </h3>
+
+  <p className="gratitude-en">
+    We are deeply grateful to H.E., Lok Neak Oknha,
+    Neak Oknha, Oknha, Lct., ladies and gentlemen,
+    for honoring us with your presence at our upcoming
+    wedding ceremony.
+  </p>
+</div>
 
             {/* ========================================
                 WISHES
