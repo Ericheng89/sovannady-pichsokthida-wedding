@@ -1752,3 +1752,22 @@ body {
     border-radius: 16px;
   }
 }
+
+/* GOOGLE MAP BUTTON TEXT */
+
+.save-btn .map-khmer {
+  display: block;
+  font-family: "Kh Ang Bokor New", serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.save-btn .map-english {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-top: 2px;
+}

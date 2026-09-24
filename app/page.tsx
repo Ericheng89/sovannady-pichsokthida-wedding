@@ -621,17 +621,19 @@ export default function Home() {
               </div>
 
               <a
-                className="save-btn kh-title-font"
-                href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                បើកទីតាំងកម្មវិធី
+  className="save-btn"
+  href="https://www.google.com/maps/search/?api=1&query=11.6260304,104.8878767"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <span className="map-khmer">
+    បើកទីតាំងកម្មវិធី
+  </span>
 
-                <span>
-                  Open Google Map
-                </span>
-              </a>
+  <span className="map-english">
+    Open Google Map
+  </span>
+</a>
             </div>
 
             {/* ========================================
