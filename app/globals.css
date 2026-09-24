@@ -1087,6 +1087,56 @@ body {
   height: 250px;
 }
 
+/* ========================================
+   APOLOGY
+======================================== */
+
+.apology-section {
+  max-width: 720px;
+  margin: 80px auto 70px;
+  text-align: center;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.apology-title {
+  color: #b8924f;
+  font-size: clamp(17px, 4vw, 25px);
+  margin-bottom: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.apology-kh {
+  color: #6b5633;
+  font-size: clamp(12px, 3.2vw, 18px);
+  line-height: 2;
+  margin: 0 auto 24px;
+}
+
+.apology-divider {
+  color: #b8924f;
+  font-size: 18px;
+  margin: 20px 0;
+  letter-spacing: 8px;
+}
+
+.apology-en-title {
+  color: #d1a556;
+  font-size: clamp(16px, 4vw, 24px);
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.apology-en {
+  color: #7c6440;
+  font-size: clamp(12px, 3.2vw, 17px);
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 auto;
+}
 
 /* ========================================
    GRATITUDE

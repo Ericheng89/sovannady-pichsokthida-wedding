@@ -751,6 +751,41 @@ export default function Home() {
             </div>
 
             {/* ========================================
+    APOLOGY
+======================================== */}
+
+<div className="apology-section">
+  <h2 className="apology-title kh-main-font">
+    សេចក្តីសូមអភ័យទោស
+  </h2>
+
+  <p className="apology-kh kh-title-font">
+    យើងខ្ញុំសូមមេត្តាអធ្យាស្រ័យ និងអភ័យទោសពីសំណាក់
+    ឯកឧត្តម អ្នកឧកញ៉ា ឧកញ៉ា លោកជំទាវ លោក លោកស្រី
+    អ្នកនាង កញ្ញា និងភ្ញៀវកិត្តិយសទាំងអស់
+    ដោយយើងខ្ញុំពុំបានគោរពជូនលិខិតអញ្ជើញដោយផ្ទាល់។
+    យើងខ្ញុំសង្ឃឹមថាភ្ញៀវកិត្តិយសទាំងអស់
+    នឹងអញ្ជើញចូលរួមក្នុងកម្មវិធីរបស់យើងខ្ញុំជាក់ជាមិនខាន។
+  </p>
+
+  <div className="apology-divider">
+    ✦
+  </div>
+
+  <h3 className="apology-en-title">
+    OUR APOLOGY
+  </h3>
+
+  <p className="apology-en">
+    We sincerely apologize and ask for the kind understanding
+    of all our honored guests, as we were unable to personally
+    deliver this invitation to you. We sincerely hope that you
+    will honor us with your presence and join us in celebrating
+    our wedding.
+  </p>
+</div>
+            
+            {/* ========================================
                 GRATITUDE
             ======================================== */}
 
