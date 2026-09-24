@@ -2537,3 +2537,429 @@ body {
     transition: none !important;
   }
 }
+
+/* ========================================
+   CINEMATIC INVITATION OPENING
+======================================== */
+
+.intro-wrap {
+  transition:
+    opacity 0.9s ease,
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1s ease;
+}
+
+
+/* COVER STARTS OPENING */
+
+.invitation-opening {
+  pointer-events: none;
+
+  animation:
+    invitationCoverOpen
+    1.2s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+@keyframes invitationCoverOpen {
+
+  0% {
+    opacity: 1;
+
+    transform:
+      scale(1);
+
+    filter:
+      brightness(1)
+      blur(0);
+  }
+
+  40% {
+    opacity: 1;
+
+    transform:
+      scale(1.015);
+
+    filter:
+      brightness(1.08)
+      blur(0);
+  }
+
+  75% {
+    opacity: 0.85;
+
+    transform:
+      scale(1.035);
+
+    filter:
+      brightness(1.18)
+      blur(2px);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      scale(1.06);
+
+    filter:
+      brightness(1.35)
+      blur(7px);
+  }
+}
+
+
+/* ========================================
+   COVER CONTENT OPENING
+======================================== */
+
+.intro-card-opening {
+  animation:
+    introCardOpen
+    1.15s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+@keyframes introCardOpen {
+
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+
+    opacity: 1;
+  }
+
+  45% {
+    transform:
+      translate3d(0, -3px, 0)
+      scale(1.015);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate3d(0, -12px, 0)
+      scale(1.055);
+
+    opacity: 0;
+  }
+}
+
+
+/* ========================================
+   OPENING BUTTON GLOW
+======================================== */
+
+.intro-card-opening .open-frame-img {
+  animation:
+    openButtonGlow
+    0.9s
+    ease-out
+    forwards;
+}
+
+
+@keyframes openButtonGlow {
+
+  0% {
+    transform:
+      translateZ(0)
+      scale(1);
+
+    filter:
+      drop-shadow(
+        0 0 0
+        rgba(213, 173, 93, 0)
+      );
+  }
+
+  45% {
+    transform:
+      translateZ(0)
+      scale(1.035);
+
+    filter:
+      drop-shadow(
+        0 0 10px
+        rgba(213, 173, 93, 0.55)
+      );
+  }
+
+  100% {
+    transform:
+      translateZ(0)
+      scale(1.02);
+
+    filter:
+      drop-shadow(
+        0 0 22px
+        rgba(236, 205, 143, 0.2)
+      );
+  }
+}
+
+
+/* ========================================
+   GOLD / WHITE LIGHT WASH
+======================================== */
+
+.opening-light {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 252, 242, 0.98) 0%,
+      rgba(248, 229, 190, 0.68) 35%,
+      rgba(220, 181, 105, 0.18) 65%,
+      transparent 85%
+    );
+
+  transform:
+    scale(0.35);
+
+  transition:
+    opacity 0.3s ease;
+}
+
+
+.opening-light-active {
+  animation:
+    weddingLightWash
+    1.2s
+    ease-in-out
+    forwards;
+}
+
+
+@keyframes weddingLightWash {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      scale(0.35);
+  }
+
+  35% {
+    opacity: 0.15;
+  }
+
+  70% {
+    opacity: 0.75;
+
+    transform:
+      scale(1.5);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      scale(2.2);
+  }
+}
+
+
+/* ========================================
+   MUSIC PLAYING GLOW
+======================================== */
+
+.music-btn.music-playing {
+  animation:
+    musicBreathingGlow
+    2.4s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes musicBreathingGlow {
+
+  0%,
+  100% {
+    box-shadow:
+      0 5px 16px rgba(75, 55, 30, 0.09),
+      0 0 0 0 rgba(210, 169, 88, 0),
+      inset 0 1px 1px rgba(255, 255, 255, 0.75);
+  }
+
+  50% {
+    box-shadow:
+      0 7px 20px rgba(75, 55, 30, 0.12),
+      0 0 0 6px rgba(210, 169, 88, 0.10),
+      0 0 20px rgba(210, 169, 88, 0.20),
+      inset 0 1px 1px rgba(255, 255, 255, 0.85);
+  }
+}
+
+
+/* ========================================
+   LIQUID GLASS SHIMMER
+======================================== */
+
+.quick-nav {
+  overflow: hidden;
+}
+
+
+.quick-nav::after {
+  content: "";
+
+  position: absolute;
+
+  top: -40%;
+  left: -45%;
+
+  width: 28%;
+  height: 180%;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      100deg,
+      transparent,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.60),
+      rgba(255, 255, 255, 0.12),
+      transparent
+    );
+
+  transform:
+    rotate(14deg);
+
+  filter:
+    blur(2px);
+
+  animation:
+    liquidGlassShimmer
+    9s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes liquidGlassShimmer {
+
+  0%,
+  68% {
+    left: -45%;
+
+    opacity: 0;
+  }
+
+  72% {
+    opacity: 0.75;
+  }
+
+  88% {
+    left: 120%;
+
+    opacity: 0.45;
+  }
+
+  100% {
+    left: 120%;
+
+    opacity: 0;
+  }
+}
+
+
+/* KEEP NAV BUTTONS ABOVE SHIMMER */
+
+.quick-nav button {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* ========================================
+   ANIMATED GOLD DIVIDER
+======================================== */
+
+.divider-reveal {
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    center;
+
+  opacity: 0;
+
+  transition:
+    transform 1.3s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease;
+}
+
+
+.divider-reveal.is-visible {
+  transform:
+    scaleX(1);
+
+  opacity: 1;
+}
+
+
+/* ========================================
+   MOBILE PERFORMANCE
+======================================== */
+
+@media (max-width: 600px) {
+
+  .opening-light {
+    filter: none;
+  }
+
+  .invitation-opening {
+    will-change:
+      opacity,
+      transform,
+      filter;
+  }
+
+  .intro-card-opening {
+    will-change:
+      opacity,
+      transform;
+  }
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .invitation-opening,
+  .intro-card-opening,
+  .opening-light-active,
+  .music-btn.music-playing,
+  .quick-nav::after {
+    animation: none !important;
+  }
+
+  .divider-reveal {
+    opacity: 1 !important;
+
+    transform: none !important;
+  }
+}

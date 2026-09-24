@@ -23,6 +23,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const [opened, setOpened] = useState(false);
+  const [opening, setOpening] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [guestName, setGuestName] = useState("");
 
@@ -69,8 +70,8 @@ export default function Home() {
     if (!opened) return;
 
     const elements = document.querySelectorAll(
-      ".scroll-reveal, .gallery-reveal"
-    );
+  ".scroll-reveal, .gallery-reveal, .divider-reveal"
+);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -184,28 +185,37 @@ export default function Home() {
   ======================================== */
 
   function handleOpen() {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 2;
+  if (opening) return;
 
-      const playPromise = audioRef.current.play();
+  setOpening(true);
 
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setMusicPlaying(true);
-            setOpened(true);
-          })
-          .catch((err) => {
-            console.log("Audio play blocked:", err);
-            setOpened(true);
-          });
-      } else {
-        setOpened(true);
-      }
-    } else {
-      setOpened(true);
+  if (audioRef.current) {
+    audioRef.current.currentTime = 2;
+
+    const playPromise = audioRef.current.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setMusicPlaying(true);
+        })
+        .catch((err) => {
+          console.log("Audio play blocked:", err);
+        });
     }
   }
+
+  // Let the cinematic cover animation play first
+  setTimeout(() => {
+    setOpened(true);
+    setOpening(false);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  }, 1200);
+}
 
   /* ========================================
      MUSIC
@@ -349,8 +359,16 @@ export default function Home() {
            FRONT COVER
         ======================================== */
 
-        <section className="intro-wrap">
-          <div className="intro-card fade-up">
+        <section
+  className={`intro-wrap ${
+    opening ? "invitation-opening" : ""
+  }`}
+>
+          <div
+  className={`intro-card fade-up ${
+    opening ? "intro-card-opening" : ""
+  }`}
+>
 
             {/* KHMER WEDDING TITLE */}
 
@@ -412,6 +430,15 @@ export default function Home() {
                 className="open-frame-img"
               />
             </button>
+
+            {/* CINEMATIC OPENING LIGHT */}
+
+<div
+  className={`opening-light ${
+    opening ? "opening-light-active" : ""
+  }`}
+  aria-hidden="true"
+/>
           </div>
         </section>
       ) : (
@@ -464,7 +491,9 @@ export default function Home() {
               </button>
 
               <button
-                className="music-btn"
+  className={`music-btn ${
+    musicPlaying ? "music-playing" : ""
+  }`}
                 onClick={toggleMusic}
                 aria-label={
                   musicPlaying
@@ -885,7 +914,7 @@ export default function Home() {
                 DIVIDER — APOLOGY / GRATITUDE
             ======================================== */}
 
-            <div className="apology-gratitude-divider"></div>
+            <div className="apology-gratitude-divider divider-reveal"></div>
 
             {/* ========================================
                 GRATITUDE
