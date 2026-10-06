@@ -1368,10 +1368,10 @@ useEffect(() => {
  function handleOpen() {
   if (opening || curtainOpening || opened) return;
 
-  // Keep your ORIGINAL cover animation
+  // Start original cover animation
   setOpening(true);
 
-  // Start music
+  // Start music immediately
   if (audioRef.current) {
     audioRef.current.currentTime = 2;
     audioRef.current.volume = 0;
@@ -1390,20 +1390,20 @@ useEffect(() => {
     }
   }
 
-  // Let original cover animation play first
+  // Let the original cover animation begin briefly
   setTimeout(() => {
-    // Put curtains over screen
+    // Show floral doors
     setCurtainOpening(true);
 
-    // Small delay so curtains render CLOSED first
+    // Once doors are covering the screen,
+    // switch to the invitation behind them
     setTimeout(() => {
-      // Now switch to invitation behind curtains
       setOpened(true);
       setOpening(false);
       window.scrollTo(0, 0);
-    }, 150);
+    }, 120);
 
-    // Remove curtains after opening animation
+    // Remove floral doors after their 2.9s animation
     setTimeout(() => {
       setCurtainOpening(false);
 
@@ -1414,8 +1414,9 @@ useEffect(() => {
           setShowGuestWelcome(false);
         }, 3200);
       }
-    }, 3200);
-  }, 3000);
+    }, 3050);
+
+  }, 700);
 }
 
 
@@ -1697,18 +1698,66 @@ useEffect(() => {
     className={opened ? "fixed-bg-inner" : "fixed-bg"}
   />
 
-  {/* CURTAIN OPENING */}
-  {curtainOpening && (
-  <div className="curtain-transition" aria-hidden="true">
-    <div className="curtain curtain-left">
-      <div className="curtain-folds" />
+  {/* LUXURY FLORAL DOOR OPENING */}
+{curtainOpening && (
+  <div className="floral-door-transition" aria-hidden="true">
+
+    {/* invitation underneath starts softly blurred */}
+    <div className="floral-door-veil" />
+
+    {/* LEFT DOOR */}
+    <div className="floral-door floral-door-left">
+      <div className="floral-door-inner">
+
+        <div className="door-border door-border-left" />
+
+        <div className="door-ornament door-ornament-top-left">
+          ❦
+        </div>
+
+        <div className="door-ornament door-ornament-bottom-left">
+          ❧
+        </div>
+
+        <div className="door-vine door-vine-left">
+          <span>❦</span>
+          <span>✦</span>
+          <span>❧</span>
+        </div>
+
+      </div>
     </div>
 
-    <div className="curtain curtain-right">
-      <div className="curtain-folds" />
+
+    {/* RIGHT DOOR */}
+    <div className="floral-door floral-door-right">
+      <div className="floral-door-inner">
+
+        <div className="door-border door-border-right" />
+
+        <div className="door-ornament door-ornament-top-right">
+          ❧
+        </div>
+
+        <div className="door-ornament door-ornament-bottom-right">
+          ❦
+        </div>
+
+        <div className="door-vine door-vine-right">
+          <span>❧</span>
+          <span>✦</span>
+          <span>❦</span>
+        </div>
+
+      </div>
     </div>
 
-    <div className="curtain-glow" />
+
+    {/* GOLD CENTER SEAM */}
+    <div className="floral-door-seam">
+      <span className="door-seam-diamond">✦</span>
+    </div>
+
   </div>
 )}
 

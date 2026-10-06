@@ -4926,12 +4926,11 @@ body {
   }
 }
 
-/* ========================================
-   LUXURY SILK CURTAIN REVEAL
-   Full replacement
-======================================== */
+/* =========================================================
+   LUXURY IVORY + GOLD FLORAL DOORS
+========================================================= */
 
-.curtain-transition {
+.floral-door-transition {
   position: fixed;
   inset: 0;
 
@@ -4939,101 +4938,85 @@ body {
   height: 100dvh;
 
   z-index: 999999;
+
   overflow: hidden;
   pointer-events: none;
+
+  perspective: 1800px;
 
   isolation: isolate;
 }
 
 
-/* ========================================
-   SOFT VEIL OVER INVITATION
+/* =========================================================
+   SOFT REVEAL UNDER THE DOORS
+========================================================= */
 
-   Starts slightly hazy and clears as
-   the curtains are pulled apart.
-======================================== */
-
-.curtain-transition::before {
-  content: "";
-
+.floral-door-veil {
   position: absolute;
   inset: 0;
+
   z-index: 0;
 
   background:
     radial-gradient(
-      circle at 50% 45%,
-      rgba(255, 251, 240, 0.08),
-      rgba(245, 226, 194, 0.16)
+      circle at center,
+      rgba(255, 249, 235, 0.12),
+      rgba(229, 199, 142, 0.18)
     );
 
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 
   animation:
-    curtainVeilReveal
-    4.8s
-    cubic-bezier(0.16, 1, 0.3, 1)
+    floralVeilReveal
+    2.9s
+    ease-out
     forwards;
 }
 
 
-/* ========================================
-   MAIN SILK FABRIC
-======================================== */
+/* =========================================================
+   MAIN DOORS
+========================================================= */
 
-.curtain {
+.floral-door {
   position: absolute;
 
-  top: -1%;
-  bottom: -1%;
+  top: 0;
 
-  width: 51%;
-  height: 102%;
+  width: 50.2%;
+  height: 100%;
 
-  z-index: 2;
+  z-index: 3;
 
   overflow: hidden;
 
   /*
-    Wide gradients instead of harsh repeating
-    stripes = softer silk appearance.
+    Ivory paper/card texture
   */
 
   background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(255,255,255,0.78),
+      transparent 45%
+    ),
+
     linear-gradient(
-      90deg,
-
-      #b99669 0%,
-      #d9bd94 5%,
-      #f1dfc3 10%,
-      #c7a476 16%,
-
-      #ead2ae 22%,
-      #f7e8d0 28%,
-      #c4a071 34%,
-
-      #e2c49b 41%,
-      #f5e3c7 48%,
-      #b88f60 55%,
-
-      #ddbd90 62%,
-      #f6e6ce 69%,
-      #c7a174 76%,
-
-      #e8cda7 83%,
-      #f4e1c4 90%,
-      #b58c60 100%
+      135deg,
+      #fffdf8 0%,
+      #f8f0df 28%,
+      #f4e8d2 55%,
+      #fbf5e9 78%,
+      #eee0c7 100%
     );
 
   box-shadow:
-    inset 0 0 55px rgba(84, 55, 27, 0.13),
-    inset 0 0 12px rgba(255, 255, 255, 0.18);
+    inset 0 0 70px rgba(143, 104, 50, 0.08);
 
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-
-  transform: translateZ(0);
 
   will-change:
     transform,
@@ -5041,613 +5024,538 @@ body {
 }
 
 
-/* ========================================
-   SOFT FABRIC FOLDS
-======================================== */
+.floral-door-left {
+  left: 0;
 
-.curtain-folds {
+  transform-origin:
+    left center;
+
+  animation:
+    floralDoorOpenLeft
+    2.9s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+.floral-door-right {
+  right: 0;
+
+  transform-origin:
+    right center;
+
+  animation:
+    floralDoorOpenRight
+    2.9s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   INNER CARD DETAIL
+========================================================= */
+
+.floral-door-inner {
   position: absolute;
-  inset: 0;
 
-  /*
-    Layer 1 = broad folds
-    Layer 2 = fine silk highlights
-    Layer 3 = vertical lighting
-  */
+  inset: 16px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(184, 146, 79, 0.38);
+
+  box-shadow:
+    inset 0 0 0 4px rgba(255,255,255,0.20),
+    inset 0 0 30px rgba(184,146,79,0.05);
+}
+
+
+/* second fine border */
+
+.floral-door-inner::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 7px;
+
+  border:
+    1px solid rgba(184, 146, 79, 0.13);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CENTER GOLD BORDERS
+========================================================= */
+
+.door-border {
+  position: absolute;
+
+  top: 4%;
+  bottom: 4%;
+
+  width: 1px;
 
   background:
-
-    repeating-linear-gradient(
-      90deg,
-
-      rgba(255,255,255,0.26) 0px,
-      rgba(255,255,255,0.08) 16px,
-
-      rgba(87,57,30,0.08) 34px,
-
-      rgba(255,255,255,0.14) 52px,
-
-      rgba(82,52,27,0.10) 72px,
-
-      rgba(255,255,255,0.22) 92px
-    ),
-
-    repeating-linear-gradient(
-      90deg,
-
-      transparent 0px,
-      rgba(255,255,255,0.08) 8px,
-      transparent 17px,
-      rgba(73,45,23,0.05) 29px,
-      transparent 41px
-    ),
-
     linear-gradient(
       to bottom,
 
-      rgba(255,255,255,0.20) 0%,
-      rgba(255,255,255,0.03) 18%,
+      transparent,
 
-      transparent 42%,
+      rgba(184,146,79,0.25) 8%,
 
-      rgba(89,57,30,0.04) 72%,
+      rgba(184,146,79,0.75) 30%,
 
-      rgba(67,42,20,0.09) 100%
-    );
+      #cba25b 50%,
 
-  opacity: 0.85;
+      rgba(184,146,79,0.75) 70%,
 
-  mix-blend-mode: soft-light;
+      rgba(184,146,79,0.25) 92%,
 
-  transform: translateZ(0);
-
-  will-change:
-    transform,
-    background-position;
-}
-
-
-/* ========================================
-   SILK SHIMMER
-======================================== */
-
-.curtain::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  z-index: 3;
-
-  background:
-    linear-gradient(
-      115deg,
-
-      transparent 10%,
-
-      rgba(255,255,255,0.05) 28%,
-
-      rgba(255,255,255,0.20) 43%,
-
-      rgba(255,255,255,0.04) 57%,
-
-      transparent 75%
-    );
-
-  transform: translateX(-60%);
-
-  animation:
-    curtainSilkShimmer
-    4.8s
-    ease-out
-    forwards;
-
-  pointer-events: none;
-}
-
-
-/* ========================================
-   INNER EDGE SHADOW
-
-   Makes the center seam feel like two
-   pieces of fabric touching each other.
-======================================== */
-
-.curtain-left::after,
-.curtain-right::after {
-  content: "";
-
-  position: absolute;
-  top: 0;
-  bottom: 0;
-
-  width: 22px;
-
-  z-index: 5;
-
-  pointer-events: none;
-}
-
-.curtain-left::after {
-  right: 0;
-
-  background:
-    linear-gradient(
-      to left,
-
-      rgba(72,45,23,0.19),
-      rgba(91,58,29,0.06),
       transparent
     );
-}
 
-.curtain-right::after {
-  left: 0;
-
-  background:
-    linear-gradient(
-      to right,
-
-      rgba(72,45,23,0.19),
-      rgba(91,58,29,0.06),
-      transparent
-    );
+  box-shadow:
+    0 0 8px rgba(203,162,91,0.18);
 }
 
 
-/* ========================================
-   LEFT CURTAIN
-======================================== */
-
-.curtain-left {
-  left: 0;
-
-  transform-origin: left center;
-
-  animation:
-    luxuryCurtainLeft
-    4.8s
-    cubic-bezier(0.16, 1, 0.3, 1)
-    forwards;
+.door-border-left {
+  right: 10px;
 }
 
 
-/* ========================================
-   RIGHT CURTAIN
-======================================== */
-
-.curtain-right {
-  right: 0;
-
-  transform-origin: right center;
-
-  animation:
-    luxuryCurtainRight
-    4.8s
-    cubic-bezier(0.16, 1, 0.3, 1)
-    forwards;
+.door-border-right {
+  left: 10px;
 }
 
 
-/* ========================================
-   FABRIC FOLD MOVEMENT
-
-   Texture slowly compresses while curtain
-   gathers toward each side.
-======================================== */
-
-.curtain-left .curtain-folds {
-  animation:
-    luxuryFoldsLeft
-    4.8s
-    cubic-bezier(0.16, 1, 0.3, 1)
-    forwards;
-}
-
-.curtain-right .curtain-folds {
-  animation:
-    luxuryFoldsRight
-    4.8s
-    cubic-bezier(0.16, 1, 0.3, 1)
-    forwards;
-}
-
-
-/* ========================================
-   LEFT OPENING
-
-   Important:
-   Mostly transform animation.
-   Much smoother than clip-path polygons.
-======================================== */
-
-@keyframes luxuryCurtainLeft {
-
-  /* Fully closed */
-
-  0% {
-    transform:
-      translate3d(0, 0, 0)
-      scaleX(1);
-
-    opacity: 1;
-  }
-
-
-  /* Hold for a moment */
-
-  8% {
-    transform:
-      translate3d(0, 0, 0)
-      scaleX(1);
-  }
-
-
-  /* Tiny human-like tug */
-
-  14% {
-    transform:
-      translate3d(-0.6%, 0, 0)
-      scaleX(0.998);
-  }
-
-
-  /* Very slight release */
-
-  18% {
-    transform:
-      translate3d(-0.3%, 0, 0)
-      scaleX(0.996);
-  }
-
-
-  /* Pull starts */
-
-  26% {
-    transform:
-      translate3d(-4%, 0, 0)
-      scaleX(0.965);
-  }
-
-
-  /* Fabric gathering */
-
-  38% {
-    transform:
-      translate3d(-14%, 0, 0)
-      scaleX(0.90);
-  }
-
-
-  52% {
-    transform:
-      translate3d(-31%, 0, 0)
-      scaleX(0.80);
-  }
-
-
-  66% {
-    transform:
-      translate3d(-51%, 0, 0)
-      scaleX(0.68);
-  }
-
-
-  78% {
-    transform:
-      translate3d(-70%, 0, 0)
-      scaleX(0.56);
-  }
-
-
-  88% {
-    transform:
-      translate3d(-85%, 0, 0)
-      scaleX(0.46);
-  }
-
-
-  95% {
-    transform:
-      translate3d(-96%, 0, 0)
-      scaleX(0.38);
-
-    opacity: 1;
-  }
-
-
-  /* Finish outside viewport */
-
-  100% {
-    transform:
-      translate3d(-108%, 0, 0)
-      scaleX(0.32);
-
-    opacity: 0;
-  }
-}
-
-
-/* ========================================
-   RIGHT OPENING
-======================================== */
-
-@keyframes luxuryCurtainRight {
-
-  0% {
-    transform:
-      translate3d(0, 0, 0)
-      scaleX(1);
-
-    opacity: 1;
-  }
-
-
-  8% {
-    transform:
-      translate3d(0, 0, 0)
-      scaleX(1);
-  }
-
-
-  14% {
-    transform:
-      translate3d(0.6%, 0, 0)
-      scaleX(0.998);
-  }
-
-
-  18% {
-    transform:
-      translate3d(0.3%, 0, 0)
-      scaleX(0.996);
-  }
-
-
-  26% {
-    transform:
-      translate3d(4%, 0, 0)
-      scaleX(0.965);
-  }
-
-
-  38% {
-    transform:
-      translate3d(14%, 0, 0)
-      scaleX(0.90);
-  }
-
-
-  52% {
-    transform:
-      translate3d(31%, 0, 0)
-      scaleX(0.80);
-  }
-
-
-  66% {
-    transform:
-      translate3d(51%, 0, 0)
-      scaleX(0.68);
-  }
-
-
-  78% {
-    transform:
-      translate3d(70%, 0, 0)
-      scaleX(0.56);
-  }
-
-
-  88% {
-    transform:
-      translate3d(85%, 0, 0)
-      scaleX(0.46);
-  }
-
-
-  95% {
-    transform:
-      translate3d(96%, 0, 0)
-      scaleX(0.38);
-
-    opacity: 1;
-  }
-
-
-  100% {
-    transform:
-      translate3d(108%, 0, 0)
-      scaleX(0.32);
-
-    opacity: 0;
-  }
-}
-
-
-/* ========================================
-   FOLD COMPRESSION
-======================================== */
-
-@keyframes luxuryFoldsLeft {
-
-  0%,
-  15% {
-    transform:
-      translate3d(0, 0, 0)
-      scaleX(1);
-
-    background-position:
-      0 0,
-      0 0,
-      0 0;
-  }
-
-
-  40% {
-    transform:
-      translate3d(-1%, 0, 0)
-      scaleX(1.05);
-
-    background-position:
-      -12px 0,
-      -5px 0,
-      0 0;
-  }
-
-
-  70% {
-    transform:
-      translate3d(-3%, 0, 0)
-      scaleX(1.15);
-
-    background-position:
-      -28px 0,
-      -13px 0,
-      0 0;
-  }
-
-
-  100% {
-    transform:
-      translate3d(-6%, 0, 0)
-      scaleX(1.28);
-
-    background-position:
-      -45px 0,
-      -20px 0,
-      0 0;
-  }
-}
-
-
-@keyframes luxuryFoldsRight {
-
-  0%,
-  15% {
-    transform:
-      translate3d(0, 0, 0)
-      scaleX(1);
-
-    background-position:
-      0 0,
-      0 0,
-      0 0;
-  }
-
-
-  40% {
-    transform:
-      translate3d(1%, 0, 0)
-      scaleX(1.05);
-
-    background-position:
-      12px 0,
-      5px 0,
-      0 0;
-  }
-
-
-  70% {
-    transform:
-      translate3d(3%, 0, 0)
-      scaleX(1.15);
-
-    background-position:
-      28px 0,
-      13px 0,
-      0 0;
-  }
-
-
-  100% {
-    transform:
-      translate3d(6%, 0, 0)
-      scaleX(1.28);
-
-    background-position:
-      45px 0,
-      20px 0,
-      0 0;
-  }
-}
-
-
-/* ========================================
-   SUBTLE CENTER LIGHT
-
-   No giant white flash.
-======================================== */
-
-.curtain-glow {
+/* =========================================================
+   CORNER FLORAL ORNAMENTS
+========================================================= */
+
+.door-ornament {
   position: absolute;
 
-  z-index: 1;
+  color: rgba(174, 132, 64, 0.78);
 
-  top: 0;
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    clamp(48px, 9vw, 100px);
+
+  font-weight: 300;
+
+  line-height: 1;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.75),
+    0 0 15px rgba(190,148,75,0.08);
+
+  opacity: 0.72;
+}
+
+
+.door-ornament-top-left {
+  top: 25px;
+  left: 22px;
+
+  transform:
+    rotate(-25deg);
+}
+
+
+.door-ornament-bottom-left {
+  bottom: 25px;
+  left: 22px;
+
+  transform:
+    rotate(205deg);
+}
+
+
+.door-ornament-top-right {
+  top: 25px;
+  right: 22px;
+
+  transform:
+    rotate(25deg);
+}
+
+
+.door-ornament-bottom-right {
+  bottom: 25px;
+  right: 22px;
+
+  transform:
+    rotate(155deg);
+}
+
+
+/* =========================================================
+   CENTER VINES
+========================================================= */
+
+.door-vine {
+  position: absolute;
+
+  top: 50%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 22px;
+
+  color: #b8924f;
+
+  transform:
+    translateY(-50%);
+
+  opacity: 0.68;
+}
+
+
+.door-vine span:nth-child(1),
+.door-vine span:nth-child(3) {
+
+  font-size:
+    clamp(38px, 7vw, 70px);
+
+  line-height: 1;
+}
+
+
+.door-vine span:nth-child(2) {
+
+  font-size:
+    clamp(10px, 2vw, 16px);
+
+  opacity: 0.75;
+}
+
+
+.door-vine-left {
+  right: 28px;
+}
+
+
+.door-vine-right {
+  left: 28px;
+}
+
+
+/* =========================================================
+   GOLD CENTER SEAM
+========================================================= */
+
+.floral-door-seam {
+  position: absolute;
+
+  z-index: 8;
+
   left: 50%;
+  top: 0;
 
   width: 1px;
   height: 100%;
 
   transform:
-    translate3d(-50%, 0, 0);
+    translateX(-50%);
 
   background:
     linear-gradient(
       to bottom,
 
-      transparent 0%,
+      transparent 2%,
 
-      rgba(255, 241, 208, 0.40) 18%,
+      rgba(184,146,79,0.30) 15%,
 
-      rgba(255, 232, 182, 0.78) 48%,
+      rgba(202,160,84,0.85) 50%,
 
-      rgba(255, 241, 208, 0.40) 82%,
+      rgba(184,146,79,0.30) 85%,
 
-      transparent 100%
+      transparent 98%
     );
 
   box-shadow:
-    0 0 10px rgba(255, 226, 166, 0.45),
-    0 0 28px rgba(255, 220, 150, 0.22);
-
-  opacity: 0;
+    0 0 8px rgba(215,175,99,0.20);
 
   animation:
-    luxuryCenterLight
-    4.8s
+    floralDoorSeam
+    2.9s
     ease-out
     forwards;
 }
 
 
-/* ========================================
-   CENTER LIGHT
-======================================== */
+/* =========================================================
+   SMALL CENTER DIAMOND
+========================================================= */
 
-@keyframes luxuryCenterLight {
+.door-seam-diamond {
+  position: absolute;
 
-  0%,
-  13% {
-    opacity: 0;
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  color: #b8924f;
+
+  font-size: 15px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,253,245,0.98),
+      rgba(243,229,201,0.92)
+    );
+
+  border:
+    1px solid rgba(184,146,79,0.48);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 5px 18px rgba(101,72,30,0.10),
+    0 0 0 5px rgba(255,255,255,0.16);
+
+  animation:
+    floralDiamondOpen
+    2.9s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   LEFT DOOR ANIMATION
+========================================================= */
+
+@keyframes floralDoorOpenLeft {
+
+  0% {
+    transform:
+      translate3d(0,0,0)
+      rotateY(0deg);
+
+    opacity: 1;
   }
 
-  20% {
+
+  /* tiny physical movement */
+
+  5% {
+    transform:
+      translate3d(-1px,0,0)
+      rotateY(0deg);
+  }
+
+
+  /* starts separating */
+
+  12% {
+    transform:
+      translate3d(-3%,0,0)
+      rotateY(1deg);
+  }
+
+
+  30% {
+    transform:
+      translate3d(-20%,0,0)
+      rotateY(4deg);
+  }
+
+
+  52% {
+    transform:
+      translate3d(-48%,0,0)
+      rotateY(7deg);
+  }
+
+
+  75% {
+    transform:
+      translate3d(-78%,0,0)
+      rotateY(10deg);
+  }
+
+
+  92% {
+    transform:
+      translate3d(-102%,0,0)
+      rotateY(12deg);
+
+    opacity: 1;
+  }
+
+
+  100% {
+    transform:
+      translate3d(-108%,0,0)
+      rotateY(12deg);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   RIGHT DOOR ANIMATION
+========================================================= */
+
+@keyframes floralDoorOpenRight {
+
+  0% {
+    transform:
+      translate3d(0,0,0)
+      rotateY(0deg);
+
+    opacity: 1;
+  }
+
+
+  5% {
+    transform:
+      translate3d(1px,0,0)
+      rotateY(0deg);
+  }
+
+
+  12% {
+    transform:
+      translate3d(3%,0,0)
+      rotateY(-1deg);
+  }
+
+
+  30% {
+    transform:
+      translate3d(20%,0,0)
+      rotateY(-4deg);
+  }
+
+
+  52% {
+    transform:
+      translate3d(48%,0,0)
+      rotateY(-7deg);
+  }
+
+
+  75% {
+    transform:
+      translate3d(78%,0,0)
+      rotateY(-10deg);
+  }
+
+
+  92% {
+    transform:
+      translate3d(102%,0,0)
+      rotateY(-12deg);
+
+    opacity: 1;
+  }
+
+
+  100% {
+    transform:
+      translate3d(108%,0,0)
+      rotateY(-12deg);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   CENTER SEAM DISAPPEARS
+========================================================= */
+
+@keyframes floralDoorSeam {
+
+  0%,
+  6% {
+    opacity: 1;
+  }
+
+  18% {
     opacity: 0.75;
   }
 
+  30% {
+    opacity: 0.15;
+  }
+
+  40%,
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   CENTER DIAMOND
+========================================================= */
+
+@keyframes floralDiamondOpen {
+
+  0% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(0deg);
+  }
+
+
+  8% {
+    transform:
+      translate(-50%, -50%)
+      scale(1.08)
+      rotate(8deg);
+  }
+
+
+  18% {
+    opacity: 0.9;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.9)
+      rotate(20deg);
+  }
+
+
   32% {
-    opacity: 0.55;
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.65)
+      rotate(35deg);
   }
 
-  50% {
-    opacity: 0.32;
-  }
-
-  70% {
-    opacity: 0.12;
-  }
 
   100% {
     opacity: 0;
@@ -5655,14 +5563,13 @@ body {
 }
 
 
-/* ========================================
-   INVITATION VEIL REVEAL
-======================================== */
+/* =========================================================
+   BACKGROUND REVEAL
+========================================================= */
 
-@keyframes curtainVeilReveal {
+@keyframes floralVeilReveal {
 
-  0%,
-  15% {
+  0% {
     opacity: 1;
 
     backdrop-filter: blur(3px);
@@ -5670,19 +5577,19 @@ body {
   }
 
 
-  35% {
-    opacity: 0.78;
+  25% {
+    opacity: 0.75;
 
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
   }
 
 
-  60% {
-    opacity: 0.38;
+  55% {
+    opacity: 0.28;
 
-    backdrop-filter: blur(0.8px);
-    -webkit-backdrop-filter: blur(0.8px);
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
   }
 
 
@@ -5695,96 +5602,94 @@ body {
 }
 
 
-/* ========================================
-   SILK HIGHLIGHT MOVEMENT
-======================================== */
-
-@keyframes curtainSilkShimmer {
-
-  0%,
-  15% {
-    transform:
-      translate3d(-65%, 0, 0);
-
-    opacity: 0.25;
-  }
-
-
-  50% {
-    transform:
-      translate3d(-5%, 0, 0);
-
-    opacity: 0.55;
-  }
-
-
-  100% {
-    transform:
-      translate3d(55%, 0, 0);
-
-    opacity: 0.12;
-  }
-}
-
-
-/* ========================================
+/* =========================================================
    MOBILE
-======================================== */
+========================================================= */
 
 @media (max-width: 600px) {
 
-  .curtain {
-    width: 51%;
+  .floral-door {
+    width: 50.5%;
   }
 
-  .curtain-folds {
-    background:
 
-      repeating-linear-gradient(
-        90deg,
-
-        rgba(255,255,255,0.25) 0px,
-        rgba(255,255,255,0.07) 11px,
-
-        rgba(87,57,30,0.09) 23px,
-
-        rgba(255,255,255,0.14) 35px,
-
-        rgba(82,52,27,0.10) 48px,
-
-        rgba(255,255,255,0.20) 61px
-      ),
-
-      repeating-linear-gradient(
-        90deg,
-
-        transparent 0px,
-        rgba(255,255,255,0.07) 6px,
-        transparent 13px,
-        rgba(73,45,23,0.05) 21px,
-        transparent 29px
-      ),
-
-      linear-gradient(
-        to bottom,
-
-        rgba(255,255,255,0.18),
-        transparent 35%,
-        rgba(74,46,23,0.07)
-      );
+  .floral-door-inner {
+    inset: 9px;
   }
 
+
+  .floral-door-inner::before {
+    inset: 5px;
+  }
+
+
+  .door-vine-left {
+    right: 17px;
+  }
+
+
+  .door-vine-right {
+    left: 17px;
+  }
+
+
+  .door-vine {
+    gap: 17px;
+  }
+
+
+  .door-ornament {
+    font-size:
+      clamp(40px, 13vw, 65px);
+  }
+
+
+  .door-ornament-top-left {
+    top: 18px;
+    left: 13px;
+  }
+
+
+  .door-ornament-bottom-left {
+    bottom: 18px;
+    left: 13px;
+  }
+
+
+  .door-ornament-top-right {
+    top: 18px;
+    right: 13px;
+  }
+
+
+  .door-ornament-bottom-right {
+    bottom: 18px;
+    right: 13px;
+  }
+
+
+  .door-seam-diamond {
+    width: 34px;
+    height: 34px;
+
+    font-size: 12px;
+  }
 }
 
 
-/* ========================================
-   PERFORMANCE
-======================================== */
+/* =========================================================
+   GPU / SMOOTHNESS
+========================================================= */
 
-.curtain,
-.curtain-folds,
-.curtain-glow,
-.curtain-transition::before {
-  -webkit-transform-style: preserve-3d;
+.floral-door,
+.floral-door-inner,
+.floral-door-veil,
+.floral-door-seam,
+.door-seam-diamond {
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
