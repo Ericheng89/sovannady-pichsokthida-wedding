@@ -99,7 +99,7 @@ export default function Home() {
 
 
   const [opening, setOpening] = useState(false);
-
+  const [curtainOpening, setCurtainOpening] = useState(false);
 
 
   const [musicPlaying, setMusicPlaying] = useState(false);
@@ -1365,159 +1365,58 @@ useEffect(() => {
 
 
 
-  function handleOpen() {
-
-
-
-    if (opening) return;
-
-
-
-
-
-
-
-    setOpening(true);
-
-
-
-
-
-
-
-    if (audioRef.current) {
-
-
-
-      audioRef.current.currentTime = 2;
-
-
-
-      audioRef.current.volume = 0;
-
-
-
-
-
-
-
-      const playPromise = audioRef.current.play();
-
-
-
-
-
-
-
-      if (playPromise !== undefined) {
-
-
-
-        playPromise
-
-
-
-          .then(() => {
-
-
-
-            setMusicPlaying(true);
-
-
-
-            fadeMusicIn();
-
-
-
-          })
-
-
-
-          .catch((err) => {
-
-
-
-            console.log("Audio play blocked:", err);
-
-
-
-          });
-
-
-
-      }
-
-
-
+ function handleOpen() {
+  if (opening || curtainOpening || opened) return;
+
+  // Keep your ORIGINAL cover animation
+  setOpening(true);
+
+  // Start music
+  if (audioRef.current) {
+    audioRef.current.currentTime = 2;
+    audioRef.current.volume = 0;
+
+    const playPromise = audioRef.current.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setMusicPlaying(true);
+          fadeMusicIn();
+        })
+        .catch((err) => {
+          console.log("Audio play blocked:", err);
+        });
     }
+  }
 
+  // Let original cover animation play first
+  setTimeout(() => {
+    // Put curtains over screen
+    setCurtainOpening(true);
 
-
-
-
-
-
-    // Let the cinematic cover animation play first
-
-
-
+    // Small delay so curtains render CLOSED first
     setTimeout(() => {
-
-
-
+      // Now switch to invitation behind curtains
       setOpened(true);
-
-
-
       setOpening(false);
-
-
-
-
-
-
-
       window.scrollTo(0, 0);
+    }, 150);
 
-
-
-
-
-
+    // Remove curtains after opening animation
+    setTimeout(() => {
+      setCurtainOpening(false);
 
       if (guestName) {
-
-
-
         setShowGuestWelcome(true);
 
-
-
-
-
-
-
         setTimeout(() => {
-
-
-
           setShowGuestWelcome(false);
-
-
-
         }, 3200);
-
-
-
       }
-
-
-
-    }, 1800);
-
-
-
-  }
+    }, 1950);
+  }, 1000);
+}
 
 
 
@@ -1799,19 +1698,19 @@ useEffect(() => {
   />
 
   {/* CURTAIN OPENING */}
-  {opening && (
-    <div className="curtain-transition" aria-hidden="true">
-      <div className="curtain curtain-left">
-        <div className="curtain-folds" />
-      </div>
-
-      <div className="curtain curtain-right">
-        <div className="curtain-folds" />
-      </div>
-
-      <div className="curtain-glow" />
+  {curtainOpening && (
+  <div className="curtain-transition" aria-hidden="true">
+    <div className="curtain curtain-left">
+      <div className="curtain-folds" />
     </div>
-  )}
+
+    <div className="curtain curtain-right">
+      <div className="curtain-folds" />
+    </div>
+
+    <div className="curtain-glow" />
+  </div>
+)}
 
   {/* MUSIC */}
 
@@ -3061,8 +2960,6 @@ useEffect(() => {
 
                     កូនប្រុសនាម
 
-
-កឧក
                   </p>
 
 
