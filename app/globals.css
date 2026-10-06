@@ -4868,3 +4868,60 @@ body {
     padding: 12px 22px;
   }
 }
+
+/* ========================================
+   WEBSITE CREDIT
+======================================== */
+
+.site-credit {
+  margin-top: 55px;
+  padding-top: 22px;
+
+  border-top: 1px solid rgba(184, 146, 79, 0.2);
+
+  color: rgba(107, 86, 51, 0.7);
+
+  font-family: "Cormorant Garamond", serif;
+
+  text-align: center;
+}
+
+.site-credit p {
+  margin: 0 0 5px;
+
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+.site-credit strong {
+  color: #9b7335;
+  font-weight: 600;
+}
+
+.site-credit span {
+  color: #b8924f;
+  margin: 0 2px;
+}
+
+.site-credit small {
+  display: block;
+
+  font-size: 11px;
+  letter-spacing: 0.6px;
+
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .site-credit {
+    margin-top: 45px;
+  }
+
+  .site-credit p {
+    font-size: 13px;
+  }
+
+  .site-credit small {
+    font-size: 10px;
+  }
+}

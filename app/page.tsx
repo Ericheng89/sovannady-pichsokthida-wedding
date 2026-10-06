@@ -4749,38 +4749,43 @@ useEffect(() => {
               </div>
 
 
-              {/* ========================================
-                  WEDDING FINALE
-              ======================================== */}
+             {/* ========================================
+    WEDDING FINALE
+======================================== */}
 
-              <div className="wedding-finale scroll-reveal">
+<div className="wedding-finale scroll-reveal">
 
-                <div className="finale-sparkle">
-                  ✦
-                </div>
+  <div className="finale-sparkle">
+    ✦
+  </div>
 
-                <h2 className="finale-names">
-                  Sovannady
-                  <span>&</span>
-                  Pichsokthida
-                </h2>
+  <p className="finale-message">
+    Thank you for celebrating
+    <br />
+    our special day with us.
+  </p>
 
-                <div className="finale-line"></div>
+  <div className="finale-line"></div>
 
-                <p className="finale-date">
-                  16 • 11 • 2026
-                </p>
+  <p className="finale-date">
+    16 • 11 • 2026
+  </p>
 
-                <p className="finale-message">
-                  Thank you for celebrating
-                  our special day with us.
-                </p>
+  <div className="finale-sparkle finale-sparkle-bottom">
+    ✦
+  </div>
 
-                <div className="finale-sparkle finale-sparkle-bottom">
-                  ✦
-                </div>
+  <div className="site-credit">
+    <p>
+      Crafted with <span>♡</span> by <strong>Heng Studio</strong>
+    </p>
 
-              </div>
+    <small>
+      © 2026 Heng Studio. All Rights Reserved.
+    </small>
+  </div>
+
+</div>
 
 
 
