@@ -1513,7 +1513,7 @@ useEffect(() => {
 
 
 
-    }, 1200);
+    }, 1800);
 
 
 
@@ -1794,26 +1794,26 @@ useEffect(() => {
 
 
     <main className={opened ? "site-bg-inner" : "site-bg"}>
+  <div
+    className={opened ? "fixed-bg-inner" : "fixed-bg"}
+  />
 
+  {/* CURTAIN OPENING */}
+  {opening && (
+    <div className="curtain-transition" aria-hidden="true">
+      <div className="curtain curtain-left">
+        <div className="curtain-folds" />
+      </div>
 
+      <div className="curtain curtain-right">
+        <div className="curtain-folds" />
+      </div>
 
-      <div
+      <div className="curtain-glow" />
+    </div>
+  )}
 
-
-
-        className={opened ? "fixed-bg-inner" : "fixed-bg"}
-
-
-
-      />
-
-
-
-
-
-
-
-      {/* MUSIC */}
+  {/* MUSIC */}
 
 
 
