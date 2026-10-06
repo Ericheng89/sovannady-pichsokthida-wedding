@@ -1365,160 +1365,49 @@ useEffect(() => {
 
 
 
-  function handleOpen() {
-
-
-
-    if (opening) return;
-
-
-
-
-
-
-
-    setOpening(true);
-
-
-
-
-
-
-
-    if (audioRef.current) {
-
-
-
-      audioRef.current.currentTime = 2;
-
-
-
-      audioRef.current.volume = 0;
-
-
-
-
-
-
-
-      const playPromise = audioRef.current.play();
-
-
-
-
-
-
-
-      if (playPromise !== undefined) {
-
-
-
-        playPromise
-
-
-
-          .then(() => {
-
-
-
-            setMusicPlaying(true);
-
-
-
-            fadeMusicIn();
-
-
-
-          })
-
-
-
-          .catch((err) => {
-
-
-
-            console.log("Audio play blocked:", err);
-
-
-
-          });
-
-
-
-      }
-
-
-
+function handleOpen() {
+  if (opening || opened) return;
+
+  // Start curtain animation
+  setOpening(true);
+
+  // Start music
+  if (audioRef.current) {
+    audioRef.current.currentTime = 2;
+    audioRef.current.volume = 0;
+
+    const playPromise = audioRef.current.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setMusicPlaying(true);
+          fadeMusicIn();
+        })
+        .catch((err) => {
+          console.log("Audio play blocked:", err);
+        });
     }
-
-
-
-
-
-
-
-    // Let the cinematic cover animation play first
-
-
-
-    setTimeout(() => {
-
-
-
-      setOpened(true);
-
-
-
-      setOpening(false);
-
-
-
-
-
-
-
-      window.scrollTo(0, 0);
-
-
-
-
-
-
-
-      if (guestName) {
-
-
-
-        setShowGuestWelcome(true);
-
-
-
-
-
-
-
-        setTimeout(() => {
-
-
-
-          setShowGuestWelcome(false);
-
-
-
-        }, 3200);
-
-
-
-      }
-
-
-
-    }, 1800);
-
-
-
   }
 
+  // IMPORTANT:
+  // Put the invitation behind the curtains immediately.
+  setOpened(true);
+  window.scrollTo(0, 0);
+
+  // Remove curtains AFTER they finish opening.
+  setTimeout(() => {
+    setOpening(false);
+
+    if (guestName) {
+      setShowGuestWelcome(true);
+
+      setTimeout(() => {
+        setShowGuestWelcome(false);
+      }, 3200);
+    }
+  }, 1800);
+}
 
 
 
@@ -3179,7 +3068,8 @@ useEffect(() => {
                 ដែលនឹងប្រព្រឹត្តទៅនា
                 <br />
                 ថ្ងៃចន្ទ ៧កើត ខែកត្តិក ឆ្នាំមមី អដ្ឋស័ក ព.ស.២៥៧០ ត្រូវនឹងថ្ងៃទី១៦ ខែវិច្ឆិកា ឆ្នាំ២០២៦
-                វេលាម៉ោង ៥ៈ០០ ល្ងាច ស្ថិតនៅ ភោជនីយដ្ឋាន ឡាក់គីប្រាយ ដោយមេត្រីភាព។
+                វេលាម៉ោង ៥ៈ០០ ល្ងាច ស្ថិតនៅ ភោជនីយដ្ឋាន ឡាក់គីប្រាយ
+                ដោយមេត្រីភាព។
                 <br />
                 <span className="date-thank-you">សូមអរគុណ</span>
               </p>
