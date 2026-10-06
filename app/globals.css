@@ -2434,20 +2434,16 @@ body {
 
 .scroll-reveal {
   opacity: 0;
-
-  transform: translate3d(0, 28px, 0);
-
-  filter: blur(4px);
+  transform: translateY(24px);
 
   transition:
-    opacity 0.9s ease,
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.9s ease;
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-  will-change:
-    opacity,
-    transform,
-    filter;
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
@@ -5798,18 +5794,4 @@ body {
 
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-}
-
-/* Prevent Khmer + English invitation sections from overlapping */
-.khmer-section {
-  position: relative;
-  height: auto;
-  min-height: 0;
-  margin-bottom: 80px;
-}
-
-.english-section {
-  position: relative;
-  clear: both;
-  margin-top: 0;
 }
