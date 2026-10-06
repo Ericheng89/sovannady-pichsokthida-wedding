@@ -4927,61 +4927,277 @@ body {
 }
 
 /* ========================================
-   REALISTIC HAND-PULLED WEDDING CURTAINS
+   LUXURY SILK CURTAIN REVEAL
+   Full replacement
 ======================================== */
 
 .curtain-transition {
   position: fixed;
   inset: 0;
-  z-index: 999999;
+
   width: 100vw;
   height: 100dvh;
+
+  z-index: 999999;
   overflow: hidden;
+  pointer-events: none;
+
+  isolation: isolate;
+}
+
+
+/* ========================================
+   SOFT VEIL OVER INVITATION
+
+   Starts slightly hazy and clears as
+   the curtains are pulled apart.
+======================================== */
+
+.curtain-transition::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 251, 240, 0.08),
+      rgba(245, 226, 194, 0.16)
+    );
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+
+  animation:
+    curtainVeilReveal
+    4.8s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+
+/* ========================================
+   MAIN SILK FABRIC
+======================================== */
+
+.curtain {
+  position: absolute;
+
+  top: -1%;
+  bottom: -1%;
+
+  width: 51%;
+  height: 102%;
+
+  z-index: 2;
+
+  overflow: hidden;
+
+  /*
+    Wide gradients instead of harsh repeating
+    stripes = softer silk appearance.
+  */
+
+  background:
+    linear-gradient(
+      90deg,
+
+      #b99669 0%,
+      #d9bd94 5%,
+      #f1dfc3 10%,
+      #c7a476 16%,
+
+      #ead2ae 22%,
+      #f7e8d0 28%,
+      #c4a071 34%,
+
+      #e2c49b 41%,
+      #f5e3c7 48%,
+      #b88f60 55%,
+
+      #ddbd90 62%,
+      #f6e6ce 69%,
+      #c7a174 76%,
+
+      #e8cda7 83%,
+      #f4e1c4 90%,
+      #b58c60 100%
+    );
+
+  box-shadow:
+    inset 0 0 55px rgba(84, 55, 27, 0.13),
+    inset 0 0 12px rgba(255, 255, 255, 0.18);
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transform: translateZ(0);
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* ========================================
+   SOFT FABRIC FOLDS
+======================================== */
+
+.curtain-folds {
+  position: absolute;
+  inset: 0;
+
+  /*
+    Layer 1 = broad folds
+    Layer 2 = fine silk highlights
+    Layer 3 = vertical lighting
+  */
+
+  background:
+
+    repeating-linear-gradient(
+      90deg,
+
+      rgba(255,255,255,0.26) 0px,
+      rgba(255,255,255,0.08) 16px,
+
+      rgba(87,57,30,0.08) 34px,
+
+      rgba(255,255,255,0.14) 52px,
+
+      rgba(82,52,27,0.10) 72px,
+
+      rgba(255,255,255,0.22) 92px
+    ),
+
+    repeating-linear-gradient(
+      90deg,
+
+      transparent 0px,
+      rgba(255,255,255,0.08) 8px,
+      transparent 17px,
+      rgba(73,45,23,0.05) 29px,
+      transparent 41px
+    ),
+
+    linear-gradient(
+      to bottom,
+
+      rgba(255,255,255,0.20) 0%,
+      rgba(255,255,255,0.03) 18%,
+
+      transparent 42%,
+
+      rgba(89,57,30,0.04) 72%,
+
+      rgba(67,42,20,0.09) 100%
+    );
+
+  opacity: 0.85;
+
+  mix-blend-mode: soft-light;
+
+  transform: translateZ(0);
+
+  will-change:
+    transform,
+    background-position;
+}
+
+
+/* ========================================
+   SILK SHIMMER
+======================================== */
+
+.curtain::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 3;
+
+  background:
+    linear-gradient(
+      115deg,
+
+      transparent 10%,
+
+      rgba(255,255,255,0.05) 28%,
+
+      rgba(255,255,255,0.20) 43%,
+
+      rgba(255,255,255,0.04) 57%,
+
+      transparent 75%
+    );
+
+  transform: translateX(-60%);
+
+  animation:
+    curtainSilkShimmer
+    4.8s
+    ease-out
+    forwards;
+
   pointer-events: none;
 }
 
 
 /* ========================================
-   CURTAIN FABRIC
+   INNER EDGE SHADOW
+
+   Makes the center seam feel like two
+   pieces of fabric touching each other.
 ======================================== */
 
-.curtain {
+.curtain-left::after,
+.curtain-right::after {
+  content: "";
+
   position: absolute;
   top: 0;
+  bottom: 0;
 
-  width: 50.5%;
-  height: 100%;
+  width: 22px;
 
-  overflow: hidden;
+  z-index: 5;
 
-  /*
-    Multiple narrow highlights/shadows create
-    vertical folds in the silk.
-  */
+  pointer-events: none;
+}
+
+.curtain-left::after {
+  right: 0;
+
   background:
-    repeating-linear-gradient(
-      90deg,
-      #c5a171 0px,
-      #ead4b2 15px,
-      #f8ead3 28px,
-      #d2af7f 42px,
-      #aa8055 57px,
-      #d7b98c 72px,
-      #f4e2c7 88px,
-      #c29b69 104px
+    linear-gradient(
+      to left,
+
+      rgba(72,45,23,0.19),
+      rgba(91,58,29,0.06),
+      transparent
     );
+}
 
-  box-shadow:
-    inset 0 0 70px rgba(83, 55, 28, 0.16);
+.curtain-right::after {
+  left: 0;
 
-  will-change:
-    clip-path,
-    transform,
-    filter;
+  background:
+    linear-gradient(
+      to right,
+
+      rgba(72,45,23,0.19),
+      rgba(91,58,29,0.06),
+      transparent
+    );
 }
 
 
-/* LEFT HALF */
+/* ========================================
+   LEFT CURTAIN
+======================================== */
 
 .curtain-left {
   left: 0;
@@ -4989,14 +5205,16 @@ body {
   transform-origin: left center;
 
   animation:
-    pullCurtainLeft
-    4.2s
-    cubic-bezier(0.62, 0, 0.22, 1)
+    luxuryCurtainLeft
+    4.8s
+    cubic-bezier(0.16, 1, 0.3, 1)
     forwards;
 }
 
 
-/* RIGHT HALF */
+/* ========================================
+   RIGHT CURTAIN
+======================================== */
 
 .curtain-right {
   right: 0;
@@ -5004,369 +5222,507 @@ body {
   transform-origin: right center;
 
   animation:
-    pullCurtainRight
-    4.2s
-    cubic-bezier(0.62, 0, 0.22, 1)
+    luxuryCurtainRight
+    4.8s
+    cubic-bezier(0.16, 1, 0.3, 1)
     forwards;
 }
 
 
 /* ========================================
-   EXTRA FABRIC DEPTH
+   FABRIC FOLD MOVEMENT
+
+   Texture slowly compresses while curtain
+   gathers toward each side.
 ======================================== */
 
-.curtain-folds {
-  position: absolute;
-  inset: 0;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-
-      rgba(255,255,255,0.34) 0px,
-      rgba(255,255,255,0.04) 18px,
-
-      rgba(75,45,20,0.16) 36px,
-
-      rgba(255,255,255,0.16) 54px,
-
-      rgba(70,42,20,0.13) 72px
-    );
-
-  mix-blend-mode: soft-light;
-
+.curtain-left .curtain-folds {
   animation:
-    curtainFabricGather
-    4.2s
-    cubic-bezier(0.62, 0, 0.22, 1)
+    luxuryFoldsLeft
+    4.8s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+.curtain-right .curtain-folds {
+  animation:
+    luxuryFoldsRight
+    4.8s
+    cubic-bezier(0.16, 1, 0.3, 1)
     forwards;
 }
 
 
 /* ========================================
-   LEFT — CENTER EDGE IS PULLED LEFT
+   LEFT OPENING
+
+   Important:
+   Mostly transform animation.
+   Much smoother than clip-path polygons.
 ======================================== */
 
-@keyframes pullCurtainLeft {
+@keyframes luxuryCurtainLeft {
 
-  /* curtain closed */
+  /* Fully closed */
 
   0% {
-    clip-path:
-      polygon(
-        0 0,
-        100% 0,
-        100% 100%,
-        0 100%
-      );
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
 
-    transform: scaleX(1);
-
-    filter: brightness(1);
+    opacity: 1;
   }
 
 
-  /* tiny pause before someone starts pulling */
+  /* Hold for a moment */
 
-  12% {
-    clip-path:
-      polygon(
-        0 0,
-        100% 0,
-        100% 100%,
-        0 100%
-      );
-
-    transform: scaleX(1);
+  8% {
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
   }
 
 
-  /* center starts separating */
+  /* Tiny human-like tug */
 
-  25% {
-    clip-path:
-      polygon(
-        0 0,
-        92% 3%,
-        88% 50%,
-        92% 97%,
-        0 100%
-      );
-
-    transform: scaleX(0.98);
+  14% {
+    transform:
+      translate3d(-0.6%, 0, 0)
+      scaleX(0.998);
   }
 
 
-  /* fabric begins gathering */
+  /* Very slight release */
 
-  43% {
-    clip-path:
-      polygon(
-        0 0,
-        72% 5%,
-        63% 50%,
-        72% 95%,
-        0 100%
-      );
-
-    transform: scaleX(0.94);
+  18% {
+    transform:
+      translate3d(-0.3%, 0, 0)
+      scaleX(0.996);
   }
 
 
-  /* strong pull */
+  /* Pull starts */
 
-  65% {
-    clip-path:
-      polygon(
-        0 0,
-        48% 8%,
-        34% 50%,
-        48% 92%,
-        0 100%
-      );
-
-    transform: scaleX(0.84);
-
-    filter: brightness(0.98);
+  26% {
+    transform:
+      translate3d(-4%, 0, 0)
+      scaleX(0.965);
   }
 
 
-  /* curtain bunches at side */
+  /* Fabric gathering */
 
-  84% {
-    clip-path:
-      polygon(
-        0 0,
-        25% 10%,
-        13% 50%,
-        25% 90%,
-        0 100%
-      );
-
-    transform: scaleX(0.68);
+  38% {
+    transform:
+      translate3d(-14%, 0, 0)
+      scaleX(0.90);
   }
 
 
-  /* remains as gathered fabric at edge */
+  52% {
+    transform:
+      translate3d(-31%, 0, 0)
+      scaleX(0.80);
+  }
+
+
+  66% {
+    transform:
+      translate3d(-51%, 0, 0)
+      scaleX(0.68);
+  }
+
+
+  78% {
+    transform:
+      translate3d(-70%, 0, 0)
+      scaleX(0.56);
+  }
+
+
+  88% {
+    transform:
+      translate3d(-85%, 0, 0)
+      scaleX(0.46);
+  }
+
+
+  95% {
+    transform:
+      translate3d(-96%, 0, 0)
+      scaleX(0.38);
+
+    opacity: 1;
+  }
+
+
+  /* Finish outside viewport */
 
   100% {
-    clip-path:
-      polygon(
-        0 0,
-        13% 12%,
-        5% 50%,
-        13% 88%,
-        0 100%
-      );
+    transform:
+      translate3d(-108%, 0, 0)
+      scaleX(0.32);
 
-    transform: scaleX(0.52);
+    opacity: 0;
   }
 }
 
 
 /* ========================================
-   RIGHT — MIRROR OF LEFT
+   RIGHT OPENING
 ======================================== */
 
-@keyframes pullCurtainRight {
+@keyframes luxuryCurtainRight {
 
   0% {
-    clip-path:
-      polygon(
-        0 0,
-        100% 0,
-        100% 100%,
-        0 100%
-      );
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
 
-    transform: scaleX(1);
-
-    filter: brightness(1);
-  }
-
-  12% {
-    clip-path:
-      polygon(
-        0 0,
-        100% 0,
-        100% 100%,
-        0 100%
-      );
-
-    transform: scaleX(1);
+    opacity: 1;
   }
 
 
-  25% {
-    clip-path:
-      polygon(
-        8% 3%,
-        100% 0,
-        100% 100%,
-        8% 97%,
-        12% 50%
-      );
-
-    transform: scaleX(0.98);
+  8% {
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
   }
 
 
-  43% {
-    clip-path:
-      polygon(
-        28% 5%,
-        100% 0,
-        100% 100%,
-        28% 95%,
-        37% 50%
-      );
-
-    transform: scaleX(0.94);
+  14% {
+    transform:
+      translate3d(0.6%, 0, 0)
+      scaleX(0.998);
   }
 
 
-  65% {
-    clip-path:
-      polygon(
-        52% 8%,
-        100% 0,
-        100% 100%,
-        52% 92%,
-        66% 50%
-      );
-
-    transform: scaleX(0.84);
-
-    filter: brightness(0.98);
+  18% {
+    transform:
+      translate3d(0.3%, 0, 0)
+      scaleX(0.996);
   }
 
 
-  84% {
-    clip-path:
-      polygon(
-        75% 10%,
-        100% 0,
-        100% 100%,
-        75% 90%,
-        87% 50%
-      );
+  26% {
+    transform:
+      translate3d(4%, 0, 0)
+      scaleX(0.965);
+  }
 
-    transform: scaleX(0.68);
+
+  38% {
+    transform:
+      translate3d(14%, 0, 0)
+      scaleX(0.90);
+  }
+
+
+  52% {
+    transform:
+      translate3d(31%, 0, 0)
+      scaleX(0.80);
+  }
+
+
+  66% {
+    transform:
+      translate3d(51%, 0, 0)
+      scaleX(0.68);
+  }
+
+
+  78% {
+    transform:
+      translate3d(70%, 0, 0)
+      scaleX(0.56);
+  }
+
+
+  88% {
+    transform:
+      translate3d(85%, 0, 0)
+      scaleX(0.46);
+  }
+
+
+  95% {
+    transform:
+      translate3d(96%, 0, 0)
+      scaleX(0.38);
+
+    opacity: 1;
   }
 
 
   100% {
-    clip-path:
-      polygon(
-        87% 12%,
-        100% 0,
-        100% 100%,
-        87% 88%,
-        95% 50%
-      );
+    transform:
+      translate3d(108%, 0, 0)
+      scaleX(0.32);
 
-    transform: scaleX(0.52);
+    opacity: 0;
   }
 }
 
 
 /* ========================================
-   FOLDS COMPRESS WHILE BEING PULLED
+   FOLD COMPRESSION
 ======================================== */
 
-@keyframes curtainFabricGather {
+@keyframes luxuryFoldsLeft {
 
-  0% {
-    background-size: 100% 100%;
-    opacity: 0.72;
+  0%,
+  15% {
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
+
+    background-position:
+      0 0,
+      0 0,
+      0 0;
   }
 
-  30% {
-    background-size: 95% 100%;
-    opacity: 0.76;
+
+  40% {
+    transform:
+      translate3d(-1%, 0, 0)
+      scaleX(1.05);
+
+    background-position:
+      -12px 0,
+      -5px 0,
+      0 0;
   }
 
-  60% {
-    background-size: 70% 100%;
-    opacity: 0.82;
+
+  70% {
+    transform:
+      translate3d(-3%, 0, 0)
+      scaleX(1.15);
+
+    background-position:
+      -28px 0,
+      -13px 0,
+      0 0;
   }
+
 
   100% {
-    background-size: 38% 100%;
-    opacity: 0.92;
+    transform:
+      translate3d(-6%, 0, 0)
+      scaleX(1.28);
+
+    background-position:
+      -45px 0,
+      -20px 0,
+      0 0;
+  }
+}
+
+
+@keyframes luxuryFoldsRight {
+
+  0%,
+  15% {
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
+
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+
+
+  40% {
+    transform:
+      translate3d(1%, 0, 0)
+      scaleX(1.05);
+
+    background-position:
+      12px 0,
+      5px 0,
+      0 0;
+  }
+
+
+  70% {
+    transform:
+      translate3d(3%, 0, 0)
+      scaleX(1.15);
+
+    background-position:
+      28px 0,
+      13px 0,
+      0 0;
+  }
+
+
+  100% {
+    transform:
+      translate3d(6%, 0, 0)
+      scaleX(1.28);
+
+    background-position:
+      45px 0,
+      20px 0,
+      0 0;
   }
 }
 
 
 /* ========================================
-   LIGHT APPEARING THROUGH CENTER
+   SUBTLE CENTER LIGHT
+
+   No giant white flash.
 ======================================== */
 
 .curtain-glow {
   position: absolute;
 
+  z-index: 1;
+
+  top: 0;
   left: 50%;
-  top: 50%;
 
-  width: 4px;
-  height: 8%;
+  width: 1px;
+  height: 100%;
 
-  transform: translate(-50%, -50%);
-
-  border-radius: 50%;
+  transform:
+    translate3d(-50%, 0, 0);
 
   background:
-    rgba(255, 241, 205, 0.95);
+    linear-gradient(
+      to bottom,
+
+      transparent 0%,
+
+      rgba(255, 241, 208, 0.40) 18%,
+
+      rgba(255, 232, 182, 0.78) 48%,
+
+      rgba(255, 241, 208, 0.40) 82%,
+
+      transparent 100%
+    );
 
   box-shadow:
-    0 0 30px rgba(255, 231, 175, 0.85),
-    0 0 90px rgba(255, 223, 155, 0.55),
-    0 0 180px rgba(255, 218, 145, 0.28);
+    0 0 10px rgba(255, 226, 166, 0.45),
+    0 0 28px rgba(255, 220, 150, 0.22);
+
+  opacity: 0;
 
   animation:
-    pulledCurtainLight
-    4.2s
+    luxuryCenterLight
+    4.8s
     ease-out
     forwards;
 }
 
 
-@keyframes pulledCurtainLight {
+/* ========================================
+   CENTER LIGHT
+======================================== */
+
+@keyframes luxuryCenterLight {
 
   0%,
-  12% {
+  13% {
     opacity: 0;
-
-    width: 2px;
-    height: 4%;
   }
 
-  24% {
-    opacity: 0.8;
-
-    width: 5px;
-    height: 18%;
+  20% {
+    opacity: 0.75;
   }
 
-  42% {
-    opacity: 0.65;
-
-    width: 40px;
-    height: 60%;
+  32% {
+    opacity: 0.55;
   }
 
-  65% {
-    opacity: 0.35;
+  50% {
+    opacity: 0.32;
+  }
 
-    width: 180px;
-    height: 100%;
+  70% {
+    opacity: 0.12;
   }
 
   100% {
     opacity: 0;
+  }
+}
 
-    width: 80vw;
-    height: 120%;
+
+/* ========================================
+   INVITATION VEIL REVEAL
+======================================== */
+
+@keyframes curtainVeilReveal {
+
+  0%,
+  15% {
+    opacity: 1;
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+
+  35% {
+    opacity: 0.78;
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+
+  60% {
+    opacity: 0.38;
+
+    backdrop-filter: blur(0.8px);
+    -webkit-backdrop-filter: blur(0.8px);
+  }
+
+
+  100% {
+    opacity: 0;
+
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+  }
+}
+
+
+/* ========================================
+   SILK HIGHLIGHT MOVEMENT
+======================================== */
+
+@keyframes curtainSilkShimmer {
+
+  0%,
+  15% {
+    transform:
+      translate3d(-65%, 0, 0);
+
+    opacity: 0.25;
+  }
+
+
+  50% {
+    transform:
+      translate3d(-5%, 0, 0);
+
+    opacity: 0.55;
+  }
+
+
+  100% {
+    transform:
+      translate3d(55%, 0, 0);
+
+    opacity: 0.12;
   }
 }
 
@@ -5383,17 +5739,52 @@ body {
 
   .curtain-folds {
     background:
+
       repeating-linear-gradient(
         90deg,
 
-        rgba(255,255,255,0.30) 0px,
-        rgba(255,255,255,0.04) 12px,
+        rgba(255,255,255,0.25) 0px,
+        rgba(255,255,255,0.07) 11px,
 
-        rgba(75,45,20,0.15) 24px,
+        rgba(87,57,30,0.09) 23px,
 
-        rgba(255,255,255,0.15) 36px,
+        rgba(255,255,255,0.14) 35px,
 
-        rgba(70,42,20,0.12) 48px
+        rgba(82,52,27,0.10) 48px,
+
+        rgba(255,255,255,0.20) 61px
+      ),
+
+      repeating-linear-gradient(
+        90deg,
+
+        transparent 0px,
+        rgba(255,255,255,0.07) 6px,
+        transparent 13px,
+        rgba(73,45,23,0.05) 21px,
+        transparent 29px
+      ),
+
+      linear-gradient(
+        to bottom,
+
+        rgba(255,255,255,0.18),
+        transparent 35%,
+        rgba(74,46,23,0.07)
       );
   }
+
+}
+
+
+/* ========================================
+   PERFORMANCE
+======================================== */
+
+.curtain,
+.curtain-folds,
+.curtain-glow,
+.curtain-transition::before {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
