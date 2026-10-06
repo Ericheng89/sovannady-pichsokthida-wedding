@@ -151,7 +151,7 @@ body {
   text-transform: uppercase;
   color: #8f6a32;
   font-weight: 600;
-  margin-top: 0;
+  margin-top: 5px;
   margin-bottom: 11px;
   line-height: 1.2;
   white-space: nowrap;
@@ -270,6 +270,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 
   cursor: pointer;
+}
+
+.open-frame-btn-with-guest {
+  transform: translateY(-18px);
 }
 
 
@@ -556,7 +560,7 @@ body {
   color: #b8924f;
 
   font-size:
-    clamp(13px, 3.3vw, 29px);
+    clamp(15px, 3.7vw, 28px);
 
   margin: 0;
 
@@ -715,13 +719,12 @@ body {
 }
 
 .english-couple-name .ampersand {
-  font-size: 0.75em;
-
-  line-height: 0.8;
-
-  margin:
-    -2px
-    0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7em;
+  font-weight: 500;
+  line-height: 1;
+  margin: 2px 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 .english-date {
