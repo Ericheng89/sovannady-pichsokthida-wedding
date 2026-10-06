@@ -1404,19 +1404,11 @@ useEffect(() => {
     }, 120);
 
     // Remove floral doors after their 2.9s animation
-    setTimeout(() => {
-      setCurtainOpening(false);
+   setTimeout(() => {
+  setCurtainOpening(false);
+}, 3300);
 
-      if (guestName) {
-        setShowGuestWelcome(true);
-
-        setTimeout(() => {
-          setShowGuestWelcome(false);
-        }, 3200);
-      }
-    }, 3050);
-
-  }, 700);
+}, 700);
 }
 
 
@@ -1702,8 +1694,38 @@ useEffect(() => {
 {curtainOpening && (
   <div className="floral-door-transition" aria-hidden="true">
 
-    {/* invitation underneath starts softly blurred */}
     <div className="floral-door-veil" />
+
+    {/* GUEST REVEAL BEHIND DOORS */}
+    {guestName && (
+      <div className="door-guest-reveal">
+        <p className="door-guest-small">
+          WELCOME
+        </p>
+
+        <h2
+          className={`door-guest-name ${
+            /[\u1780-\u17FF]/.test(guestName)
+              ? "door-guest-name-khmer"
+              : "door-guest-name-english"
+          }`}
+        >
+          {guestName}
+        </h2>
+
+        <div className="door-guest-divider">
+          <span />
+          <b>✦</b>
+          <span />
+        </div>
+
+        <p className="door-guest-message">
+          We are delighted to celebrate
+          <br />
+          this special day with you.
+        </p>
+      </div>
+    )}
 
     {/* LEFT DOOR */}
     <div className="floral-door floral-door-left">
@@ -1728,7 +1750,6 @@ useEffect(() => {
       </div>
     </div>
 
-
     {/* RIGHT DOOR */}
     <div className="floral-door floral-door-right">
       <div className="floral-door-inner">
@@ -1752,8 +1773,7 @@ useEffect(() => {
       </div>
     </div>
 
-
-    {/* GOLD CENTER SEAM */}
+    {/* CENTER SEAM */}
     <div className="floral-door-seam">
       <span className="door-seam-diamond">✦</span>
     </div>
