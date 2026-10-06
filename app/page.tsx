@@ -1414,7 +1414,7 @@ useEffect(() => {
           setShowGuestWelcome(false);
         }, 3200);
       }
-    }, 1950);
+    }, 4400);
   }, 1000);
 }
 
