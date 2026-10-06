@@ -181,170 +181,104 @@ const galleryPhotos = [
 
 
 
-  function handleTouchStart(
-
-
-
+ function handleTouchStart(
   event: React.TouchEvent<HTMLDivElement>
-
-
-
 ) {
-
-
-
   touchStartX.current =
-
-
-
     event.targetTouches[0].clientX;
 
-
-
-
-
-
-
   touchEndX.current = null;
-
-
-
 }
-
-
-
-
-
 
 
 function handleTouchMove(
-
-
-
   event: React.TouchEvent<HTMLDivElement>
-
-
-
 ) {
-
-
-
   touchEndX.current =
-
-
-
     event.targetTouches[0].clientX;
-
-
-
 }
-
-
-
-
-
 
 
 function handleTouchEnd() {
-
-
-
   if (
-
-
-
     touchStartX.current === null ||
-
-
-
     touchEndX.current === null
-
-
-
   ) {
-
-
-
     return;
-
-
-
   }
 
-
-
-
-
-
-
   const distance =
-
-
-
     touchStartX.current - touchEndX.current;
-
-
-
-
-
-
 
   const minimumSwipeDistance = 50;
 
-
-
-
-
-
-
   if (distance > minimumSwipeDistance) {
-
-
-
     nextPhoto();
-
-
-
   }
-
-
-
-
-
-
 
   if (distance < -minimumSwipeDistance) {
-
-
-
     previousPhoto();
-
-
-
   }
 
-
-
-
-
-
-
   touchStartX.current = null;
-
-
-
   touchEndX.current = null;
-
-
-
 }
 
 
+/* ========================================
+   TAP SPARKLE
+======================================== */
 
+function createTapSparkle(
+  event: React.PointerEvent<HTMLElement>
+) {
+  const target = event.target as HTMLElement;
 
+  // Don't sparkle while typing
+  if (
+    target.closest("input") ||
+    target.closest("textarea")
+  ) {
+    return;
+  }
 
+  const x = event.clientX;
+  const y = event.clientY;
 
+  const symbols = ["✦", "✧", "·", "✦", "˚"];
 
+  symbols.forEach((symbol, index) => {
+    const sparkle = document.createElement("span");
+
+    sparkle.className = "tap-sparkle";
+    sparkle.textContent = symbol;
+
+    const angle =
+      (Math.PI * 2 * index) / symbols.length;
+
+    const distance =
+      18 + Math.random() * 18;
+
+    sparkle.style.left = `${x}px`;
+    sparkle.style.top = `${y}px`;
+
+    sparkle.style.setProperty(
+      "--sparkle-x",
+      `${Math.cos(angle) * distance}px`
+    );
+
+    sparkle.style.setProperty(
+      "--sparkle-y",
+      `${Math.sin(angle) * distance}px`
+    );
+
+    document.body.appendChild(sparkle);
+
+    window.setTimeout(() => {
+      sparkle.remove();
+    }, 700);
+  });
+}
   const weddingDate = new Date("2026-11-16T17:00:00");
 
 
@@ -1681,10 +1615,10 @@ useEffect(() => {
 
 
 
-    <main className={opened ? "site-bg-inner" : "site-bg"}>
-  <div
-    className={opened ? "fixed-bg-inner" : "fixed-bg"}
-  />
+    <main
+  className={opened ? "site-bg-inner" : "site-bg"}
+  onPointerDown={createTapSparkle}
+>
 
   {/* LUXURY FLORAL DOOR OPENING */}
 {curtainOpening && (
