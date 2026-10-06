@@ -1365,49 +1365,160 @@ useEffect(() => {
 
 
 
-function handleOpen() {
-  if (opening || opened) return;
+  function handleOpen() {
 
-  // Start curtain animation
-  setOpening(true);
 
-  // Start music
-  if (audioRef.current) {
-    audioRef.current.currentTime = 2;
-    audioRef.current.volume = 0;
 
-    const playPromise = audioRef.current.play();
+    if (opening) return;
 
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setMusicPlaying(true);
-          fadeMusicIn();
-        })
-        .catch((err) => {
-          console.log("Audio play blocked:", err);
-        });
+
+
+
+
+
+
+    setOpening(true);
+
+
+
+
+
+
+
+    if (audioRef.current) {
+
+
+
+      audioRef.current.currentTime = 2;
+
+
+
+      audioRef.current.volume = 0;
+
+
+
+
+
+
+
+      const playPromise = audioRef.current.play();
+
+
+
+
+
+
+
+      if (playPromise !== undefined) {
+
+
+
+        playPromise
+
+
+
+          .then(() => {
+
+
+
+            setMusicPlaying(true);
+
+
+
+            fadeMusicIn();
+
+
+
+          })
+
+
+
+          .catch((err) => {
+
+
+
+            console.log("Audio play blocked:", err);
+
+
+
+          });
+
+
+
+      }
+
+
+
     }
+
+
+
+
+
+
+
+    // Let the cinematic cover animation play first
+
+
+
+    setTimeout(() => {
+
+
+
+      setOpened(true);
+
+
+
+      setOpening(false);
+
+
+
+
+
+
+
+      window.scrollTo(0, 0);
+
+
+
+
+
+
+
+      if (guestName) {
+
+
+
+        setShowGuestWelcome(true);
+
+
+
+
+
+
+
+        setTimeout(() => {
+
+
+
+          setShowGuestWelcome(false);
+
+
+
+        }, 3200);
+
+
+
+      }
+
+
+
+    }, 1800);
+
+
+
   }
 
-  // IMPORTANT:
-  // Put the invitation behind the curtains immediately.
-  setOpened(true);
-  window.scrollTo(0, 0);
-
-  // Remove curtains AFTER they finish opening.
-  setTimeout(() => {
-    setOpening(false);
-
-    if (guestName) {
-      setShowGuestWelcome(true);
-
-      setTimeout(() => {
-        setShowGuestWelcome(false);
-      }, 3200);
-    }
-  }, 1800);
-}
 
 
 
