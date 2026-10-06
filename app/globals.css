@@ -115,7 +115,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 72px;
+  padding-top: 100px; /* was 72px */
   padding-left: 22px;
   padding-right: 22px;
   padding-bottom: 20px;
@@ -408,9 +408,11 @@ body {
 ======================================== */
 
 .khmer-section {
-  padding-top: 40px;
+  padding-top: 85px;
   margin: 0 auto 160px;
   box-sizing: border-box;
+
+  scroll-margin-top: 35px;
 }
 
 .khmer-title {
