@@ -1619,6 +1619,14 @@ useEffect(() => {
   className={opened ? "site-bg-inner" : "site-bg"}
   onPointerDown={createTapSparkle}
 >
+  {/* FIXED WEDDING FRAME / BACKGROUND */}
+<div
+  className={
+    opened
+      ? "fixed-bg-inner"
+      : "fixed-bg"
+  }
+/>
 
   {/* LUXURY FLORAL DOOR OPENING */}
 {curtainOpening && (
