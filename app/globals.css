@@ -160,7 +160,7 @@ body {
 }
 
 .monogram-logo {
-  width: clamp(145px, 40vw, 220px);
+  width: clamp(180px, 50vw, 290px);
   margin-top: 15px;
   margin-bottom: 25px;
   filter: drop-shadow(
