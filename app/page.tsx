@@ -4693,140 +4693,94 @@ useEffect(() => {
 
 
 
-            </div>
-
-
-
-
-
-
-
-            {/* ========================================
-
-
-
-    WEDDING FINALE
-
-
-
-\\======================================== */}
-
-
-
-
-
-
-
-<div className="wedding-finale scroll-reveal">
-
-
-
-
-
-
-
-  <div className="finale-sparkle">
-
-
-
-    ✦
-
-
-
-  </div>
-
-
-
-
-
-
-
-  <h2 className="finale-names">
-
-
-
-    Sovannady
-
-
-
-    <span>&</span>
-
-
-
-    Pichsokthida
-
-
-
-  </h2>
-
-
-
-
-
-
-
-  <div className="finale-line"></div>
-
-
-
-
-
-
-
-  <p className="finale-date">
-
-
-
-    16 • 11 • 2026
-
-
-
-  </p>
-
-
-
-
-
-
-
-  <p className="finale-message">
-
-
-
-    Thank you for celebrating
-
-
-
-    our special day with us.
-
-
-
-  </p>
-
-
-
-
-
-
-
-  <div className="finale-sparkle finale-sparkle-bottom">
-
-
-
-    ✦
-
-
-
-  </div>
-
-
-
-
-
-
-
-</div>
-
+              </div>
+
+              {/* ========================================
+                  WEDDING GIFT
+              ======================================== */}
+
+              <div className="wedding-gift-section scroll-reveal">
+                <div className="wedding-gift-icon">
+                  ♡
+                </div>
+
+                <h2 className="wedding-gift-title kh-main-font">
+                  ចំណងដៃអាពាហ៍ពិពាហ៍
+                </h2>
+
+                <p className="wedding-gift-subtitle">
+                  WEDDING GIFT
+                </p>
+
+                <p className="wedding-gift-message kh-title-font">
+                  វត្តមាន និងពាក្យជូនពររបស់លោកអ្នក
+                  គឺជាអំណោយដ៏មានតម្លៃសម្រាប់យើងខ្ញុំ។
+                </p>
+
+                <p className="wedding-gift-message-en">
+                  Your presence and kind wishes are already
+                  a wonderful gift to us.
+                  <br />
+                  For those who wish to send a wedding gift,
+                  you may do so through ABA Pay.
+                </p>
+
+                <a
+                  href="https://pay.ababank.com/oRF8/686k5mel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wedding-gift-btn"
+                >
+                  <span className="wedding-gift-btn-icon">
+                    ♡
+                  </span>
+
+                  <span>
+                    <strong>Send a Wedding Gift</strong>
+                    <small>via ABA Pay</small>
+                  </span>
+                </a>
+
+                <div className="wedding-gift-decoration">
+                  <span></span>
+                  <b>✦</b>
+                  <span></span>
+                </div>
+              </div>
+
+
+              {/* ========================================
+                  WEDDING FINALE
+              ======================================== */}
+
+              <div className="wedding-finale scroll-reveal">
+
+                <div className="finale-sparkle">
+                  ✦
+                </div>
+
+                <h2 className="finale-names">
+                  Sovannady
+                  <span>&</span>
+                  Pichsokthida
+                </h2>
+
+                <div className="finale-line"></div>
+
+                <p className="finale-date">
+                  16 • 11 • 2026
+                </p>
+
+                <p className="finale-message">
+                  Thank you for celebrating
+                  our special day with us.
+                </p>
+
+                <div className="finale-sparkle finale-sparkle-bottom">
+                  ✦
+                </div>
+
+              </div>
 
 
 
