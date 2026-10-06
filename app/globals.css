@@ -4927,7 +4927,7 @@ body {
 }
 
 /* ========================================
-   LUXURY WEDDING CURTAIN OPENING
+   ELEGANT SILK WEDDING CURTAIN
 ======================================== */
 
 .curtain-transition {
@@ -4938,9 +4938,15 @@ body {
   z-index: 999999;
   overflow: hidden;
   pointer-events: none;
+
+  /* Soft cinematic veil */
+  background: rgba(255, 249, 239, 0.08);
 }
 
-/* LEFT + RIGHT CURTAIN */
+
+/* ========================================
+   SILK CURTAINS
+======================================== */
 
 .curtain {
   position: absolute;
@@ -4952,29 +4958,43 @@ body {
 
   overflow: hidden;
 
+  /*
+    Ivory / champagne silk.
+    Softer and much less brown than before.
+  */
   background:
     linear-gradient(
       90deg,
-      #9b693e 0%,
-      #d3a66e 8%,
-      #f1d6ad 17%,
-      #bd8752 27%,
-      #e8c394 38%,
-      #a97143 49%,
-      #e4bd8b 61%,
-      #b67d4b 72%,
-      #efd1a5 84%,
-      #a96f40 100%
+
+      #c9ab83 0%,
+      #ead6b9 7%,
+      #f8ead4 14%,
+      #d5b78e 22%,
+
+      #f4e2c8 31%,
+      #cbaa80 40%,
+      #ead3b2 49%,
+
+      #f8ead6 58%,
+      #d0ae82 67%,
+      #f1ddc1 76%,
+
+      #c7a477 86%,
+      #ead3b1 94%,
+      #f6e5cc 100%
     );
 
   box-shadow:
-    inset 0 0 60px rgba(75, 40, 15, 0.22),
-    0 0 45px rgba(50, 30, 15, 0.2);
+    inset 0 0 80px rgba(98, 67, 35, 0.13),
+    inset 0 0 25px rgba(255, 255, 255, 0.18);
 
   will-change: transform;
 }
 
-/* FABRIC FOLDS */
+
+/* ========================================
+   SOFT SILK FOLDS
+======================================== */
 
 .curtain-folds {
   position: absolute;
@@ -4983,55 +5003,83 @@ body {
   background:
     repeating-linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.22) 0px,
-      rgba(255, 255, 255, 0.05) 18px,
-      rgba(70, 38, 15, 0.16) 36px,
-      rgba(255, 255, 255, 0.12) 54px,
-      rgba(70, 38, 15, 0.12) 72px
+
+      rgba(255, 255, 255, 0.30) 0px,
+      rgba(255, 255, 255, 0.08) 20px,
+
+      rgba(104, 72, 40, 0.10) 42px,
+
+      rgba(255, 255, 255, 0.18) 64px,
+
+      rgba(100, 67, 34, 0.08) 86px
     );
 
-  opacity: 0.9;
+  opacity: 0.72;
 
   mix-blend-mode: soft-light;
 }
 
-/* LEFT SIDE */
+
+/* subtle silk highlight */
+
+.curtain::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+
+      rgba(255, 255, 255, 0.20) 0%,
+      transparent 20%,
+      rgba(255, 255, 255, 0.06) 48%,
+      transparent 72%,
+      rgba(105, 70, 35, 0.08) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ========================================
+   LEFT CURTAIN
+======================================== */
 
 .curtain-left {
   left: 0;
 
-  transform:
-    translate3d(0, 0, 0)
-    scaleX(1);
-
   transform-origin: left center;
 
   animation:
-    curtainOpenLeft
-    1.8s
-    cubic-bezier(0.76, 0, 0.24, 1)
+    elegantCurtainLeft
+    3.2s
+    cubic-bezier(0.65, 0, 0.22, 1)
     forwards;
 }
 
-/* RIGHT SIDE */
+
+/* ========================================
+   RIGHT CURTAIN
+======================================== */
 
 .curtain-right {
   right: 0;
 
-  transform:
-    translate3d(0, 0, 0)
-    scaleX(1);
-
   transform-origin: right center;
 
   animation:
-    curtainOpenRight
-    1.8s
-    cubic-bezier(0.76, 0, 0.24, 1)
+    elegantCurtainRight
+    3.2s
+    cubic-bezier(0.65, 0, 0.22, 1)
     forwards;
 }
 
-/* LIGHT THROUGH CENTER */
+
+/* ========================================
+   WARM LIGHT BETWEEN CURTAINS
+======================================== */
 
 .curtain-glow {
   position: absolute;
@@ -5039,7 +5087,7 @@ body {
   top: 0;
   left: 50%;
 
-  width: 3px;
+  width: 2px;
   height: 100%;
 
   transform: translateX(-50%);
@@ -5047,28 +5095,34 @@ body {
   background:
     linear-gradient(
       to bottom,
-      rgba(255, 245, 215, 0.5),
-      rgba(255, 229, 166, 1),
-      rgba(255, 245, 215, 0.5)
+
+      rgba(255, 250, 229, 0.30),
+      rgba(255, 235, 188, 0.95),
+      rgba(255, 248, 220, 0.75),
+      rgba(255, 231, 176, 0.95),
+      rgba(255, 250, 229, 0.30)
     );
 
   box-shadow:
-    0 0 15px rgba(255, 225, 160, 1),
-    0 0 40px rgba(255, 220, 145, 0.85),
-    0 0 100px rgba(255, 215, 130, 0.55);
+    0 0 18px rgba(255, 226, 163, 0.75),
+    0 0 55px rgba(255, 222, 153, 0.48),
+    0 0 130px rgba(255, 218, 143, 0.25);
 
   animation:
-    curtainCenterGlow
-    1.8s
+    elegantCurtainGlow
+    3.2s
     ease-out
     forwards;
 }
 
+
 /* ========================================
-   CURTAIN ANIMATIONS
+   LEFT OPENING
 ======================================== */
 
-@keyframes curtainOpenLeft {
+@keyframes elegantCurtainLeft {
+
+  /* Hold closed briefly */
 
   0% {
     transform:
@@ -5076,17 +5130,38 @@ body {
       scaleX(1);
   }
 
-  12% {
+  14% {
     transform:
       translate3d(0, 0, 0)
       scaleX(1);
   }
 
-  35% {
+
+  /* Fabric begins pulling */
+
+  30% {
     transform:
-      translate3d(-5%, 0, 0)
-      scaleX(0.98);
+      translate3d(-3%, 0, 0)
+      scaleX(0.99);
   }
+
+
+  /* Slow graceful opening */
+
+  58% {
+    transform:
+      translate3d(-38%, 0, 0)
+      scaleX(0.94);
+  }
+
+  80% {
+    transform:
+      translate3d(-75%, 0, 0)
+      scaleX(0.88);
+  }
+
+
+  /* Completely leave screen */
 
   100% {
     transform:
@@ -5095,7 +5170,12 @@ body {
   }
 }
 
-@keyframes curtainOpenRight {
+
+/* ========================================
+   RIGHT OPENING
+======================================== */
+
+@keyframes elegantCurtainRight {
 
   0% {
     transform:
@@ -5103,16 +5183,28 @@ body {
       scaleX(1);
   }
 
-  12% {
+  14% {
     transform:
       translate3d(0, 0, 0)
       scaleX(1);
   }
 
-  35% {
+  30% {
     transform:
-      translate3d(5%, 0, 0)
-      scaleX(0.98);
+      translate3d(3%, 0, 0)
+      scaleX(0.99);
+  }
+
+  58% {
+    transform:
+      translate3d(38%, 0, 0)
+      scaleX(0.94);
+  }
+
+  80% {
+    transform:
+      translate3d(75%, 0, 0)
+      scaleX(0.88);
   }
 
   100% {
@@ -5122,36 +5214,52 @@ body {
   }
 }
 
-@keyframes curtainCenterGlow {
+
+/* ========================================
+   CENTER LIGHT ANIMATION
+======================================== */
+
+@keyframes elegantCurtainGlow {
 
   0% {
+    opacity: 0;
+    width: 1px;
+  }
+
+  12% {
     opacity: 0;
     width: 2px;
   }
 
-  12% {
-    opacity: 1;
+  25% {
+    opacity: 0.85;
     width: 3px;
   }
 
-  35% {
-    opacity: 1;
-    width: 15px;
+  45% {
+    opacity: 0.9;
+    width: 18px;
   }
 
-  70% {
+  65% {
     opacity: 0.55;
-    width: 130px;
+    width: 75px;
+  }
+
+  82% {
+    opacity: 0.25;
+    width: 180px;
   }
 
   100% {
     opacity: 0;
-    width: 320px;
+    width: 360px;
   }
 }
 
+
 /* ========================================
-   MOBILE CURTAIN
+   MOBILE
 ======================================== */
 
 @media (max-width: 600px) {
@@ -5164,11 +5272,15 @@ body {
     background:
       repeating-linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.22) 0px,
-        rgba(255, 255, 255, 0.04) 12px,
-        rgba(70, 38, 15, 0.16) 24px,
-        rgba(255, 255, 255, 0.11) 36px,
-        rgba(70, 38, 15, 0.12) 48px
+
+        rgba(255, 255, 255, 0.28) 0px,
+        rgba(255, 255, 255, 0.07) 14px,
+
+        rgba(100, 68, 36, 0.10) 28px,
+
+        rgba(255, 255, 255, 0.16) 42px,
+
+        rgba(100, 68, 36, 0.07) 56px
       );
   }
 }
