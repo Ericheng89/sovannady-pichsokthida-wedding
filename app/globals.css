@@ -5878,3 +5878,11 @@ body {
     opacity: 0;
   }
 }
+
+/* Leave breathing room above sections when using quick navigation */
+#agenda,
+#location,
+#gallery,
+#wishes {
+  scroll-margin-top: 80px;
+}
