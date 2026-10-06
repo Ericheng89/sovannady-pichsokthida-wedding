@@ -577,7 +577,7 @@ body {
   color: #6b5633;
 
   font-size:
-    clamp(12px, 3.3vw, 20px);
+    clamp(11px, 3vw, 18px);
 
   line-height: 1.55;
 
