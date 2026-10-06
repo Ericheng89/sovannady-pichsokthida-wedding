@@ -4925,3 +4925,250 @@ body {
     font-size: 10px;
   }
 }
+
+/* ========================================
+   LUXURY WEDDING CURTAIN OPENING
+======================================== */
+
+.curtain-transition {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 999999;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* LEFT + RIGHT CURTAIN */
+
+.curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: 50.5vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      #9b693e 0%,
+      #d3a66e 8%,
+      #f1d6ad 17%,
+      #bd8752 27%,
+      #e8c394 38%,
+      #a97143 49%,
+      #e4bd8b 61%,
+      #b67d4b 72%,
+      #efd1a5 84%,
+      #a96f40 100%
+    );
+
+  box-shadow:
+    inset 0 0 60px rgba(75, 40, 15, 0.22),
+    0 0 45px rgba(50, 30, 15, 0.2);
+
+  will-change: transform;
+}
+
+/* FABRIC FOLDS */
+
+.curtain-folds {
+  position: absolute;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.22) 0px,
+      rgba(255, 255, 255, 0.05) 18px,
+      rgba(70, 38, 15, 0.16) 36px,
+      rgba(255, 255, 255, 0.12) 54px,
+      rgba(70, 38, 15, 0.12) 72px
+    );
+
+  opacity: 0.9;
+
+  mix-blend-mode: soft-light;
+}
+
+/* LEFT SIDE */
+
+.curtain-left {
+  left: 0;
+
+  transform:
+    translate3d(0, 0, 0)
+    scaleX(1);
+
+  transform-origin: left center;
+
+  animation:
+    curtainOpenLeft
+    1.8s
+    cubic-bezier(0.76, 0, 0.24, 1)
+    forwards;
+}
+
+/* RIGHT SIDE */
+
+.curtain-right {
+  right: 0;
+
+  transform:
+    translate3d(0, 0, 0)
+    scaleX(1);
+
+  transform-origin: right center;
+
+  animation:
+    curtainOpenRight
+    1.8s
+    cubic-bezier(0.76, 0, 0.24, 1)
+    forwards;
+}
+
+/* LIGHT THROUGH CENTER */
+
+.curtain-glow {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 3px;
+  height: 100%;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 245, 215, 0.5),
+      rgba(255, 229, 166, 1),
+      rgba(255, 245, 215, 0.5)
+    );
+
+  box-shadow:
+    0 0 15px rgba(255, 225, 160, 1),
+    0 0 40px rgba(255, 220, 145, 0.85),
+    0 0 100px rgba(255, 215, 130, 0.55);
+
+  animation:
+    curtainCenterGlow
+    1.8s
+    ease-out
+    forwards;
+}
+
+/* ========================================
+   CURTAIN ANIMATIONS
+======================================== */
+
+@keyframes curtainOpenLeft {
+
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
+  }
+
+  12% {
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
+  }
+
+  35% {
+    transform:
+      translate3d(-5%, 0, 0)
+      scaleX(0.98);
+  }
+
+  100% {
+    transform:
+      translate3d(-105%, 0, 0)
+      scaleX(0.82);
+  }
+}
+
+@keyframes curtainOpenRight {
+
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
+  }
+
+  12% {
+    transform:
+      translate3d(0, 0, 0)
+      scaleX(1);
+  }
+
+  35% {
+    transform:
+      translate3d(5%, 0, 0)
+      scaleX(0.98);
+  }
+
+  100% {
+    transform:
+      translate3d(105%, 0, 0)
+      scaleX(0.82);
+  }
+}
+
+@keyframes curtainCenterGlow {
+
+  0% {
+    opacity: 0;
+    width: 2px;
+  }
+
+  12% {
+    opacity: 1;
+    width: 3px;
+  }
+
+  35% {
+    opacity: 1;
+    width: 15px;
+  }
+
+  70% {
+    opacity: 0.55;
+    width: 130px;
+  }
+
+  100% {
+    opacity: 0;
+    width: 320px;
+  }
+}
+
+/* ========================================
+   MOBILE CURTAIN
+======================================== */
+
+@media (max-width: 600px) {
+
+  .curtain {
+    width: 51vw;
+  }
+
+  .curtain-folds {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.22) 0px,
+        rgba(255, 255, 255, 0.04) 12px,
+        rgba(70, 38, 15, 0.16) 24px,
+        rgba(255, 255, 255, 0.11) 36px,
+        rgba(70, 38, 15, 0.12) 48px
+      );
+  }
+}
