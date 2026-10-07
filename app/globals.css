@@ -6094,3 +6094,15 @@ body {
   padding-top: 12px;
   overflow: visible !important;
 }
+
+/* Fix Khmer clipping on Apology + Gratitude titles */
+.apology-title,
+.gratitude-title {
+  line-height: 1.5 !important;
+  padding-top: 12px;
+  overflow: visible !important;
+}
+
+.map-khmer.kh-main-font {
+  font-family: "Khmer MEF2", serif !important;
+}
