@@ -6123,17 +6123,14 @@ body {
 ======================================== */
 
 .guest-name-wrap {
-  margin-top: 6px;
-  margin-bottom: 4px;
+  transform: translateY(-6px);
 }
 
-/* Move divider closer to guest name */
 .guest-divider {
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-/* Raise open invitation frame only when guest exists */
 .open-frame-btn-with-guest {
-  margin-top: -12px;
+  transform: translateY(-14px);
 }
