@@ -6108,3 +6108,12 @@ body {
   font-weight: 400;
   line-height: 1.5;
 }
+
+/* FORCE KHMER MOOL ON MAP BUTTON */
+.save-btn .map-khmer {
+  font-family: "Khmer Mool 1", serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  line-height: 1.6;
+  opacity: 1;
+}
