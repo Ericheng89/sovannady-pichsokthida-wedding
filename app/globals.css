@@ -6087,3 +6087,11 @@ body {
       rotate(90deg);
   }
 }
+
+/* Keep section titles fully visible after quick-nav jump */
+#agenda,
+#location,
+#gallery,
+#wishes {
+  scroll-margin-top: 140px;
+}
