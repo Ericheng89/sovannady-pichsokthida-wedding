@@ -6117,3 +6117,23 @@ body {
   line-height: 1.6;
   opacity: 1;
 }
+
+/* ========================================
+   GUEST NAME — COMPACT COVER LAYOUT
+======================================== */
+
+.guest-name-wrap {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+/* Move divider closer to guest name */
+.guest-divider {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+/* Raise open invitation frame only when guest exists */
+.open-frame-btn-with-guest {
+  margin-top: -12px;
+}
