@@ -1985,10 +1985,10 @@ body {
 
 .save-btn .map-khmer {
   display: block;
-  font-family: "Kh Ang Bokor New", serif;
+  font-family: "Khmer Mool 1", serif;
   font-size: 17px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .save-btn .map-english {
@@ -6103,6 +6103,8 @@ body {
   overflow: visible !important;
 }
 
-.map-khmer.kh-main-font {
-  font-family: "Khmer MEF2", serif !important;
+.map-khmer {
+  font-family: "Khmer MEF2", "Noto Sans Khmer", sans-serif !important;
+  font-weight: 400;
+  line-height: 1.5;
 }
