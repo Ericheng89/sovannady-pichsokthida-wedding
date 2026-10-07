@@ -6088,10 +6088,9 @@ body {
   }
 }
 
-/* Keep section titles fully visible after quick-nav jump */
-#agenda,
-#location,
-#gallery,
-#wishes {
-  scroll-margin-top: 140px;
+/* FIX: Khmer section titles being clipped */
+.section-title {
+  line-height: 1.5 !important;
+  padding-top: 12px;
+  overflow: visible !important;
 }
