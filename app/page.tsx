@@ -3615,7 +3615,7 @@ useEffect(() => {
   </span>
 
   <span className="map-english">
-    Open Google Maps
+    Open Google Map
   </span>
 </a>
             </div>
