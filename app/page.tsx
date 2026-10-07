@@ -3610,7 +3610,7 @@ useEffect(() => {
   target="_blank"
   rel="noopener noreferrer"
 >
-  <span className="map-khmer">
+  <span className="map-khmer kh-main-font">
     បើកទីតាំងកម្មវិធី
   </span>
 
@@ -4265,7 +4265,7 @@ useEffect(() => {
 
 
 
-              <h2 className="section-title kh-title-font">
+              <h2 className="section-title kh-main-font">
 
 
 
