@@ -6671,16 +6671,20 @@ body {
   }
 }
 
-/* Stabilize front cover height on mobile */
+/* STABLE FRONT COVER POSITION */
+
 .intro-wrap {
   min-height: 100svh;
   box-sizing: border-box;
+  padding-top: 65px;
 }
 
 @media (max-width: 600px) {
   .intro-wrap {
     min-height: 100svh;
-    padding-top: 100px;
+    padding-top: 55px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }
 

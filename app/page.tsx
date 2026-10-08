@@ -2121,15 +2121,9 @@ setTimeout(() => {
 
 
 
-  className={`intro-card fade-up ${
-
-
-
-    opening ? "intro-card-opening" : ""
-
-
-
-  }`}
+  className={`intro-card ${
+  opening ? "intro-card-opening" : ""
+}`}
 
 
 
