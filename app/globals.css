@@ -6634,3 +6634,37 @@ body {
     animation: none;
   }
 }
+
+
+/* SMOOTHER FLORAL DOOR OPENING */
+
+.floral-door-left,
+.floral-door-right {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  animation-timing-function: cubic-bezier(0.65, 0, 0.25, 1);
+}
+
+.floral-door-inner {
+  backface-visibility: hidden;
+}
+
+.floral-door-veil {
+  will-change: opacity;
+  animation-timing-function: ease-in-out;
+}
+
+.floral-door-seam {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floral-door-left,
+  .floral-door-right,
+  .floral-door-veil,
+  .floral-door-seam {
+    animation-duration: 0.01ms !important;
+  }
+}
