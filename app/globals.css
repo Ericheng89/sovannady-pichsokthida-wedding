@@ -6415,3 +6415,88 @@ body {
     line-height: 2 !important;
   }
 }
+
+/* =========================================
+   RANDOM STARRY TITLE EFFECT
+========================================= */
+
+.title-with-stars {
+  position: relative;
+  isolation: isolate;
+  overflow: visible !important;
+}
+
+/* Starfield surrounding each heading */
+.title-stars {
+  position: absolute;
+  inset: -15px -12px;
+  pointer-events: none;
+  z-index: -1;
+  overflow: visible;
+}
+
+.title-star {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: #fff2c9;
+
+  box-shadow:
+    0 0 4px 1px rgba(255, 221, 140, 0.65),
+    0 0 10px rgba(235, 179, 78, 0.35);
+
+  opacity: 0.15;
+  animation: starryBlink ease-in-out infinite;
+}
+
+.title-star-star {
+  border-radius: 0;
+  clip-path: polygon(
+    50% 0%,
+    60% 38%,
+    100% 50%,
+    60% 62%,
+    50% 100%,
+    40% 62%,
+    0% 50%,
+    40% 38%
+  );
+  background: #ffe5a3;
+}
+
+.title-star-dot {
+  border-radius: 50%;
+}
+
+@keyframes starryBlink {
+  0%, 100% {
+    opacity: 0.08;
+    transform: scale(0.65);
+  }
+
+  35% {
+    opacity: 0.3;
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+
+  80% {
+    opacity: 0.2;
+  }
+}
+
+@media (max-width: 600px) {
+  .title-stars {
+    inset: -10px -4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-star {
+    animation: none;
+    opacity: 0.45;
+  }
+}

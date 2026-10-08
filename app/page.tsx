@@ -1,11 +1,5 @@
 "use client";
 
-
-
-
-
-
-
 import {
 
 
@@ -82,17 +76,49 @@ import { db } from "./firebase";
 
 
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 
+function TitleStars() {
+  const stars = useMemo(
+    () =>
+      Array.from({ length: 24 }, (_, i) => {
+        const x = (i * 37 + 13) % 100;
+        const y = (i * 53 + 17) % 100;
 
+        return {
+          id: i,
+          x,
+          y,
+          size: i % 6 === 0 ? 7 : i % 3 === 0 ? 4 : 2,
+          duration: 1.8 + ((i * 7) % 13) / 5,
+          delay: -((i * 11) % 37) / 7,
+          type: i % 5 === 0 ? "star" : "dot",
+        };
+      }),
+    []
+  );
 
-
-
-
+  return (
+    <span className="title-stars" aria-hidden="true">
+      {stars.map((star) => (
+        <span
+          key={star.id}
+          className={`title-star title-star-${star.type}`}
+          style={{
+            left: `${star.x}%`,
+            top: `${star.y}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            animationDuration: `${star.duration}s`,
+            animationDelay: `${star.delay}s`,
+          }}
+        />
+      ))}
+    </span>
+  );
+}
 
 export default function Home() {
-
-
 
   const [opened, setOpened] = useState(false);
 
@@ -2163,15 +2189,10 @@ useEffect(() => {
 
 
 
-            <h1 className="intro-khmer-title khmer-mool-title">
-
-
-
-              សិរីមង្គលអាពាហ៍ពិពាហ៍
-
-
-
-            </h1>
+            <h1 className="intro-khmer-title khmer-mool-title title-with-stars">
+  <TitleStars />
+  សិរីមង្គលអាពាហ៍ពិពាហ៍
+</h1>
 
 
 
@@ -2737,15 +2758,10 @@ useEffect(() => {
 
 
 
-              <h1 className="khmer-title kh-main-font">
-
-
-
-                សិរីមង្គលអាពាហ៍ពិពាហ៍
-
-
-
-              </h1>
+              <h1 className="khmer-title kh-main-font title-with-stars">
+  <TitleStars />
+  សិរីមង្គលអាពាហ៍ពិពាហ៍
+</h1>
 
 
 
@@ -3120,23 +3136,12 @@ useEffect(() => {
 
 
 
-              <h2 className="english-title">
-
-
-
-                THE
-
-
-
-                <br />
-
-
-
-                WEDDING INVITATION
-
-
-
-              </h2>
+              <h2 className="english-title title-with-stars">
+  <TitleStars />
+  THE
+  <br />
+  WEDDING INVITATION
+</h2>
 
 
 
@@ -3317,15 +3322,10 @@ useEffect(() => {
 
 
 
-              <h2 className="section-title kh-main-font">
-
-
-
-                របៀបវារៈកម្មវិធី
-
-
-
-              </h2>
+              <h2 className="section-title kh-main-font title-with-stars">
+  <TitleStars />
+  របៀបវារៈកម្មវិធី
+</h2>
 
 
 
@@ -3477,15 +3477,10 @@ useEffect(() => {
 
 
 
-              <h2 className="section-title kh-main-font">
-
-
-
-                ទីតាំងកម្មវិធី
-
-
-
-              </h2>
+              <h2 className="section-title kh-main-font title-with-stars">
+  <TitleStars />
+  ទីតាំងកម្មវិធី
+</h2>
 
 
 
@@ -3599,15 +3594,10 @@ useEffect(() => {
 
 
 
-                <h2 className="section-title kh-main-font">
-
-
-
-                  រាប់ថយក្រោយ
-
-
-
-                </h2>
+                <h2 className="section-title kh-main-font title-with-stars">
+  <TitleStars />
+  រាប់ថយក្រោយ
+</h2>
 
 
 
@@ -3809,11 +3799,10 @@ useEffect(() => {
 
 <div id="gallery" className="gallery-section scroll-reveal">
 
-  <h2 className="section-title kh-main-font">
-
-    កម្រងរូបភាពអនុស្សាវរីយ៍
-
-  </h2>
+  <h2 className="section-title kh-main-font title-with-stars">
+  <TitleStars />
+  កម្រងរូបភាពអនុស្សាវរីយ៍
+</h2>
 
 
 
@@ -3913,15 +3902,10 @@ useEffect(() => {
 
 
 
-              <h2 className="apology-title kh-main-font">
-
-
-
-                សេចក្តីសូមអភ័យទោស
-
-
-
-              </h2>
+              <h2 className="apology-title kh-main-font title-with-stars">
+  <TitleStars />
+  សេចក្តីសូមអភ័យទោស
+</h2>
 
 
 
@@ -4077,15 +4061,10 @@ useEffect(() => {
 
 
 
-              <h2 className="gratitude-title kh-main-font">
-
-
-
-                សេចក្តីថ្លែងអំណរគុណ
-
-
-
-              </h2>
+              <h2 className="gratitude-title kh-main-font title-with-stars">
+  <TitleStars />
+  សេចក្តីថ្លែងអំណរគុណ
+</h2>
 
 
 
@@ -4202,15 +4181,10 @@ useEffect(() => {
 
 
 
-              <h2 className="section-title kh-main-font">
-
-
-
-                សារជូនពរ
-
-
-
-              </h2>
+              <h2 className="section-title kh-main-font title-with-stars">
+  <TitleStars />
+  សារជូនពរ
+</h2>
 
 
 
@@ -4505,11 +4479,12 @@ useEffect(() => {
                   ♡
                 </div>
 
-                <h2 className="wedding-gift-title kh-main-font">
-                  ចំណងដៃអាពាហ៍ពិពាហ៍
-                </h2>
+                <h2 className="wedding-gift-title kh-main-font title-with-stars">
+  <TitleStars />
+  ចំណងដៃអាពាហ៍ពិពាហ៍
+</h2>
 
-                <p className="wedding-gift-subtitle">
+                <p className="wedding-gift-subtitle title-with-stars">
                   WEDDING GIFT
                 </p>
 
