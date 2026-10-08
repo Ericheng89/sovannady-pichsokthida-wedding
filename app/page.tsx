@@ -1666,10 +1666,10 @@ setCountdownFinished(false);
         </div>
 
         <div className="door-vine door-vine-left">
-          <span>❦</span>
-          <span>✦</span>
-          <span>❧</span>
-        </div>
+  <span>❀</span>
+  <span>❁</span>
+  <span>❀</span>
+</div>
 
       </div>
     </div>
@@ -1689,10 +1689,10 @@ setCountdownFinished(false);
         </div>
 
         <div className="door-vine door-vine-right">
-          <span>❧</span>
-          <span>✦</span>
-          <span>❦</span>
-        </div>
+  <span>❀</span>
+  <span>❁</span>
+  <span>❀</span>
+</div>
 
       </div>
     </div>
