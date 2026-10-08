@@ -335,6 +335,7 @@ function createTapSparkle(
 
   });
 
+  const [countdownFinished, setCountdownFinished] = useState(false);
 
 
 
@@ -923,67 +924,26 @@ useEffect(() => {
 
       const distance = weddingDate.getTime() - now;
 
-
-
-
-
-
-
       if (distance <= 0) {
+  setCountdownFinished(true);
 
+  setTimeLeft({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
+  return;
+}
 
-        setTimeLeft({
-
-
-
-          days: 0,
-
-
-
-          hours: 0,
-
-
-
-          minutes: 0,
-
-
-
-          seconds: 0,
-
-
-
-        });
-
-
-
-
-
-
-
-        return;
-
-
-
-      }
-
-
-
-
-
-
+setCountdownFinished(false);
 
       setTimeLeft({
 
 
 
         days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-
-
-
-
-
-
 
         hours: Math.floor(
 
@@ -3574,220 +3534,78 @@ useEffect(() => {
 
 
 
-            <div
-
-
-
-              id="countdown"
-
-
-
-              className="countdown-section scroll-reveal"
-
-
-
-            >
-
-
-
-              <div className="countdown-title-wrap">
-
-
-
-                <h2 className="section-title kh-main-font title-with-stars">
-  <TitleStars />
-  រាប់ថយក្រោយ
-</h2>
-
-
-
-
-
-
-
-                <p className="section-subtitle-en">
-
-
-
-                  COUNTDOWN
-
-
-
-                </p>
-
-
-
-              </div>
-
-
-
-
-
-
-
-              {[
-
-
-
-                {
-
-
-
-                  label: "ថ្ងៃ",
-
-
-
-                  en: "Days",
-
-
-
-                  value: timeLeft.days,
-
-
-
-                },
-
-
-
-                {
-
-
-
-                  label: "ម៉ោង",
-
-
-
-                  en: "Hours",
-
-
-
-                  value: timeLeft.hours,
-
-
-
-                },
-
-
-
-                {
-
-
-
-                  label: "នាទី",
-
-
-
-                  en: "Minutes",
-
-
-
-                  value: timeLeft.minutes,
-
-
-
-                },
-
-
-
-                {
-
-
-
-                  label: "វិនាទី",
-
-
-
-                  en: "Seconds",
-
-
-
-                  value: timeLeft.seconds,
-
-
-
-                },
-
-
-
-              ].map((item) => (
-
-
-
-                <div
-
-
-
-                  key={item.label}
-
-
-
-                  className="countdown-box"
-
-
-
-                >
-
-
-
-                  <h2>
-
-
-
-                    {item.value}
-
-
-
-                  </h2>
-
-
-
-
-
-
-
-                  <p className="kh-main-font">
-
-
-
-                    {item.label}
-
-
-
-                  </p>
-
-
-
-
-
-
-
-                  <span>
-
-
-
-                    {item.en}
-
-
-
-                  </span>
-
-
-
-                </div>
-
-
-
-              ))}
-
-
-
-            </div>
-
-
-
-
-
-
+            
+{/* ========================================
+    COUNTDOWN / OUR FOREVER BEGINS
+======================================== */}
+
+<div
+  id="countdown"
+  className="countdown-section scroll-reveal"
+>
+  {countdownFinished ? (
+    <div className="forever-message">
+      <div className="forever-ornament">✦ ♡ ✦</div>
+
+      <h2 className="forever-khmer kh-main-font title-with-stars">
+        <TitleStars />
+        ចាប់ពីថ្ងៃនេះ រហូតដល់អស់កល្បជានិច្ច
+      </h2>
+
+      <h3 className="forever-english">
+        And So, Our Forever Begins
+      </h3>
+
+      <p className="forever-description">
+        The countdown has ended,
+        <br />
+        but our story is just beginning.
+      </p>
+
+      <div className="forever-divider">
+        <span />
+        <b>♡</b>
+        <span />
+      </div>
+
+      <p className="forever-couple">
+        Soeun Sovannady
+        <span> &amp; </span>
+        Chea Pichsokthida
+      </p>
+
+      <p className="forever-date">
+        ✦ 16 NOVEMBER 2026 ✦
+      </p>
+    </div>
+  ) : (
+    <>
+      <div className="countdown-title-wrap">
+        <h2 className="section-title kh-main-font title-with-stars">
+          <TitleStars />
+          រាប់ថយក្រោយ
+        </h2>
+
+        <p className="section-subtitle-en">
+          COUNTDOWN
+        </p>
+      </div>
+
+      {[
+        { label: "ថ្ងៃ", en: "Days", value: timeLeft.days },
+        { label: "ម៉ោង", en: "Hours", value: timeLeft.hours },
+        { label: "នាទី", en: "Minutes", value: timeLeft.minutes },
+        { label: "វិនាទី", en: "Seconds", value: timeLeft.seconds },
+      ].map((item) => (
+        <div key={item.label} className="countdown-box">
+          <h2>{item.value}</h2>
+          <p className="kh-main-font">{item.label}</p>
+          <span>{item.en}</span>
+        </div>
+      ))}
+    </>
+  )}
+</div>
 
             {/* ========================================
 

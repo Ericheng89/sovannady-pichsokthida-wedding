@@ -6500,3 +6500,137 @@ body {
     opacity: 0.45;
   }
 }
+
+/* =========================================
+   OUR FOREVER BEGINS — COUNTDOWN COMPLETED
+========================================= */
+
+.forever-message {
+  width: 100%;
+  text-align: center;
+  padding: 45px 18px;
+  animation: foreverReveal 1.8s ease both;
+}
+
+.forever-ornament {
+  color: #c6a46a;
+  font-size: 22px;
+  letter-spacing: 14px;
+  margin-bottom: 28px;
+  animation: foreverGlow 3s ease-in-out infinite;
+}
+
+.forever-khmer {
+  color: #b79458;
+  font-size: clamp(20px, 4vw, 32px);
+  line-height: 1.9;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.forever-english {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: 400;
+  font-style: italic;
+  color: #b79458;
+  line-height: 1.2;
+  margin: 12px 0 20px;
+}
+
+.forever-description {
+  color: #756550;
+  font-size: 15px;
+  line-height: 1.9;
+  letter-spacing: 0.4px;
+}
+
+.forever-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 28px auto;
+  color: #c6a46a;
+}
+
+.forever-divider span {
+  width: 65px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #c6a46a,
+    transparent
+  );
+}
+
+.forever-divider b {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.forever-couple {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(23px, 4vw, 34px);
+  color: #a5824b;
+  line-height: 1.5;
+}
+
+.forever-couple span {
+  font-style: italic;
+  padding: 0 5px;
+}
+
+.forever-date {
+  margin-top: 20px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #a88a5c;
+}
+
+@keyframes foreverReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes foreverGlow {
+  0%, 100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 14px rgba(198, 164, 106, 0.6);
+  }
+}
+
+@media (max-width: 600px) {
+  .forever-message {
+    padding: 30px 8px;
+  }
+
+  .forever-ornament {
+    letter-spacing: 8px;
+  }
+
+  .forever-date {
+    letter-spacing: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forever-message,
+  .forever-ornament {
+    animation: none;
+  }
+}
