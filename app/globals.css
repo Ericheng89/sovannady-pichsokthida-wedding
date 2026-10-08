@@ -273,7 +273,7 @@ body {
 }
 
 .open-frame-btn-with-guest {
-  transform: translateY(-18px);
+  transform: translateY(-55px);
 }
 
 
@@ -6666,5 +6666,18 @@ body {
   .floral-door-veil,
   .floral-door-seam {
     animation-duration: 0.01ms !important;
+  }
+}
+
+/* Stabilize front cover height on mobile */
+.intro-wrap {
+  min-height: 100svh;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .intro-wrap {
+    min-height: 100svh;
+    padding-top: 100px;
   }
 }
