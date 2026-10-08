@@ -1319,10 +1319,10 @@ setCountdownFinished(false);
       window.scrollTo(0, 0);
     }, 120);
 
-    // Remove floral doors after their 2.9s animation
-   setTimeout(() => {
+    // Keep guest welcome visible longer
+setTimeout(() => {
   setCurtainOpening(false);
-}, 3300);
+}, 5300);
 
 }, 700);
 }

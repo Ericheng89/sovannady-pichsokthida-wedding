@@ -5839,7 +5839,7 @@ body {
 
   background: #f7f1e8;
 
-  animation: guestVeilFade 3.3s ease forwards;
+  animation: guestVeilFade 4.5s ease forwards;
 }
 
 /* Guest name/message */
@@ -5857,7 +5857,7 @@ body {
   box-sizing: border-box;
   text-align: center;
 
-  animation: guestRevealFade 3.3s ease forwards;
+  animation: guestRevealFade 4.5s ease forwards;
 }
 
 /* Floral doors stay above everything */
@@ -5894,12 +5894,14 @@ body {
     opacity: 0;
   }
 
-  15%,
-  65% {
+  10% {
     opacity: 1;
   }
 
-  82%,
+  78% {
+    opacity: 1;
+  }
+
   100% {
     opacity: 0;
   }
@@ -6679,5 +6681,71 @@ body {
   .intro-wrap {
     min-height: 100svh;
     padding-top: 100px;
+  }
+}
+
+/* SMOOTH, CONTINUOUS FLORAL DOOR OPENING */
+
+.floral-door-left {
+  animation: floralDoorOpenLeft 3.8s
+    cubic-bezier(0.45, 0, 0.2, 1) forwards;
+}
+
+.floral-door-right {
+  animation: floralDoorOpenRight 3.8s
+    cubic-bezier(0.45, 0, 0.2, 1) forwards;
+}
+
+@keyframes floralDoorOpenLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-105%, 0, 0);
+  }
+}
+
+@keyframes floralDoorOpenRight {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(105%, 0, 0);
+  }
+}
+
+/* KEEP GUEST NAME VISIBLE LONGER */
+
+.door-guest-reveal {
+  animation: guestRevealFade 5.3s ease-in-out forwards;
+}
+
+@keyframes guestRevealFade {
+  0% {
+    opacity: 0;
+  }
+
+  10%, 78% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.floral-door-veil {
+  animation: guestVeilFade 5.3s ease-in-out forwards;
+}
+
+@keyframes guestVeilFade {
+  0%, 78% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
