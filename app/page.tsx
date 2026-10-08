@@ -3145,79 +3145,16 @@ useEffect(() => {
 
 
               <div className="english-parents-grid">
+  <div>
+    <div>MR. SOEUN SOVANNA</div>
+    <div>MRS. LAM SOKCHENG</div>
+  </div>
 
-
-
-                <p>
-
-
-
-                  Mr. SOEUN SOVANNA
-
-
-
-                  <br />
-
-
-
-                  Mrs. LAM SOKCHENG
-
-
-
-                </p>
-
-
-
-
-
-
-
-                <p>
-
-
-
-                  <span>
-
-
-
-                    Mr. CHEA VIRAK
-
-
-
-                  </span>
-
-
-
-
-
-
-
-                  <br />
-
-
-
-
-
-
-
-                  <span className="nob-nilin">
-
-
-
-                    Mrs. NOB NILIN
-
-
-
-                  </span>
-
-
-
-                </p>
-
-
-
-              </div>
-
+  <div>
+    <div>MR. CHEA VIRAK</div>
+    <div>MRS. NOB NILIN</div>
+  </div>
+</div>
 
 
 
