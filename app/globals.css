@@ -6127,10 +6127,103 @@ body {
 }
 
 .guest-divider {
-  margin-top: 0;
-  margin-bottom: 0;
+  width: min(420px, 80vw);
+  height: auto;
+  display: block;
+  margin: -32px auto 0;
+  opacity: 0.95;
+  pointer-events: none;
 }
 
 .open-frame-btn-with-guest {
-  transform: translateY(-14px);
+  transform: translateY(-28px);
+}
+
+/* FIX WEDDING CEREMONY KHMER TITLE */
+.intro-khmer-title.khmer-mool-title {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: clamp(19px, 4.8vw, 34px);
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+/* SMALL MOBILE SCREENS */
+@media (max-width: 600px) {
+  .intro-khmer-title.khmer-mool-title {
+    font-size: clamp(18px, 4.5vw, 24px);
+    line-height: 1.5;
+  }
+}
+
+/* REMOVE GOLDEN GLOW / HIGHLIGHT FROM TITLES */
+
+.intro-khmer-title,
+.khmer-title,
+.english-title,
+.section-title,
+.section-subtitle-en,
+.countdown-title-wrap .section-title,
+.apology-title,
+.gratitude-title,
+.intro-khmer-sub,
+.small-title {
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* ========================================
+   WEDDING GIFT - KHQR
+======================================== */
+
+.wedding-gift-qr-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 24px auto 20px;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wedding-gift-qr {
+  display: block;
+  width: min(250px, 68vw);
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(100, 75, 45, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wedding-gift-qr-link:hover .wedding-gift-qr {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(100, 75, 45, 0.12);
+}
+
+.wedding-gift-qr-link:active .wedding-gift-qr {
+  transform: scale(0.98);
+}
+
+.wedding-gift-qr-caption {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #9b7335;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .wedding-gift-qr {
+    width: min(220px, 65vw);
+  }
+
+  .wedding-gift-qr-link {
+    margin: 20px auto 16px;
+  }
 }

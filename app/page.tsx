@@ -143,7 +143,7 @@ const galleryPhotos = [
   "/gallery/wedding-16.webp",
   "/gallery/wedding-21.webp",
   "/gallery/wedding-25.webp",
-  "/gallery/wedding-09.webp",
+  "/gallery/wedding-12.webp",
   "/gallery/wedding-11.webp",
   "/gallery/wedding-26.webp",
   "/gallery/wedding-14.webp",
@@ -4578,6 +4578,7 @@ useEffect(() => {
 
                 <p className="wedding-gift-message kh-title-font">
                   វត្តមាន និងពាក្យជូនពររបស់លោកអ្នក
+                  <br />
                   គឺជាអំណោយដ៏មានតម្លៃសម្រាប់យើងខ្ញុំ។
                 </p>
 
@@ -4588,6 +4589,26 @@ useEffect(() => {
                   For those who wish to send a wedding gift,
                   you may do so through ABA Pay.
                 </p>
+
+                {/* CLICKABLE KHQR - THIDA */}
+<a
+  href="https://pay.ababank.com/oRF8/686k5mel"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="wedding-gift-qr-link"
+  aria-label="Open ABA Pay to send a wedding gift"
+>
+  <img
+    src="/KHQR%20Thida.png"
+    alt="KHQR Thida - Scan to send a wedding gift"
+    className="wedding-gift-qr"
+    loading="lazy"
+  />
+
+  <span className="wedding-gift-qr-caption">
+    Scan or Tap to Send a Gift
+  </span>
+</a>
 
                 <a
                   href="https://pay.ababank.com/oRF8/686k5mel"
