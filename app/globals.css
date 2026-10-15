@@ -408,11 +408,11 @@ body {
 ======================================== */
 
 .khmer-section {
-  padding-top: 85px;
-  margin: 0 auto 160px;
+  width: 100%;
+  margin: 0 auto 100px;
+  padding: 30px 0 100px;
   box-sizing: border-box;
-
-  scroll-margin-top: 35px;
+  scroll-margin-top: 20px;
 }
 
 .khmer-title {
@@ -6371,9 +6371,9 @@ body {
   max-width: 100%;
 
   font-family: "Khmer Mool 1", serif !important;
-  font-size: clamp(18px, 4.5vw, 30px) !important;
+  font-size: clamp(26px, 5.5vw, 38px) !important;
   font-weight: 400;
-  line-height: 2 !important;
+  line-height: 1.8 !important;
 
   padding: 12px 0 !important;
   margin: 10px auto 2px;
@@ -6413,8 +6413,8 @@ body {
   }
 
   .intro-khmer-title.khmer-mool-title {
-    font-size: clamp(16px, 4vw, 22px) !important;
-    line-height: 2 !important;
+    font-size: clamp(22px, 5.8vw, 28px) !important;
+    line-height: 1.8 !important;
   }
 }
 
@@ -6751,5 +6751,60 @@ body {
 
   100% {
     opacity: 0;
+  }
+}
+
+/* Center the first Khmer invitation section */
+.khmer-section {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: 35px;
+  padding-bottom: 110px;
+}
+
+/* Mobile adjustment */
+@media (max-width: 600px) {
+  .khmer-section {
+    min-height: 100svh;
+    height: auto;
+    justify-content: center;
+    padding-top: 25px;
+    padding-bottom: 115px;
+  }
+}/* Balanced Khmer invitation layout */
+
+.khmer-section {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .khmer-section {
+    min-height: 100svh;
+    margin-bottom: 80px;
+    padding-top: 35px;
+    padding-bottom: 110px;
+  }
+
+  .khmer-title {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .parents-grid {
+    margin-bottom: 12px;
+  }
+
+  .couple-section {
+    margin: 10px 0;
+  }
+
+  .date-text {
+    margin: 10px auto;
   }
 }
