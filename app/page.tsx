@@ -161,7 +161,7 @@ export default function Home() {
 
 
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
-
+  const [filmPlaying, setFilmPlaying] = useState(false);
 const galleryPhotos = [
   "/gallery/wedding-01.webp",
   "/gallery/wedding-02.webp",
@@ -3711,15 +3711,44 @@ setTimeout(() => {
     </div>
 
     <div className="prewedding-film-player">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/FF2g1cDNrlQ?playsinline=1&rel=0"
-        title="Sovannady & Pichsokthida | Pre-Wedding Film"
-        loading="lazy"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-        allowFullScreen
-        referrerPolicy="strict-origin-when-cross-origin"
+  {!filmPlaying ? (
+    <button
+      type="button"
+      className="prewedding-film-cover"
+      aria-label="Play our pre-wedding film"
+      onClick={() => {
+        audioRef.current?.pause();
+        setMusicPlaying(false);
+        setFilmPlaying(true);
+      }}
+    >
+      <img
+        src="/prewedding-cover.jpg"
+        alt="Sovannady and Pichsokthida Pre-Wedding Film"
+        className="prewedding-film-cover-image"
       />
-    </div>
+
+      <span className="prewedding-film-cover-overlay" />
+
+      <span className="prewedding-film-play">
+        <span className="prewedding-film-play-triangle" />
+      </span>
+
+      <span className="prewedding-film-cover-caption">
+        <span>OUR LOVE STORY</span>
+        <strong>Watch Our Film</strong>
+      </span>
+    </button>
+  ) : (
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/FF2g1cDNrlQ?autoplay=1&playsinline=1&rel=0"
+      title="Sovannady & Pichsokthida | Pre-Wedding Film"
+      allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+      allowFullScreen
+      referrerPolicy="strict-origin-when-cross-origin"
+    />
+  )}
+</div>
 
     <p className="prewedding-film-footer">
       Sovannady <span>&amp;</span> Pichsokthida
