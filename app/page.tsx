@@ -77,7 +77,7 @@ import { db } from "./firebase";
 
 
 import { useEffect, useRef, useState, useMemo } from "react";
-
+import { guests } from "./data/guests";
 function TitleStars() {
   const stars = useMemo(
     () =>
@@ -642,51 +642,30 @@ useEffect(() => {
 
 
 
-  /* ========================================
+ /* ========================================
+   GUEST NAME — CUSTOMIZED ID SYSTEM
+======================================== */
 
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
 
+  // New personalized Guest ID
+  const guestId = params.get("g")?.trim().toUpperCase();
 
-     GUEST NAME
+  // Old personalized guest-name URL
+  const guest = params.get("guest");
 
-
-
-  ======================================== */
-
-
-
-
-
-
-
-  useEffect(() => {
-
-
-
-    const params = new URLSearchParams(window.location.search);
-
-
-
-    const guest = params.get("guest");
-
-
-
-
-
-
-
-    if (guest) {
-
-
-
-      setGuestName(decodeURIComponent(guest));
-
-
-
-    }
-
-
-
-  }, []);
+  if (guestId && guests[guestId]) {
+    // Look up guest name using ID
+    setGuestName(guests[guestId]);
+  } else if (guest) {
+    // Keep old guest links working
+    setGuestName(guest);
+  } else {
+    // No valid guest found
+    setGuestName("");
+  }
+}, []);
 
 
 
