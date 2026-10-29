@@ -6079,7 +6079,8 @@ body {
 ======================================== */
 
 .guest-name-wrap {
-  transform: translateY(-6px);
+  transform: translateY(0);
+  margin-top: 16px;
 }
 
 .guest-divider {
