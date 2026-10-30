@@ -7102,11 +7102,65 @@ body {
 
 /* Move Khmer invitation away from top frame */
 .khmer-section {
-  padding-top: 65px;
+  padding-top: 55px;
 }
 
 @media (max-width: 600px) {
   .khmer-section {
     padding-top: 75px;
+  }
+}
+
+/* ========================================
+   REDUCE TOP SPACING FOR ALL SECTIONS
+======================================== */
+
+/* Main invitation */
+.khmer-section {
+  padding-top: 45px;
+}
+
+.english-section {
+  padding-top: 8px;
+}
+
+/* Other wedding sections */
+.countdown-section,
+.agenda-section,
+.location-section,
+.dress-code-section,
+.gallery-section,
+.apology-section,
+.gratitude-section,
+.wishes-section {
+  padding-top: 8px;
+}
+
+/* Reduce extra top margins */
+.apology-section,
+.wishes-section {
+  margin-top: 35px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .khmer-section {
+    padding-top: 50px;
+  }
+
+  .english-section {
+    padding-top: 5px;
+    margin-top: 10px;
+  }
+
+  .countdown-section,
+  .agenda-section,
+  .location-section,
+  .dress-code-section,
+  .gallery-section,
+  .apology-section,
+  .gratitude-section,
+  .wishes-section {
+    padding-top: 5px;
   }
 }

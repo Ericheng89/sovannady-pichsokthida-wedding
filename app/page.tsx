@@ -179,33 +179,17 @@ const galleryPhotos = [
   "/gallery/wedding-17.webp",
   "/gallery/wedding-18.webp",
   "/gallery/wedding-05.webp",
+  "/gallery/wedding-27.webp",
+  "/gallery/wedding-23.webp",
+  "/gallery/wedding-22.webp",
+  "/gallery/wedding-08.webp",
 ];
-
-
-
-
-
-
-
-
-
-
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-
-
   const touchStartX = useRef<number | null>(null);
 
-
-
   const touchEndX = useRef<number | null>(null);
-
-
-
-
-
-
 
  function handleTouchStart(
   event: React.TouchEvent<HTMLDivElement>
@@ -667,27 +651,11 @@ useEffect(() => {
   }
 }, []);
 
-
-
-
-
-
-
   /* ========================================
-
-
 
      SCROLL REVEAL
 
-
-
   ======================================== */
-
-
-
-
-
-
 
   useEffect(() => {
 
