@@ -7070,7 +7070,6 @@ body {
   }
 }
 
-
 /* ========================================
    KHMER + ENGLISH INVITATION SPACING FIX
 ======================================== */
@@ -7096,7 +7095,8 @@ body {
   }
 
   .english-section {
-    margin-top: 0;
-    padding-top: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
   }
 }
+
