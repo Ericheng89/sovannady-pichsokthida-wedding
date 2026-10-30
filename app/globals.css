@@ -7100,3 +7100,13 @@ body {
   }
 }
 
+/* Move Khmer invitation away from top frame */
+.khmer-section {
+  padding-top: 65px;
+}
+
+@media (max-width: 600px) {
+  .khmer-section {
+    padding-top: 75px;
+  }
+}
