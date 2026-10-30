@@ -182,7 +182,6 @@ const galleryPhotos = [
   "/gallery/wedding-27.webp",
   "/gallery/wedding-23.webp",
   "/gallery/wedding-22.webp",
-  "/gallery/wedding-08.webp",
 ];
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
