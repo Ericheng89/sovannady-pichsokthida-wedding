@@ -182,6 +182,7 @@ const galleryPhotos = [
   "/gallery/wedding-27.webp",
   "/gallery/wedding-23.webp",
   "/gallery/wedding-22.webp",
+  "/gallery/wedding-08.webp",
 ];
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -3581,14 +3582,14 @@ setTimeout(() => {
         key={photo}
 
         className={`photo-card gallery-reveal ${
-
-          index === 0 || index === 4 || index === 8 || index === 12
-
-            ? "large-photo"
-
-            : ""
-
-        }`}
+  index === 0 ||
+  index === 4 ||
+  index === 8 ||
+  index === 12 ||
+  photo === "/gallery/wedding-27.webp"
+    ? "large-photo"
+    : ""
+}`}
 
         onClick={() => openPhoto(index)}
 
