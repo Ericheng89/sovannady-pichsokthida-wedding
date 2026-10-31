@@ -74,7 +74,7 @@ export const guests: Record<string, string> = {
   "T072": "Ms. PHALLA SREYKEUN",
   "T073": "Mr. LONG MENGCHHUN",
   "T074": "Mr. KUCH SOKMAKARA",
-  "D001": "លោក​ សេង​ សុវណ្ណារិទ្ធ",
+  "D001": "Mr. Seng Sovannarith & Hary",
   "D002": "លោក ប៉ាន់​ សុវណ្ណារាជ",
   "D003": "លោក យាង​ តុលាវឌ្ឍនា​​ & ភរិយា",
   "D004": "លោក ប៊ុន​ ចាន់វីរះ & ភរិយា",
