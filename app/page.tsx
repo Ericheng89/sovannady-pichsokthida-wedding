@@ -3490,7 +3490,7 @@ setTimeout(() => {
 
       <h2 className="forever-khmer kh-main-font title-with-stars">
         <TitleStars />
-        ចាប់ពីថ្ងៃនេះ រហូតដល់អស់កល្បជានិច្ច
+        ចាប់ពីថ្ងៃនេះ ជានិរន្តរ៍របស់យើង
       </h2>
 
       <h3 className="forever-english">
