@@ -643,4 +643,5 @@ export const guests: Record<string, string> = {
   "N480": "ហៀង សុវណ្ណមុនីបញ្ញា",
   "N481": "ឈីម ពេជ្រសុខី និង ស្វាមី",
   "N482": "Sovan Nita",
+  "N483": "Bong Kevin & Bong Rithy",
 };
